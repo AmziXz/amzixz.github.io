@@ -88,6 +88,15 @@ a {
   box-shadow: 0 10px 24px rgba(14, 124, 134, 0.3);
 }
 
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  object-fit: contain;
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(14, 124, 134, 0.18);
+}
+
 .brand-text {
   font-size: 1.2rem;
 }
