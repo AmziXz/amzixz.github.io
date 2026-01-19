@@ -9,11 +9,14 @@
   <body>
     <header class="site-header">
       <nav class="nav container">
-        <a class="brand" href="/">AmziXz</a>
+        <a class="brand" href="/">
+          <img class="brand-logo" src="assets/logo.png" alt="AmziXz logo" />
+          <span class="brand-text">AmziXz</span>
+        </a>
         <ul class="nav-links">
-          <li><a href="/about">About</a></li>
-          <li><a href="/projects">Projects</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </header>
@@ -21,21 +24,27 @@
     <main>
       <section class="section container">
         <h1>Projects</h1>
-        <p>Highlighted work and experiments from the AmziXz studio.</p>
-        <ul>
-          <li>
-            <strong>Project Atlas</strong> — A visual storytelling concept for turning
-            datasets into engaging narratives.
-          </li>
-          <li>
-            <strong>Signal Notes</strong> — Lightweight note templates for ideation,
-            retrospectives, and sprint planning.
-          </li>
-          <li>
-            <strong>Studio Lab</strong> — Explorations in motion, typography, and
-            micro-interactions.
-          </li>
-        </ul>
+        <p class="lead">Highlighted work and experiments from the AmziXz studio.</p>
+        <div class="card-grid">
+          <article class="card">
+            <h2>Project Atlas</h2>
+            <p class="muted">
+              A visual storytelling concept for turning datasets into engaging narratives.
+            </p>
+          </article>
+          <article class="card">
+            <h2>Signal Notes</h2>
+            <p class="muted">
+              Lightweight note templates for ideation, retrospectives, and sprint planning.
+            </p>
+          </article>
+          <article class="card">
+            <h2>Studio Lab</h2>
+            <p class="muted">
+              Explorations in motion, typography, and micro-interactions.
+            </p>
+          </article>
+        </div>
       </section>
     </main>
 
