@@ -4,49 +4,93 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AmziXz · About</title>
+    <meta
+      name="description"
+      content="I'm AmziXz — I mod phone software on YouTube, stream and post on TikTok, and organise Catch The Baltic, a car show at Spilve Airfield in Riga."
+    />
+    <link rel="canonical" href="https://amzixz.github.io/about.html" />
+    <link rel="icon" href="assets/logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/logo.png" />
+    <meta name="theme-color" content="#0e7c86" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a0b" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AmziXz" />
+    <meta property="og:title" content="About · AmziXz" />
+    <meta
+      property="og:description"
+      content="Phone modding, live streams, and a car show in Riga."
+    />
+    <meta property="og:url" content="https://amzixz.github.io/about.html" />
+    <meta property="og:image" content="https://amzixz.github.io/assets/logo.png" />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap"
+    />
     <link rel="stylesheet" href="assets/style.css" />
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
     <header class="site-header">
-      <nav class="nav container">
-        <a class="brand" href="/">
-          <img class="brand-logo" src="/assets/logo.png" alt="AmziXz logo" />
+      <nav class="nav container" aria-label="Primary">
+        <a class="brand" href="index.html">
+          <img class="brand-logo" src="assets/logo.png" alt="" width="42" height="42" />
           <span class="brand-text">AmziXz</span>
         </a>
         <ul class="nav-links">
-          <li><a href="about.html">About</a></li>
           <li><a href="projects.html">Projects</a></li>
+          <li><a href="about.html" aria-current="page">About</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </header>
 
-    <main>
+    <main id="main">
       <section class="section container">
-        <h1>About AmziXz</h1>
-        <p class="lead">
-          AmziXz is a creative space focused on building digital experiences, sharing
-          experiments, and documenting the journey of learning and making. The goal
-          is to blend thoughtful design with clean engineering.
+        <h1>About</h1>
+        <p class="lead">I'm AmziXz.</p>
+        <p>
+          On YouTube I mod phone software — custom ROMs, root, debloating, and
+          generally pushing devices past what they shipped with. I'm a fourth-year
+          computer systems student, which is the reason the tutorials work instead
+          of bricking your phone.
         </p>
         <p>
-          This site will continue to evolve with new case studies, behind-the-scenes
-          notes, and resources that can help others on similar paths.
+          On TikTok I stream live and post. Unedited, on the move, whatever's
+          actually happening.
         </p>
-        <div class="card-grid">
-          <div class="card"></div>
-          <div class="card">
-            <h2>What you will find</h2>
-            <p class="muted">
-              Process notes, experiments, and the thinking behind each launch.
-            </p>
-          </div>
+        <p>
+          Off camera I organise Catch The Baltic, a car show at Spilve Airfield in
+          Riga. The next one is 22 August 2026.
+        </p>
+        <p>
+          If you're here for one of those three things, you'll probably tolerate the
+          other two.
+        </p>
+        <div class="hero-actions" style="margin-top: 2rem">
+          <a class="btn" href="projects.html">What I make</a>
+          <a class="btn secondary" href="contact.html">Get in touch</a>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <p>Thanks for stopping by.</p>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="projects.html">Projects</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="uses.html">Uses</a>
+        <a href="index.html#socials">Socials</a>
+        <a href="https://www.youtube.com/@PhoneGuruAmziXz" rel="noopener">YouTube</a>
+        <a href="https://www.tiktok.com/@itsamzixz" rel="noopener">TikTok</a>
+        <a href="https://github.com/AmziXz" rel="me noopener">GitHub</a>
+      </nav>
+      <p>© 2026 AmziXz.</p>
     </footer>
   </body>
 </html>

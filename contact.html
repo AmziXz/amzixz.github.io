@@ -4,50 +4,184 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AmziXz · Contact</title>
+    <meta
+      name="description"
+      content="Get in touch with AmziXz. Telegram is fastest — t.me/AmziXz. Email, Discord, and answers to the questions I get most."
+    />
+    <link rel="canonical" href="https://amzixz.github.io/contact.html" />
+    <link rel="icon" href="assets/logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/logo.png" />
+    <meta name="theme-color" content="#0e7c86" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a0b" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AmziXz" />
+    <meta property="og:title" content="Contact · AmziXz" />
+    <meta
+      property="og:description"
+      content="Telegram is fastest. Email, Discord, and the questions I get most."
+    />
+    <meta property="og:url" content="https://amzixz.github.io/contact.html" />
+    <meta property="og:image" content="https://amzixz.github.io/assets/logo.png" />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap"
+    />
     <link rel="stylesheet" href="assets/style.css" />
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
     <header class="site-header">
-      <nav class="nav container">
-        <a class="brand" href="index">
+      <nav class="nav container" aria-label="Primary">
+        <a class="brand" href="index.html">
+          <img class="brand-logo" src="assets/logo.png" alt="" width="42" height="42" />
           <span class="brand-text">AmziXz</span>
         </a>
         <ul class="nav-links">
-          <li><a href="about">About</a></li>
-          <li><a href="projects">Projects</a></li>
-          <li><a href="contact">Contact</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
         </ul>
       </nav>
     </header>
 
-    <main>
+    <main id="main">
       <section class="section container">
         <h1>Contact</h1>
         <p class="lead">
-          Sup People Test
+          Questions, collab ideas, or just want to say hi? Any of these work.
         </p>
         <div class="two-column">
           <div class="card">
             <h2>Reach Out</h2>
-            <ul>
-              <li>Email: amzixz@proton.me</li>
-              <li>Telegram: @AmziXz</li>
-              <li>Open hours: Weekdays, 10am-6pm</li>
+            <ul class="link-list">
+              <li>
+                <a href="https://t.me/AmziXz" rel="noopener">Telegram · @AmziXz</a>
+              </li>
+              <li><a href="mailto:amzixz@proton.me">amzixz@proton.me</a></li>
+              <li>
+                <a href="https://github.com/AmziXz" rel="me noopener">GitHub · @AmziXz</a>
+              </li>
             </ul>
+            <p class="muted" style="margin-top: 1.2rem">
+              Telegram is the fastest — I check it more than anything else. Email is
+              better if it needs a paper trail.
+            </p>
           </div>
-          <div class="card">
+          <div class="card" id="discord">
             <h2>Discord</h2>
             <p class="muted">
               Join the community for updates and live feedback.
             </p>
-            <iframe src="https://discord.com/widget?id=1413564887535321321&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+            <a class="card-cta" href="https://discord.com/invite/zvb6F7vF" rel="noopener">Join the server</a>
+            <div class="embed-frame">
+              <iframe
+                title="AmziXz Discord server widget"
+                src="https://discord.com/widget?id=1413564887535321321&amp;theme=dark"
+                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+              ></iframe>
+            </div>
           </div>
+        </div>
+      </section>
+
+      <section class="section container" id="socials">
+        <h2>Socials</h2>
+        <p>Everywhere else you can find AmziXz.</p>
+        <div class="social-grid">
+          <a class="social-card youtube" href="https://www.youtube.com/@PhoneGuruAmziXz" rel="noopener">
+            <span class="social-name">YouTube · Phone Guru</span>
+            <span class="social-handle">@PhoneGuruAmziXz</span>
+            <span class="social-blurb">Phone modding guides. ROMs, root, debloating.</span>
+          </a>
+          <a class="social-card tiktok" href="https://www.tiktok.com/@itsamzixz" rel="noopener">
+            <span class="social-name">TikTok</span>
+            <span class="social-handle">@itsamzixz</span>
+            <span class="social-blurb">Live streams and posts. Nothing scripted.</span>
+          </a>
+          <a class="social-card youtube" href="https://www.youtube.com/@AmziXz" rel="noopener">
+            <span class="social-name">YouTube · Main</span>
+            <span class="social-handle">@AmziXz</span>
+            <span class="social-blurb">The main channel — everything that isn't phone modding.</span>
+          </a>
+          <a class="social-card telegram" href="https://t.me/AmziXz" rel="noopener">
+            <span class="social-name">Telegram</span>
+            <span class="social-handle">@AmziXz</span>
+            <span class="social-blurb">Fastest way to reach me. I check it most.</span>
+          </a>
+          <a class="social-card discord" href="https://discord.com/invite/zvb6F7vF" rel="noopener">
+            <span class="social-name">Discord</span>
+            <span class="social-handle">Join the server</span>
+            <span class="social-blurb">Updates, early drops, and help with builds.</span>
+          </a>
+          <a class="social-card github" href="https://github.com/AmziXz" rel="me noopener">
+            <span class="social-name">GitHub</span>
+            <span class="social-handle">@AmziXz</span>
+            <span class="social-blurb">Code, including the source for this site.</span>
+          </a>
+          <a class="social-card email" href="mailto:amzixz@proton.me">
+            <span class="social-name">Email</span>
+            <span class="social-handle">amzixz@proton.me</span>
+            <span class="social-blurb">Best for anything that needs a paper trail.</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="section container" id="faq">
+        <h2>Questions I get a lot</h2>
+        <div class="faq">
+          <details>
+            <summary>What's the fastest way to reach you?</summary>
+            <p>
+              Telegram — <a href="https://t.me/AmziXz" rel="noopener">t.me/AmziXz</a>.
+              I check it more than email, so you'll hear back sooner there.
+            </p>
+          </details>
+          <details>
+            <summary>What do you actually make?</summary>
+            <p>
+              Phone modding guides — custom ROMs, rooting, debloating — on
+              <a href="https://www.youtube.com/@PhoneGuruAmziXz" rel="noopener">@PhoneGuruAmziXz</a>,
+              and live streams and posts on <a href="https://www.tiktok.com/@itsamzixz" rel="noopener">TikTok</a>.
+              Everything else goes on <a href="https://www.youtube.com/@AmziXz" rel="noopener">@AmziXz</a>.
+              See <a href="projects.html">what I do</a> for the longer version.
+            </p>
+          </details>
+          <details>
+            <summary>What is Catch The Baltic?</summary>
+            <p>
+              A car show I organise at Spilve Airfield in Riga. The next one is on
+              22 August 2026.
+            </p>
+          </details>
+          <details>
+            <summary>Are you open to collabs?</summary>
+            <p>
+              Yes — collabs and feedback both. Message me on Telegram and tell me what
+              you have in mind.
+            </p>
+          </details>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <p>XD</p>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="projects.html">Projects</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="uses.html">Uses</a>
+        <a href="index.html#socials">Socials</a>
+        <a href="https://www.youtube.com/@PhoneGuruAmziXz" rel="noopener">YouTube</a>
+        <a href="https://www.tiktok.com/@itsamzixz" rel="noopener">TikTok</a>
+        <a href="https://github.com/AmziXz" rel="me noopener">GitHub</a>
+      </nav>
+      <p>© 2026 AmziXz.</p>
     </footer>
   </body>
 </html>
