@@ -878,6 +878,42 @@ img {
   color: var(--muted);
 }
 
+.uses-list code {
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 0.85em;
+  padding: 0.1rem 0.4rem;
+  border-radius: 5px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--accent-strong);
+}
+
+.uses-callout {
+  margin-top: 0.9rem;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  border: 1px solid var(--accent);
+  background: var(--surface-alt);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem 1.2rem;
+}
+
+.uses-callout p {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.uses-callout .price {
+  font-family: "Fraunces", "Georgia", serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent-strong);
+  white-space: nowrap;
+}
+
 .footer {
   text-align: center;
   padding: 2rem 1.5rem 3rem;
