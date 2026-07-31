@@ -81,6 +81,28 @@ Language persists two ways, deliberately layered:
 at the other, and set the switch hrefs in the header. Miss the `hreflang` and
 the switch still works, but the remembered preference will not follow.
 
+## Cache busting
+
+Everything in `/assets` is referenced with a `?v=N` query string:
+
+```html
+<link rel="stylesheet" href="/assets/style.css?v=2" />
+```
+
+GitHub Pages serves assets with `Cache-Control: max-age=600`, and browsers hold
+images and stylesheets far longer than that. Without the version, editing
+`style.css` or replacing `logo.png` leaves returning visitors on the old copy —
+new HTML with stale CSS, which breaks the layout rather than just looking dated.
+
+**After changing anything in `/assets`, bump the number in every page.** From
+the repo root:
+
+```bash
+python -c "import glob,re,pathlib
+for f in glob.glob('*.html')+glob.glob('lv/*.html'):
+    p=pathlib.Path(f); p.write_text(re.sub(r'\?v=\d+','?v=3',p.read_text(encoding='utf-8')),encoding='utf-8')"
+```
+
 ## Conventions
 
 - **Design tokens** are CSS custom properties in `:root`, with a
