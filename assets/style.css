@@ -783,6 +783,144 @@ img {
   color: var(--muted);
 }
 
+/* ---------- Language switch ---------- */
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.lang-switch a {
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--muted);
+  transition: color var(--dur-hover) ease, background-color var(--dur-hover) ease;
+}
+
+.lang-switch a[aria-current="true"] {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lang-switch a:not([aria-current="true"]):hover {
+    color: var(--bg-ink);
+  }
+}
+
+/* ---------- Event page ---------- */
+
+.event-meta {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  margin-top: 1.6rem;
+}
+
+.price-list,
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 1.2rem 0 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.price-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 1.1rem;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.price-list .amount {
+  font-family: "Fraunces", "Georgia", serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  white-space: nowrap;
+  color: var(--accent-strong);
+}
+
+.price-list .amount.free {
+  color: #16a34a;
+}
+
+@media (prefers-color-scheme: dark) {
+  .price-list .amount.free {
+    color: #4ade80;
+  }
+}
+
+.steps {
+  counter-reset: step;
+}
+
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 0.8rem 1.1rem 0.8rem 3.2rem;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.6rem;
+  height: 1.6rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.partner-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.partner-list li {
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.note {
+  margin-top: 1rem;
+  padding: 0.8rem 1.1rem;
+  border-radius: 10px;
+  border-left: 3px solid var(--accent-warm);
+  background: var(--surface-alt);
+  font-size: 0.9rem;
+}
+
 /* ---------- FAQ ---------- */
 
 .faq {
