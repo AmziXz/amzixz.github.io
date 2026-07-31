@@ -20,6 +20,7 @@ assets/
   fonts.css           Self-hosted @font-face rules
   fonts/              woff2 files (latin + latin-ext; latin-ext = Latvian)
   lang.js             Remembers the EN/LV choice across pages
+  menu.js             Mobile navigation menu
   logo.png            256px circular badge — header icon and favicon
   logo-512.png        512px — apple-touch-icon
   logo-source.png     Original 1254px master, not referenced by any page
@@ -112,6 +113,9 @@ for f in glob.glob('*.html')+glob.glob('lv/*.html'):
   `@media (hover: hover) and (pointer: fine)` so they don't stick on touch.
 - **Accessibility**: every page has a skip link, a `:focus-visible` ring, and
   `aria-current="page"` on the active nav item. Keep those when adding pages.
+- **Header**: below 760px the nav links collapse behind the menu button; the
+  language switch stays in the bar. The links are a plain `<ul>` that CSS hides
+  at narrow widths, so they still work with JavaScript off.
 - **Adding a page**: copy an existing page's `<head>` block and update `<title>`,
   `description`, `canonical`, and the `og:` tags. Add the link to both the header
   nav and the footer nav.
