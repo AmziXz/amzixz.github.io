@@ -1,6 +1,5 @@
-# graphify knowledge graph output — local tooling, not site content.
-# This repo is served directly by GitHub Pages, so anything committed here is public.
-graphify-out/
+# This repo is served directly by GitHub Pages, so anything committed here
+# is public. Keep local tooling output out of it.
 
 # OS / editor noise
 .DS_Store

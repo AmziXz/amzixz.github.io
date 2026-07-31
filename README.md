@@ -69,8 +69,8 @@ link even though the deployed site works.
 
 ## Notes
 
-- Anything committed here is publicly served. `graphify-out/` is gitignored for
-  that reason.
+- Anything committed here is publicly served. Keep local tooling output out of
+  the repo.
 - Third-party embeds (TikTok `embed.js`, the Discord widget, Buy Me a Coffee)
   are commonly blocked by Brave Shields and uBlock. That is expected and not a
   bug in the page — test with shields down before investigating.
