@@ -162,14 +162,19 @@ img {
 .brand-logo {
   width: 42px;
   height: 42px;
-  border-radius: 14px;
+  border-radius: 50%;
   object-fit: contain;
-  background: #ffffff;
   box-shadow: 0 10px 24px rgba(14, 124, 134, 0.18);
 }
 
 .brand-text {
   font-size: 1.2rem;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.3rem;
 }
 
 .nav-links {
@@ -1132,15 +1137,26 @@ main > section:nth-of-type(n + 5) {
     gap: 1rem;
   }
 
+  .nav-right {
+    gap: 0.8rem;
+  }
+
   .nav-links {
     gap: 0.9rem;
     font-size: 0.95rem;
   }
 
+  .lang-switch {
+    font-size: 0.72rem;
+  }
+
+  .lang-switch a {
+    padding: 0.2rem 0.5rem;
+  }
+
   .brand-logo {
     width: 34px;
     height: 34px;
-    border-radius: 11px;
   }
 
   .brand-text {

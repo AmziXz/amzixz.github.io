@@ -9,8 +9,11 @@
       content="The gear behind AmziXz: Nothing Phone (2), a Poco X3 Pro test device, a separate GrapheneOS phone, OrangeFox, KernelSU Next, an i7-10700F / RTX 3060 build, a DJI Osmo Mobile 8, and DaVinci Resolve."
     />
     <link rel="canonical" href="https://amzixz.github.io/uses" />
+    <link rel="alternate" hreflang="en" href="https://amzixz.github.io/uses" />
+    <link rel="alternate" hreflang="lv" href="https://amzixz.github.io/lv/uses" />
+    <link rel="alternate" hreflang="x-default" href="https://amzixz.github.io/uses" />
     <link rel="icon" href="/assets/logo.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo-512.png" />
     <meta name="theme-color" content="#0e7c86" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0a0a0b" media="(prefers-color-scheme: dark)" />
 
@@ -22,9 +25,12 @@
       content="The gear and software behind the videos and streams."
     />
     <meta property="og:url" content="https://amzixz.github.io/uses" />
-    <meta property="og:image" content="https://amzixz.github.io/assets/logo.png" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content="https://amzixz.github.io/assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
 
+    <script src="/assets/lang.js"></script>
     <link rel="stylesheet" href="/assets/fonts.css" />
     <link rel="stylesheet" href="/assets/style.css" />
   </head>
@@ -37,11 +43,17 @@
           <img class="brand-logo" src="/assets/logo.png" alt="" width="42" height="42" />
           <span class="brand-text">AmziXz</span>
         </a>
-        <ul class="nav-links">
-          <li><a href="/projects">Projects</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
+        <div class="nav-right">
+          <ul class="nav-links">
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+          <div class="lang-switch" role="group" aria-label="Language">
+            <a href="/uses" data-lang="en" aria-current="true" lang="en">EN</a>
+            <a href="/lv/uses" data-lang="lv" lang="lv">LV</a>
+          </div>
+        </div>
       </nav>
     </header>
 

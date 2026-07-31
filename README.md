@@ -6,16 +6,24 @@ this repository by GitHub Pages at <https://amzixz.github.io>.
 ## Structure
 
 ```
-index.html      Home — hero, socials, TikTok + Discord embeds, support
-about.html      About
-projects.html   What I do
-contact.html    Contact details, socials, FAQ
-uses.html       Gear and software
-404.html        Not-found page
-serve.py        Local preview server (mimics Pages URL handling)
+index.html            Home — hero, socials, TikTok + Discord embeds, support
+about.html            About
+projects.html         What I do
+contact.html          Contact details, socials, FAQ
+uses.html             Gear and software
+catch-the-baltic.html Event page
+404.html              Not-found page
+lv/                   Latvian versions of every page above except 404
+serve.py              Local preview server (mimics Pages URL handling)
 assets/
-  style.css     The entire stylesheet — design tokens live in :root
-  logo.png      Logo + favicon
+  style.css           The entire stylesheet — design tokens live in :root
+  fonts.css           Self-hosted @font-face rules
+  fonts/              woff2 files (latin + latin-ext; latin-ext = Latvian)
+  lang.js             Remembers the EN/LV choice across pages
+  logo.png            256px circular badge — header icon and favicon
+  logo-512.png        512px — apple-touch-icon
+  logo-source.png     Original 1254px master, not referenced by any page
+  og-image.png        1200x630 share banner
 ```
 
 There is no build step. Edit the HTML/CSS and push to `main`; Pages redeploys.
@@ -53,6 +61,25 @@ python serve.py        # http://localhost:8000, or `python serve.py 3000`
 `serve.py` exists because Python's built-in `http.server` does not resolve
 `/about` to `about.html`, so plain `python -m http.server` would 404 on every
 link even though the deployed site works.
+
+## Languages
+
+English lives at the root, Latvian under `/lv/`. Pages pair up one-to-one:
+`/about` <-> `/lv/about`.
+
+Language persists two ways, deliberately layered:
+
+1. **Structurally.** Every link on an LV page points at another LV page, so once
+   you are in Latvian you stay there. Works with JavaScript off, and it is what
+   search engines follow.
+2. **`assets/lang.js`.** Records the choice when the EN/LV switch is clicked,
+   and on a later visit sends you to the version you picked. It reads the
+   counterpart URL from the page's own `<link rel="alternate" hreflang>` rather
+   than constructing it, so a page without a translation stays put.
+
+**Adding a page:** create both versions, give each the `hreflang` pair pointing
+at the other, and set the switch hrefs in the header. Miss the `hreflang` and
+the switch still works, but the remembered preference will not follow.
 
 ## Conventions
 

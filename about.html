@@ -9,8 +9,11 @@
       content="I'm AmziXz — I mod phone software on YouTube, make car content on TikTok, and run the social media for Catch The Baltic, a car show at Spilve Airfield in Riga."
     />
     <link rel="canonical" href="https://amzixz.github.io/about" />
+    <link rel="alternate" hreflang="en" href="https://amzixz.github.io/about" />
+    <link rel="alternate" hreflang="lv" href="https://amzixz.github.io/lv/about" />
+    <link rel="alternate" hreflang="x-default" href="https://amzixz.github.io/about" />
     <link rel="icon" href="/assets/logo.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo-512.png" />
     <meta name="theme-color" content="#0e7c86" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0a0a0b" media="(prefers-color-scheme: dark)" />
 
@@ -22,9 +25,12 @@
       content="Phone modding, live streams, and a car show in Riga."
     />
     <meta property="og:url" content="https://amzixz.github.io/about" />
-    <meta property="og:image" content="https://amzixz.github.io/assets/logo.png" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content="https://amzixz.github.io/assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
 
+    <script src="/assets/lang.js"></script>
     <link rel="stylesheet" href="/assets/fonts.css" />
     <link rel="stylesheet" href="/assets/style.css" />
   </head>
@@ -37,11 +43,17 @@
           <img class="brand-logo" src="/assets/logo.png" alt="" width="42" height="42" />
           <span class="brand-text">AmziXz</span>
         </a>
-        <ul class="nav-links">
-          <li><a href="/projects">Projects</a></li>
-          <li><a href="/about" aria-current="page">About</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
+        <div class="nav-right">
+          <ul class="nav-links">
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/about" aria-current="page">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+          <div class="lang-switch" role="group" aria-label="Language">
+            <a href="/about" data-lang="en" aria-current="true" lang="en">EN</a>
+            <a href="/lv/about" data-lang="lv" lang="lv">LV</a>
+          </div>
+        </div>
       </nav>
     </header>
 
