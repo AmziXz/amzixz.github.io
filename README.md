@@ -45,24 +45,6 @@ extensionless URL so search engines index one address per page.
 The `.html` files are still the real files on disk — Pages does the mapping, so
 nothing needs renaming or moving into directories.
 
-## Local preview
-
-```bash
-python serve.py        # http://localhost:8000, or `python serve.py 3000`
-```
-
-**Do not open the files directly.** Under `file://`:
-
-- root-absolute paths like `/assets/style.css` resolve against your `C:` drive,
-  so no CSS loads;
-- extensionless links have no server to resolve them, so navigation 404s;
-- the TikTok and Discord embeds refuse to load, because `file://` pages are
-  treated as unique origins with no host.
-
-`serve.py` exists because Python's built-in `http.server` does not resolve
-`/about` to `about.html`, so plain `python -m http.server` would 404 on every
-link even though the deployed site works.
-
 ## Languages
 
 English lives at the root, Latvian under `/lv/`. Pages pair up one-to-one:
