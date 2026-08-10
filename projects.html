@@ -6,34 +6,38 @@
     <title>AmziXz · Projects</title>
     <meta
       name="description"
-      content="What AmziXz makes: phone modding guides on YouTube, car content on TikTok, and the social media for Catch The Baltic — a car show at Spilve Airfield in Riga."
+      content="What AmziXz makes: phone modding guides on YouTube, car content on TikTok, the social media for Catch The Baltic, and Blue Eye Energy."
     />
     <link rel="canonical" href="https://amzixz.github.io/projects" />
     <link rel="alternate" hreflang="en" href="https://amzixz.github.io/projects" />
     <link rel="alternate" hreflang="lv" href="https://amzixz.github.io/lv/projects" />
     <link rel="alternate" hreflang="x-default" href="https://amzixz.github.io/projects" />
-    <link rel="icon" href="/assets/logo.png?v=3" type="image/png" />
-    <link rel="apple-touch-icon" href="/assets/logo-512.png?v=3" />
-    <meta name="theme-color" content="#0e7c86" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0a0a0b" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/assets/logo.png?v=4" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/logo-512.png?v=4" />
+    <meta name="theme-color" content="#fafafc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0a0f" media="(prefers-color-scheme: dark)" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="AmziXz" />
     <meta property="og:title" content="What I do · AmziXz" />
     <meta
       property="og:description"
-      content="Phone modding guides, car content, and the social media for a car show in Riga."
+      content="Phone modding guides, car content, and the social media for an events organisation in Latvia."
     />
     <meta property="og:url" content="https://amzixz.github.io/projects" />
-    <meta property="og:image" content="https://amzixz.github.io/assets/og-image.png?v=3" />
+    <meta property="og:image" content="https://amzixz.github.io/assets/og-image.png?v=4" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <script src="/assets/lang.js?v=3"></script>
-    <script src="/assets/menu.js?v=3" defer></script>
-    <link rel="stylesheet" href="/assets/fonts.css?v=3" />
-    <link rel="stylesheet" href="/assets/style.css?v=3" />
+    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/space-grotesk-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+
+    <script src="/assets/theme.js?v=4"></script>
+    <script src="/assets/lang.js?v=4"></script>
+    <script src="/assets/menu.js?v=4" defer></script>
+    <script src="/assets/reveal.js?v=4" defer></script>
+    <link rel="stylesheet" href="/assets/style.css?v=5" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -41,12 +45,13 @@
     <header class="site-header">
       <nav class="nav container" aria-label="Primary">
         <a class="brand" href="/">
-          <img class="brand-logo" src="/assets/logo.png?v=3" alt="" width="42" height="42" />
+          <img class="brand-logo" src="/assets/logo.png?v=4" alt="" width="38" height="38" />
           <span class="brand-text">AmziXz</span>
         </a>
         <div class="nav-right">
           <ul class="nav-links" id="primary-menu">
-            <li><a href="/projects" aria-current="page">Projects</a></li>
+            <li><a href="/projects" aria-current="page">Work</a></li>
+            <li><a href="/ventures">Ventures</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
           </ul>
@@ -54,6 +59,12 @@
             <a href="/projects" data-lang="en" aria-current="true" lang="en">EN</a>
             <a href="/lv/projects" data-lang="lv" lang="lv">LV</a>
           </div>
+          <button class="theme-toggle" type="button" id="theme-toggle"
+                  aria-pressed="false" aria-label="Switch to dark theme"
+                  data-label-dark="Switch to dark theme"
+                  data-label-light="Switch to light theme">
+            <span class="theme-toggle-icon" aria-hidden="true"></span>
+          </button>
           <button class="nav-toggle" type="button" id="nav-toggle"
                   aria-expanded="false" aria-controls="primary-menu"
                   aria-label="Menu">
@@ -64,9 +75,18 @@
     </header>
 
     <main id="main">
+      <section class="hero container">
+        <p class="eyebrow">Work</p>
+        <h1 class="hero-title">What I do.</h1>
+        <p class="lead">
+          Content on two platforms, an event organisation, and a company in the
+          making. Most of it involves cars.
+        </p>
+      </section>
+
       <section class="section container">
-        <h1>What I do</h1>
-        <p class="lead">Three things. Two of them involve cars.</p>
+        <p class="eyebrow"><span class="index-label">[ 01 ]</span> The work</p>
+        <h2>Everything I'm running</h2>
         <div class="card-grid">
           <article class="card">
             <p class="card-status wip">Ongoing</p>
@@ -100,20 +120,35 @@
             <a class="card-cta" href="https://www.tiktok.com/@itsamzixz" rel="noopener">Watch on TikTok</a>
           </article>
           <article class="card">
-            <p class="card-status">22 Aug 2026</p>
+            <p class="card-status shipped">Ongoing</p>
             <h2>Catch The Baltic</h2>
             <p class="muted">
-              I run the social media for this car show at Spilve Airfield in Riga —
-              the accounts, the posts, and the outreach to drivers in Latvian and
-              English. The next one is on 22 August 2026.
+              An organisation and registered business running auto and moto events.
+              I handle the social media — the accounts, the posts, the announcement
+              Telegram group, the organisation groups, and the outreach to drivers
+              in Latvian and English.
             </p>
             <div class="tag-row">
               <span class="tag">Social media</span>
-              <span class="tag">Car show</span>
-              <span class="tag">Riga</span>
+              <span class="tag">Events</span>
+              <span class="tag">Latvia</span>
               <span class="tag">Latvian / English</span>
             </div>
-            <a class="card-cta" href="/catch-the-baltic">Event details</a>
+            <a class="card-cta" href="/catch-the-baltic">About the organisation</a>
+          </article>
+          <article class="card">
+            <p class="card-status wip">In development</p>
+            <h2>Blue Eye Energy</h2>
+            <p class="muted">
+              An energy drink company I co-own with a friend. Not on shelves yet —
+              we're still putting the pieces together, and currently raising.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Co-owner</span>
+              <span class="tag">Energy drink</span>
+              <span class="tag">Building</span>
+            </div>
+            <a class="card-cta" href="/ventures">All ventures</a>
           </article>
         </div>
       </section>
@@ -121,14 +156,8 @@
 
     <footer class="footer">
       <nav class="footer-links" aria-label="Footer">
-        <a href="/projects">Projects</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
-        <a href="/uses">Uses</a>
-        <a href="/catch-the-baltic">Catch The Baltic</a>
-        <a href="/#socials">Socials</a>
-        <a href="https://www.youtube.com/@PhoneGuruAmziXz" rel="noopener">YouTube</a>
-        <a href="https://www.tiktok.com/@itsamzixz" rel="noopener">TikTok</a>
         <a href="https://github.com/AmziXz" rel="me noopener">GitHub</a>
       </nav>
       <p>© 2026 AmziXz.</p>

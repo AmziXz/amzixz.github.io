@@ -3,37 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Catch The Baltic · 22 August 2026, Spilve Airfield, Riga</title>
+    <title>Catch The Baltic · Auto and moto event organisation in Latvia</title>
     <meta
       name="description"
-      content="Catch The Baltic — an auto and moto event at Spilve Airfield, Riga on 22 August 2026, 14:00–20:00. Cars, DJ sets, competitions, and an expo zone. Tickets from free to €10, cash only."
+      content="Catch The Baltic is an organisation and registered business in Latvia that puts on auto and moto events. AmziXz runs its social media, announcement channels, and organisation groups."
     />
     <link rel="canonical" href="https://amzixz.github.io/catch-the-baltic" />
     <link rel="alternate" hreflang="en" href="https://amzixz.github.io/catch-the-baltic" />
     <link rel="alternate" hreflang="lv" href="https://amzixz.github.io/lv/catch-the-baltic" />
     <link rel="alternate" hreflang="x-default" href="https://amzixz.github.io/catch-the-baltic" />
-    <link rel="icon" href="/assets/logo.png?v=3" type="image/png" />
-    <link rel="apple-touch-icon" href="/assets/logo-512.png?v=3" />
-    <meta name="theme-color" content="#0e7c86" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0a0a0b" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/assets/logo.png?v=4" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/logo-512.png?v=4" />
+    <meta name="theme-color" content="#fafafc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0a0f" media="(prefers-color-scheme: dark)" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="AmziXz" />
-    <meta property="og:title" content="Catch The Baltic · 22 August 2026" />
+    <meta property="og:title" content="Catch The Baltic" />
     <meta
       property="og:description"
-      content="An auto and moto event at Spilve Airfield, Riga. 22.08.2026, 14:00–20:00."
+      content="An organisation running auto and moto events in Latvia."
     />
     <meta property="og:url" content="https://amzixz.github.io/catch-the-baltic" />
-    <meta property="og:image" content="https://amzixz.github.io/assets/og-image.png?v=3" />
+    <meta property="og:image" content="https://amzixz.github.io/assets/og-image.png?v=4" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <script src="/assets/lang.js?v=3"></script>
-    <script src="/assets/menu.js?v=3" defer></script>
-    <link rel="stylesheet" href="/assets/fonts.css?v=3" />
-    <link rel="stylesheet" href="/assets/style.css?v=3" />
+    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/space-grotesk-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+
+    <script src="/assets/theme.js?v=4"></script>
+    <script src="/assets/lang.js?v=4"></script>
+    <script src="/assets/menu.js?v=4" defer></script>
+    <script src="/assets/reveal.js?v=4" defer></script>
+    <link rel="stylesheet" href="/assets/style.css?v=5" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Catch The Baltic",
+        "description": "An organisation and registered business running auto and moto events in Latvia.",
+        "url": "https://amzixz.github.io/catch-the-baltic",
+        "inLanguage": "en",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "LV"
+        },
+        "sameAs": [
+          "https://www.instagram.com/catchthebaltic/",
+          "https://www.tiktok.com/@catch.the.baltic"
+        ]
+      }
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -41,12 +64,13 @@
     <header class="site-header">
       <nav class="nav container" aria-label="Primary">
         <a class="brand" href="/">
-          <img class="brand-logo" src="/assets/logo.png?v=3" alt="" width="42" height="42" />
+          <img class="brand-logo" src="/assets/logo.png?v=4" alt="" width="38" height="38" />
           <span class="brand-text">AmziXz</span>
         </a>
         <div class="nav-right">
           <ul class="nav-links" id="primary-menu">
-            <li><a href="/projects">Projects</a></li>
+            <li><a href="/projects">Work</a></li>
+            <li><a href="/ventures">Ventures</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
           </ul>
@@ -54,6 +78,12 @@
             <a href="/catch-the-baltic" data-lang="en" aria-current="true" lang="en">EN</a>
             <a href="/lv/catch-the-baltic" data-lang="lv" lang="lv">LV</a>
           </div>
+          <button class="theme-toggle" type="button" id="theme-toggle"
+                  aria-pressed="false" aria-label="Switch to dark theme"
+                  data-label-dark="Switch to dark theme"
+                  data-label-light="Switch to light theme">
+            <span class="theme-toggle-icon" aria-hidden="true"></span>
+          </button>
           <button class="nav-toggle" type="button" id="nav-toggle"
                   aria-expanded="false" aria-controls="primary-menu"
                   aria-label="Menu">
@@ -64,115 +94,97 @@
     </header>
 
     <main id="main">
-      <section class="section container">
-        <p class="eyebrow">22.08.2026 · Riga</p>
-        <h1>Catch The Baltic</h1>
-        <p class="lead">
-          An auto and moto event like nothing seen here before. Cars worth looking
-          at, DJ sets, competitions, hosts on the mic, and plenty for both adults
-          and kids.
-        </p>
-
-        <div class="event-meta">
-          <div class="stat">
-            <span class="stat-label">Date</span>
-            <span class="stat-value">22 August 2026</span>
+      <section class="hero container">
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow">Organisation · Latvia</p>
+            <h1 class="hero-title">Catch The Baltic</h1>
+            <p class="lead">
+              An organisation and registered business that puts on auto and moto
+              events in Latvia. Cars worth looking at, DJ sets, competitions, hosts on
+              the mic, and plenty for both adults and kids.
+            </p>
+            <div class="hero-actions">
+              <a class="btn" href="https://www.instagram.com/catchthebaltic/" rel="noopener">Follow on Instagram</a>
+              <a class="btn secondary" href="/contact">Ask me something</a>
+            </div>
           </div>
-          <div class="stat">
-            <span class="stat-label">Time</span>
-            <span class="stat-value">14:00 – 20:00</span>
-          </div>
-          <div class="stat">
-            <span class="stat-label">Where</span>
-            <span class="stat-value">Spilve Airfield, Riga</span>
+          <div class="hero-card">
+            <!-- Drop the logo file at /assets/logos/catch-the-baltic.png and swap
+                 the initials span below for the img. See assets/logos/README.md. -->
+            <span class="brand-plate brand-plate--dark" style="width: 92px; height: 92px">
+              <img src="/assets/logos/catch-the-baltic.png?v=4" alt="Catch The Baltic" width="92" height="92" />
+            </span>
+            <h2 style="margin-top: 1.2rem">The organisation</h2>
+            <div class="stat-grid">
+              <div class="stat">
+                <span class="stat-label">Type</span>
+                <span class="stat-value">Organisation · registered business</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">Based in</span>
+                <span class="stat-value">Latvia</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">My role</span>
+                <span class="stat-value">Social media manager</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="section container">
-        <h2>Tickets</h2>
-        <ul class="price-list">
-          <li><span>Expo participants</span> <span class="amount free">Free</span></li>
-          <li><span>Children up to 12 (inclusive)</span> <span class="amount free">Free</span></li>
-          <li><span>Visitors with reduced mobility</span> <span class="amount free">Free</span></li>
-          <li><span>Ages 13 and up, and adults</span> <span class="amount">€10</span></li>
-          <li><span>Club members (20% off)</span> <span class="amount">€8</span></li>
-          <li><span>Lottery ticket</span> <span class="amount">€1</span></li>
-        </ul>
-        <p class="note"><strong>Cash only.</strong> Bring notes — there is no card payment on the gate.</p>
-      </section>
-
-      <section class="section container">
-        <h2>Getting into the expo zone</h2>
+        <p class="eyebrow"><span class="index-label">[ 01 ]</span> What it is</p>
+        <h2>An organisation, not a one-off</h2>
         <p>
-          Got a vehicle worth showing? The expo zone is free to enter, but you need
-          to be approved first. Three steps:
+          Catch The Baltic is a registered business built around auto and moto
+          culture in Latvia. It runs events, brings drivers and builders together,
+          and works with brands across the Baltics.
         </p>
-        <ol class="steps">
-          <li>Follow the event on Instagram or TikTok.</li>
-          <li>Send a DM with a photo of your vehicle.</li>
-          <li>
-            Include your name, phone number, registration plate, and the model.
-          </li>
-        </ol>
       </section>
 
       <section class="section container">
-        <h2>Follow the event</h2>
-        <p>Both accounts post the announcements. The DMs are where expo entries go.</p>
+        <p class="eyebrow"><span class="index-label">[ 02 ]</span> My role</p>
+        <h2>What I handle</h2>
+        <p>
+          I manage the organisation's social media presence — the accounts, the
+          posts, the announcement Telegram group, and the internal organisation
+          groups. I also handle outreach to drivers in both Latvian and English.
+        </p>
+        <ul class="link-list">
+          <li><a href="https://www.instagram.com/catchthebaltic/" rel="noopener">Instagram · @catchthebaltic</a></li>
+          <li><a href="https://www.tiktok.com/@catch.the.baltic" rel="noopener">TikTok · @catch.the.baltic</a></li>
+        </ul>
+      </section>
+
+      <section class="section container">
+        <p class="eyebrow"><span class="index-label">[ 03 ]</span> Follow</p>
+        <h2>Where the announcements go</h2>
+        <p class="muted">Both accounts carry the announcements. The DMs are where enquiries go.</p>
         <div class="social-grid">
-          <a class="social-card tiktok" href="https://www.instagram.com/catchthebaltic/" rel="noopener">
+          <a class="social-card instagram" href="https://www.instagram.com/catchthebaltic/" rel="noopener">
             <span class="social-name">Instagram</span>
             <span class="social-handle">@catchthebaltic</span>
-            <span class="social-blurb">Announcements and expo entries.</span>
+            <span class="social-blurb">Announcements and enquiries.</span>
           </a>
           <a class="social-card tiktok" href="https://www.tiktok.com/@catch.the.baltic" rel="noopener">
             <span class="social-name">TikTok</span>
             <span class="social-handle">@catch.the.baltic</span>
-            <span class="social-blurb">Clips from the last one, and what is coming.</span>
+            <span class="social-blurb">Clips from previous events, and what is coming.</span>
           </a>
         </div>
-      </section>
-
-      <section class="section container">
-        <h2>Partners</h2>
-        <ul class="partner-list">
-          <li>Red Bull</li>
-          <li>ALXFLAME</li>
-          <li>Location Hunters</li>
-          <li>KLAK</li>
-          <li>RC Playground</li>
-          <li>Crystal Flower</li>
-          <li>Koku Mednieki</li>
-          <li>Anemos VR</li>
-          <li>BL Workshop</li>
-          <li>NoName Latvia</li>
-          <li>StickerShop.net</li>
-          <li>MAD Racing</li>
-          <li>BLAST.LV</li>
-          <li>AUX.LV</li>
-        </ul>
-        <p class="muted" style="margin-top: 1.4rem">
-          I run the social media for the event — the accounts, the posts, and the
-          outreach to drivers in Latvian and English.
-        </p>
-        <div class="hero-actions" style="margin-top: 1.6rem">
+        <div class="hero-actions" style="margin-top: 2rem">
           <a class="btn" href="https://www.instagram.com/catchthebaltic/" rel="noopener">Follow on Instagram</a>
-          <a class="btn secondary" href="/contact">Ask me something</a>
+          <a class="btn secondary" href="/ventures">All ventures</a>
         </div>
       </section>
     </main>
 
     <footer class="footer">
       <nav class="footer-links" aria-label="Footer">
-        <a href="/projects">Projects</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
-        <a href="/uses">Uses</a>
-        <a href="/catch-the-baltic">Catch The Baltic</a>
-        <a href="/#socials">Socials</a>
-        <a href="https://www.youtube.com/@PhoneGuruAmziXz" rel="noopener">YouTube</a>
-        <a href="https://www.tiktok.com/@itsamzixz" rel="noopener">TikTok</a>
         <a href="https://github.com/AmziXz" rel="me noopener">GitHub</a>
       </nav>
       <p>© 2026 AmziXz.</p>

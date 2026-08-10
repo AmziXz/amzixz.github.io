@@ -4,30 +4,57 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AmziXz · Telefonu modificēšana, auto, tiešraides</title>
-    <meta name="description" content="AmziXz modificē telefonu programmatūru YouTube — pielāgotās ROM, root, liekās programmatūras noņemšana — veido auto saturu TikTok un vada Catch The Baltic sociālos tīklus, auto pasākumam Rīgā." />
+    <meta name="description" content="AmziXz modificē telefonu programmatūru YouTube — pielāgotās ROM, root, liekās programmatūras noņemšana — veido auto saturu TikTok un vada Catch The Baltic sociālos tīklus, auto pasākumam Latvijā." />
     <link rel="canonical" href="https://amzixz.github.io/lv/" />
     <link rel="alternate" hreflang="en" href="https://amzixz.github.io/" />
     <link rel="alternate" hreflang="lv" href="https://amzixz.github.io/lv/" />
     <link rel="alternate" hreflang="x-default" href="https://amzixz.github.io/" />
-    <link rel="icon" href="/assets/logo.png?v=3" type="image/png" />
-    <link rel="apple-touch-icon" href="/assets/logo-512.png?v=3" />
-    <meta name="theme-color" content="#0e7c86" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0a0a0b" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/assets/logo.png?v=4" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/logo-512.png?v=4" />
+    <meta name="theme-color" content="#fafafc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0a0f" media="(prefers-color-scheme: dark)" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="AmziXz" />
     <meta property="og:title" content="AmziXz" />
-    <meta property="og:description" content="Telefonu modificēšana YouTube, auto saturs TikTok un Catch The Baltic sociālie tīkli Rīgā." />
+    <meta property="og:description" content="Telefonu modificēšana YouTube, auto saturs TikTok un Catch The Baltic sociālie tīkli Latvijā." />
     <meta property="og:url" content="https://amzixz.github.io/lv/" />
-    <meta property="og:image" content="https://amzixz.github.io/assets/og-image.png?v=3" />
+    <meta property="og:image" content="https://amzixz.github.io/assets/og-image.png?v=4" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <script src="/assets/lang.js?v=3"></script>
-    <script src="/assets/menu.js?v=3" defer></script>
-    <link rel="stylesheet" href="/assets/fonts.css?v=3" />
-    <link rel="stylesheet" href="/assets/style.css?v=3" />
+    <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/space-grotesk-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+
+    <script src="/assets/theme.js?v=4"></script>
+    <script src="/assets/lang.js?v=4"></script>
+    <script src="/assets/menu.js?v=4" defer></script>
+    <script src="/assets/reveal.js?v=4" defer></script>
+    <link rel="stylesheet" href="/assets/style.css?v=5" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "AmziXz",
+        "url": "https://amzixz.github.io/lv/",
+        "image": "https://amzixz.github.io/assets/logo-512.png",
+        "jobTitle": "Satura veidotājs",
+        "inLanguage": "lv",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "LV"
+        },
+        "sameAs": [
+          "https://www.youtube.com/@PhoneGuruAmziXz",
+          "https://www.youtube.com/@AmziXz",
+          "https://www.tiktok.com/@itsamzixz",
+          "https://t.me/AmziXz",
+          "https://github.com/AmziXz"
+        ]
+      }
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Parlekt uz saturu</a>
@@ -35,12 +62,13 @@
     <header class="site-header">
       <nav class="nav container" aria-label="Galvena navigacija">
         <a class="brand" href="/lv/">
-          <img class="brand-logo" src="/assets/logo.png?v=3" alt="" width="42" height="42" />
+          <img class="brand-logo" src="/assets/logo.png?v=4" alt="" width="38" height="38" />
           <span class="brand-text">AmziXz</span>
         </a>
         <div class="nav-right">
           <ul class="nav-links" id="primary-menu">
-            <li><a href="/lv/projects">Projekti</a></li>
+            <li><a href="/lv/projects">Darbi</a></li>
+            <li><a href="/lv/ventures">Uzņēmumi</a></li>
             <li><a href="/lv/about">Par mani</a></li>
             <li><a href="/lv/contact">Kontakti</a></li>
           </ul>
@@ -48,6 +76,12 @@
             <a href="/" data-lang="en" lang="en">EN</a>
             <a href="/lv/" data-lang="lv" aria-current="true" lang="lv">LV</a>
           </div>
+          <button class="theme-toggle" type="button" id="theme-toggle"
+                  aria-pressed="false" aria-label="Pārslēgt uz tumšo motīvu"
+                  data-label-dark="Pārslēgt uz tumšo motīvu"
+                  data-label-light="Pārslēgt uz gaišo motīvu">
+            <span class="theme-toggle-icon" aria-hidden="true"></span>
+          </button>
           <button class="nav-toggle" type="button" id="nav-toggle"
                   aria-expanded="false" aria-controls="primary-menu"
                   aria-label="Izvēlne">
@@ -58,61 +92,173 @@
     </header>
 
     <main id="main">
-      <section class="hero container">
-        <div class="hero-grid">
-          <div>
-            <p class="eyebrow">Telefonu modificēšana · Auto · Tiešraides</p>
-            <h1>AmziXz</h1>
-            <p class="lead">
-              YouTube es modificēju telefonu programmatūru — pielāgotās ROM, root,
-              liekās programmatūras noņemšana un ierīču izspiešana tālāk par to, ko
-              tās spēja no rūpnīcas. TikTok veidoju auto saturu un rādu tiešraides.
-              Ārpus kameras vadu Catch The Baltic sociālos tīklus — tas ir auto
-              pasākums Rīgā.
-            </p>
-            <div class="hero-actions">
-              <a class="btn" href="/lv/projects">Ko es daru</a>
-              <a class="btn secondary" href="/lv/about">Par mani</a>
-            </div>
+      <section class="hero-full">
+        <div class="hero-full-inner">
+          <p class="eyebrow" data-reveal>Satura veidotājs</p>
+          <h1 class="display" data-reveal data-reveal-delay="80">
+            Ziņkārīgs par visu.
+            <span class="display-offset display-accent">Lielāko daļu arī būvēju.</span>
+          </h1>
+          <p class="eyebrow hero-sub" data-reveal data-reveal-delay="160">
+            Auto · Motocikli · Sistēmas · Mūzika · Un kas nākamais
+          </p>
+          <div class="hero-actions" data-reveal data-reveal-delay="220">
+            <a class="btn" href="/lv/projects">Apskati darbus</a>
+            <a class="btn secondary" href="/lv/ventures">Ko es veidoju</a>
           </div>
-          <div class="hero-card">
-            <h2>Šobrīd</h2>
-            <p class="muted">
-              Kārtoju sociālos tīklus nākamajam Catch The Baltic.
-            </p>
-            <div class="stat-grid">
-              <div class="stat">
-                <span class="stat-label">Nākamais pasākums</span>
-                <span class="stat-value"><a href="/lv/catch-the-baltic">Catch The Baltic · 22.08.2026</a></span>
-              </div>
-              <div class="stat">
-                <span class="stat-label">Kur</span>
-                <span class="stat-value">Spilves lidlauks, Rīga</span>
-              </div>
-              <div class="stat">
-                <span class="stat-label">Ātrākā saziņa</span>
-                <span class="stat-value">Telegram · @AmziXz</span>
-              </div>
-            </div>
+        </div>
+
+        <div class="hero-meta" data-reveal data-reveal-delay="280">
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Atrodas</span>
+            <span class="hero-meta-value">Latvijā</span>
           </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Veidoju</span>
+            <span class="hero-meta-value">Blue Eye Energy</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Ātrākā saziņa</span>
+            <span class="hero-meta-value">Telegram · @AmziXz</span>
+          </div>
+          <a class="scroll-cue" href="#ventures">Ritini</a>
         </div>
       </section>
 
       <section class="section container">
+        <p class="eyebrow"><span class="index-label">[ 01 ]</span> Sāc šeit</p>
         <h2>Īsumā</h2>
-        <p>Īsā versija, ja negribas lasīt visu.</p>
+        <p class="muted">Īsā versija, ja negribas lasīt visu.</p>
         <ul class="link-list">
           <li><a href="/lv/projects">Ko es veidoju</a></li>
+          <li><a href="/lv/ventures">Uzņēmumi, ko būvēju</a></li>
+          <li><a href="/lv/catch-the-baltic">Catch The Baltic</a></li>
           <li><a href="/lv/about">Kas es esmu</a></li>
-          <li><a href="/lv/catch-the-baltic">Catch The Baltic — 22.08.2026</a></li>
           <li><a href="/lv/uses">Aprīkojums, ko lietoju</a></li>
           <li><a href="/lv/contact">Sazināties</a></li>
         </ul>
       </section>
 
+      <section class="section container" id="ventures">
+        <p class="eyebrow"><span class="index-label">[ 02 ]</span> Uzņēmumi</p>
+        <h2>Ko es veidoju</h2>
+        <p class="muted">Divi ir īsti jau šodien. Pārējie godīgi atzīst, ka ir plāni.</p>
+        <div class="venture-list">
+          <a class="venture-card" href="/lv/catch-the-baltic">
+            <span class="brand-plate brand-plate--dark">
+              <img src="/assets/logos/catch-the-baltic.png?v=4" alt="Catch The Baltic" width="64" height="64" />
+            </span>
+            <span class="venture-body">
+              <span class="venture-head">
+                <span class="venture-name">Catch The Baltic</span>
+                <span class="status-pill status-pill--live">Aktīvs</span>
+              </span>
+              <span class="venture-desc">
+                Organizācija un reģistrēts uzņēmums, kas rīko auto un moto pasākumus Latvijā.
+              </span>
+              <span class="venture-role">Sociālie tīkli · paziņojumu Telegram grupa · organizācijas grupas</span>
+            </span>
+          </a>
+          <div class="venture-card">
+            <span class="brand-plate brand-plate--dark">
+              <img src="/assets/logos/blue-eye-energy.png?v=4" alt="Blue Eye Energy" width="64" height="64" />
+            </span>
+            <span class="venture-body">
+              <span class="venture-head">
+                <span class="venture-name">Blue Eye Energy</span>
+                <span class="status-pill status-pill--building">Tapšanā</span>
+              </span>
+              <span class="venture-desc">
+                Enerģijas dzēriena uzņēmums, kura līdzīpašnieks esmu kopā ar draugu.
+                Šobrīd piesaistām investīcijas.
+              </span>
+              <span class="venture-role">Līdzīpašnieks</span>
+            </span>
+          </div>
+        </div>
+        <a class="card-cta" href="/lv/ventures">Visi uzņēmumi</a>
+      </section>
+
+      <!-- Atkārtojošs vārda joslas elements. Viss ir aria-hidden: vārds jau ir
+           logotipā, h1 un lapas nosaukumā. Abas grupas ir identiskas, un celiņš
+           pārvietojas tieši par -50%, tāpēc cilpas vieta nav pamanāma. -->
+      <div class="marquee" data-reveal aria-hidden="true">
+        <div class="marquee-track">
+          <div class="marquee-group">
+            <span class="marquee-item">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item marquee-item--ghost">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item marquee-item--ghost">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item marquee-item--ghost">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item marquee-item--ghost">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item marquee-item--ghost">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item marquee-item--ghost">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item marquee-item--ghost">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item marquee-item--ghost">AmziXz</span>
+            <span class="marquee-dot"></span>
+          </div>
+          <div class="marquee-group">
+            <span class="marquee-item">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item marquee-item--ghost">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item marquee-item--ghost">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item marquee-item--ghost">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item marquee-item--ghost">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item marquee-item--ghost">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item marquee-item--ghost">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item marquee-item--ghost">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item">AmziXz</span>
+            <span class="marquee-dot"></span>
+            <span class="marquee-item marquee-item--ghost">AmziXz</span>
+            <span class="marquee-dot"></span>
+          </div>
+        </div>
+      </div>
+
       <section class="section container" id="socials">
+        <p class="eyebrow"><span class="index-label">[ 03 ]</span> Kanāli</p>
         <h2>Internetā</h2>
-        <p>
+        <p class="muted">
           Katrs no tiem ir kaut kas cits. Izvēlies to, kura dēļ atnāci.
         </p>
         <div class="social-grid">
@@ -155,6 +301,7 @@
       </section>
 
       <section class="section container" id="community">
+        <p class="eyebrow"><span class="index-label">[ 04 ]</span> Kopiena</p>
         <h2>Jaunākais un kopiena</h2>
         <div class="two-column">
           <div class="embed-card">
@@ -183,6 +330,7 @@
               <iframe
                 title="AmziXz Discord servera logrīks"
                 src="https://discord.com/widget?id=1413564887535321321&amp;theme=dark"
+                loading="lazy"
                 sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
               ></iframe>
             </div>
@@ -191,6 +339,7 @@
       </section>
 
       <section class="section container">
+        <p class="eyebrow"><span class="index-label">[ 05 ]</span> Atbalsts</p>
         <h2>Atbalsti darbu</h2>
         <p class="muted">Ja tev patīk tas, ko daru, atbalsti nākamo soli.</p>
         <div class="coffee-button">
@@ -201,14 +350,8 @@
 
     <footer class="footer">
       <nav class="footer-links" aria-label="Kajenes navigacija">
-        <a href="/lv/projects">Projekti</a>
         <a href="/lv/about">Par mani</a>
         <a href="/lv/contact">Kontakti</a>
-        <a href="/lv/uses">Aprīkojums</a>
-        <a href="/lv/catch-the-baltic">Catch The Baltic</a>
-        <a href="/lv/#socials">Sociālie tīkli</a>
-        <a href="https://www.youtube.com/@PhoneGuruAmziXz" rel="noopener">YouTube</a>
-        <a href="https://www.tiktok.com/@itsamzixz" rel="noopener">TikTok</a>
         <a href="https://github.com/AmziXz" rel="me noopener">GitHub</a>
       </nav>
       <p>© 2026 AmziXz.</p>
