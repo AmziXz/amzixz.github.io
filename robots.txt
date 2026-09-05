@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://amzixz.github.io/sitemap.xml
+Sitemap: https://amzixz.id.lv/sitemap.xml
