@@ -52,6 +52,19 @@ The repo is called `amzixz.github.io`; the site is served at
 - `https://github.com/AmziXz` links are the **profile** and stay as they are.
   Never blanket-replace "github.io" without checking which of the two you have.
 
+## services.amzixz.id.lv is a different repo
+
+Pages serves one custom domain per repository, and this one's `CNAME` is spent,
+so the services site lives in **`AmziXz/AmziXz-Services`**. Don't try to host it
+here, even in a `/services/` folder.
+
+- The "Services" links in every header and footer, and the ventures card, are
+  absolute (`https://services.amzixz.id.lv/`) for that reason. A root-relative
+  `/services` would resolve to this site and 404.
+- `AmziXz/amzixz-sites` was an attempt to build both sites from one repo. Its
+  workflow **force-pushes over this repo** on every run. It never deployed. Do
+  not add its `PAGES_TOKEN` secret or revive it.
+
 ## Running it locally
 
 Python is not installed on every machine here, so there are two equivalent
