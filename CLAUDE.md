@@ -60,7 +60,8 @@ here, even in a `/services/` folder.
 
 - The "Services" links in every header and footer, and the ventures card, are
   absolute (`https://services.amzixz.id.lv/`) for that reason. A root-relative
-  `/services` would resolve to this site and 404.
+  `/services` would resolve to this site and 404. Latvian pages link to the
+  Latvian services page, `https://services.amzixz.id.lv/lv/`.
 - `AmziXz/amzixz-sites` was an attempt to build both sites from one repo. Its
   workflow **force-pushes over this repo** on every run. It never deployed. Do
   not add its `PAGES_TOKEN` secret or revive it.
