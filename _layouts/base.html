@@ -1,0 +1,171 @@
+{%- comment -%}
+  The frame every page sits in: <head>, the top bar, the floating menu at the
+  bottom, the loading screen and the footer. No wording lives here: every
+  visible text comes from _data/lang/<code>.yml, links from _data/links.yml.
+
+  A page sets in its front matter:
+    lang:   en or lv
+    slug:   its address without the language prefix ("/" for home, "/about")
+    nav:    which item of the floating menu is lit (home, work, ventures,
+            about, contact, or none)
+    key:    which entry of the meta section of the language file holds its
+            title and description (home, about, uses, contact, notfound)
+
+  Every text goes through `escape` (or `jsonify` inside JSON-LD), so a quote
+  or & in a translation can never break the markup. Strict mode in
+  _config.yml fails the build on a missing key instead of publishing a blank.
+{%- endcomment -%}
+{%- include setup.html -%}
+{%- assign m = t.meta[page.key] -%}
+<!DOCTYPE html>
+<html lang="{{ here.code }}" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>{{ m.title | escape }}</title>
+    <meta name="description" content="{{ m.description | escape }}" />
+{%- if page.key == "notfound" %}
+    <meta name="robots" content="noindex" />
+{%- else %}
+    <link rel="canonical" href="{{ site.origin }}{{ here.prefix }}{{ page.slug }}" />
+{%- for l in langs %}
+    <link rel="alternate" hreflang="{{ l.code }}" href="{{ site.origin }}{{ l.prefix }}{{ page.slug }}" />
+{%- endfor %}
+    <link rel="alternate" hreflang="x-default" href="{{ site.origin }}{{ langs.first.prefix }}{{ page.slug }}" />
+{%- endif %}
+    <link rel="icon" href="/assets/logo.png?v={{ v }}" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/logo-512.png?v={{ v }}" />
+    <meta name="theme-color" content="#0b0a0f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AmziXz" />
+    <meta property="og:locale" content="{{ here.locale }}" />
+    <meta property="og:title" content="{{ m.title | escape }}" />
+    <meta property="og:description" content="{{ t.meta.share_description | escape }}" />
+    <meta property="og:url" content="{{ site.origin }}{{ here.prefix }}{{ page.slug }}" />
+    <meta property="og:image" content="{{ site.origin }}/assets/og-image.png?v={{ v }}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preload" href="/assets/fonts/unbounded-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Before anything paints: mark that script runs, and show the loading
+         screen on the first page of a visit only (never again until the tab
+         is closed, and never with reduced motion). -->
+    <script>
+      (function (d) {
+        d.classList.add("js");
+        try {
+          if (!sessionStorage.getItem("amzixz:seen") && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            d.classList.add("is-loading");
+            sessionStorage.setItem("amzixz:seen", "1");
+          }
+        } catch (e) {}
+      })(document.documentElement);
+    </script>
+    <!-- Not deferred: the theme and the remembered language must apply before
+         first paint. -->
+    <script src="/assets/theme.js?v={{ v }}"></script>
+    <script src="/assets/lang.js?v={{ v }}"></script>
+    <script src="/assets/site.js?v={{ v }}" defer></script>
+    <link rel="stylesheet" href="/assets/site.css?v={{ v }}" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "AmziXz",
+        "url": "{{ site.origin }}{{ home }}",
+        "image": "{{ site.origin }}/assets/logo-512.png",
+        "jobTitle": {{ t.meta.job_title | jsonify }},
+        "address": { "@type": "PostalAddress", "addressCountry": "LV" },
+        "sameAs": [{{ k.youtube_phone | jsonify }}, {{ k.youtube_main | jsonify }}, {{ k.tiktok | jsonify }}, {{ k.telegram | jsonify }}, {{ k.github | jsonify }}]
+      }
+    </script>
+  </head>
+
+  <body class="is-{{ page.key }}">
+    <a class="skip" href="#main">{{ t.ui.skip | escape }}</a>
+
+    <!-- Loading screen: first page of a visit only (see the script in <head>).
+         assets/site.js counts it up and lifts it; if that script never runs,
+         a CSS animation lifts it anyway after a moment. -->
+    <div class="loader" aria-hidden="true">
+      <span class="loader-label">{{ t.ui.loading | escape }}</span>
+      <span class="loader-count"><b>0</b>%</span>
+      <span class="loader-bar"><i></i></span>
+    </div>
+
+    <header class="top">
+      <div class="top-inner">
+        <a class="brand" href="{{ home }}">
+          <img src="/assets/logo.png?v={{ v }}" alt="" width="256" height="256" />
+          <span>AmziXz</span>
+        </a>
+        <div class="top-tools">
+          <nav class="lang-switch" aria-label="{{ t.ui.language | escape }}">
+{%- for l in langs %}
+            <a href="{{ l.prefix }}{{ page.slug }}" data-lang="{{ l.code }}" lang="{{ l.code }}" hreflang="{{ l.code }}"{% if l.code == here.code %} aria-current="true"{% endif %}><span aria-hidden="true">{{ l.short }}</span><span class="sr">{{ l.name | escape }}</span></a>
+{%- endfor %}
+          </nav>
+          <button class="theme-switch" id="theme-toggle" type="button" aria-pressed="true" data-label-dark="{{ t.ui.theme_to_dark | escape }}" data-label-light="{{ t.ui.theme_to_light | escape }}" aria-label="{{ t.ui.theme_to_light | escape }}">
+            <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6" /></svg>
+            <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" /></svg>
+            <i class="knob" aria-hidden="true"></i>
+          </button>
+          <a class="icon-pill" href="mailto:{{ k.email }}" aria-label="{{ t.ui.email | escape }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" /><path d="m4 7 8 6 8-6" /></svg>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+{{ content }}
+    </main>
+
+    <!-- The bottom of every page: one invitation to talk, then the small
+         links. -->
+    <footer class="foot">
+      <div class="wrap">
+        <div class="foot-cta">
+          <p class="kicker">{{ t.footer.label | escape }}</p>
+          <a class="foot-big" href="{{ k.telegram }}" rel="noopener">{{ t.footer.title | escape }}<span class="foot-arrow">{% include icon.html name="arrow" %}</span></a>
+          <div class="foot-actions">
+            <a class="pill" href="{{ k.telegram }}" rel="noopener" data-magnet>{% include icon.html name="telegram" %}{{ k.telegram_handle }}</a>
+            <a class="pill" href="mailto:{{ k.email }}" data-magnet>{% include icon.html name="mail" %}{{ k.email }}</a>
+          </div>
+        </div>
+        <div class="foot-bar">
+          <a class="brand" href="{{ home }}">
+            <img src="/assets/logo.png?v={{ v }}" alt="" width="256" height="256" loading="lazy" />
+            <span>AmziXz</span>
+          </a>
+          <nav class="foot-links" aria-label="{{ t.ui.pages | escape }}">
+            <a href="{{ here.prefix }}/about">{{ t.nav.about | escape }}</a>
+            <a href="{{ here.prefix }}/uses">{{ t.nav.uses | escape }}</a>
+            <a href="{{ here.prefix }}/contact">{{ t.nav.contact | escape }}</a>
+            <a href="{{ k.services }}{{ home }}" rel="noopener">{{ t.nav.services | escape }}</a>
+            <a href="{{ k.github }}" rel="me noopener">{{ t.nav.github | escape }}</a>
+          </nav>
+          <p class="foot-meta">© {{ site.time | date: "%Y" }} AmziXz · {{ t.footer.made | escape }}</p>
+          <a class="foot-top" href="#main">{{ t.ui.back_to_top | escape }}{% include icon.html name="up" %}</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- The menu floats at the bottom of the screen, where a thumb reaches it.
+         The page you are on is lit. -->
+    <nav class="dock" aria-label="{{ t.ui.pages | escape }}">
+      <ul>
+        <li><a href="{{ home }}"{% if page.nav == "home" %} aria-current="page"{% endif %}>{{ t.nav.home | escape }}</a></li>
+        <li><a href="{{ home }}#work"{% if page.nav == "work" %} aria-current="page"{% endif %}>{{ t.nav.work | escape }}</a></li>
+        <li><a href="{{ home }}#ventures"{% if page.nav == "ventures" %} aria-current="page"{% endif %}>{{ t.nav.ventures | escape }}</a></li>
+        <li><a href="{{ here.prefix }}/about"{% if page.nav == "about" %} aria-current="page"{% endif %}>{{ t.nav.about | escape }}</a></li>
+        <li><a href="{{ here.prefix }}/contact"{% if page.nav == "contact" %} aria-current="page"{% endif %}>{{ t.nav.contact | escape }}</a></li>
+      </ul>
+    </nav>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+{%- comment -%}
+  The head of a chapter on the home page: its number, a small label, the
+  title and one line under it. Pass all five: id (the section's id), n
+  ("01"), label, title and lede.
+{%- endcomment -%}
+<header class="chapter-head" data-reveal>
+  <p class="chapter-index"><span class="chapter-n">{{ include.n }}</span><span class="chapter-label">{{ include.label | escape }}</span></p>
+  <h2 id="{{ include.id }}-title">{{ include.title | escape }}</h2>
+  <p class="chapter-lede">{{ include.lede | escape }}</p>
+</header>

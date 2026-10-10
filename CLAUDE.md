@@ -1,8 +1,8 @@
 # Working notes for this repo
 
-Read `README.md` first — it documents the site itself (structure, theme, i18n,
-conventions). This file covers only the things that bite when picking the work up
-on a different machine.
+Read `README.md` first — it documents the site itself (structure, design,
+languages, checks). This file covers the things that bite when picking the
+work up on a different machine, and the rules for changing it.
 
 ## The repo is not where you think it is
 
@@ -58,8 +58,8 @@ Pages serves one custom domain per repository, and this one's `CNAME` is spent,
 so the services site lives in **`AmziXz/AmziXz-Services`**. Don't try to host it
 here, even in a `/services/` folder.
 
-- The "Services" links in every header and footer, and the ventures card, are
-  absolute (`https://services.amzixz.id.lv/`) for that reason. A root-relative
+- The "Services" link in the footer and the ventures card are absolute
+  (`https://services.amzixz.id.lv/`) for that reason. A root-relative
   `/services` would resolve to this site and 404. Latvian pages link to the
   Latvian services page, `https://services.amzixz.id.lv/lv/`.
 - `AmziXz/amzixz-sites` was an attempt to build both sites from one repo. Its
@@ -68,30 +68,61 @@ here, even in a `/services/` folder.
 
 ## Running it locally
 
-Python is not installed on every machine here, so there are two equivalent
-servers. Prefer Node:
+Python is not installed on every machine here, so the tooling is Node only:
 
 ```bash
-node serve.js          # http://localhost:8000
-npm start              # same
-python serve.py        # only if you have Python
+npm install     # once per machine: liquidjs + js-yaml for the preview
+npm start       # http://localhost:8000, renders the templates like Jekyll
+npm run check   # translation files: same keys, same lists, the name as AmziXz
 ```
 
-Do not open the HTML files directly — under `file://` the root-absolute
-`/assets/...` paths resolve against the drive root, so no CSS loads, and the
-embeds refuse to run. `serve.js` and `serve.py` must behave identically;
-if you change one, change the other.
+Do not open the HTML files directly: they are Jekyll templates, and under
+`file://` the root-absolute `/assets/...` paths resolve against the drive
+root, so no CSS loads.
 
 **On a fresh machine**, if `git` or `node` reports "not recognized" right after
 installing them, the shell has a stale PATH — restart the terminal or VS Code.
 They are on the machine PATH already.
 
+## The pages are templates
+
+Like the services site: the page files are front matter only, the layouts are
+in `_layouts/`, and **every word** is in `_data/lang/en.yml` and
+`_data/lang/lv.yml`. GitHub Pages builds them with Jekyll in strict mode, so a
+missing key fails the build instead of publishing a blank.
+
+- Never put wording in a template. Add a key to **both** language files.
+- The owner edits the `.yml` files directly on github.com. Keep their
+  comments, their order (top to bottom = the page), and the quoting rules.
+- Every output in a template goes through `| escape` (or `| jsonify` inside
+  JSON-LD).
+- Strict mode also fails on a missing key inside a list item (`item.sale` on
+  an item without `sale:`). Give every item the same keys, or keep such
+  switches outside the list (see `uses.sale_group`).
+- The home page is the cinematic one; About, Uses and Contact share a calmer
+  design. The owner asked for that difference; keep it.
+
 ## Before you commit
 
 - Anything committed here is **public and served by Pages**. `.claude/` and
   `node_modules/` are gitignored for that reason; keep it that way.
-- After changing anything in `/assets`, bump the `?v=N` cache-buster in **every**
-  page — see the README's Cache busting section for the one-liner and the check.
-  Currently `?v=6`.
+  `_config.yml` keeps the notes and local tooling (`package.json`,
+  `serve.js`, `check.js`, `tsconfig.json`, `docs/`, the READMEs in
+  `assets/`) from being published; add any new tooling or notes file to its
+  `exclude` list.
+- The name is always written **AmziXz**: never "AMZIXZ" or "amzixz" on the
+  page, so never put `text-transform: uppercase` on anything that shows it.
+  `npm run check` catches it in the language files.
+- After changing anything in `/assets`, add one to `asset_version` in
+  `_config.yml`. Every page follows. Currently `12`.
+- Run `npm run check`, and build once with real Jekyll if you changed a
+  template: the preview matches it, but GitHub is the one that publishes.
+- New text colours are tokens defined for both themes; measure each against
+  its theme's `--bg` and `--surface`.
+- **Nothing goes on the page that the owner hasn't confirmed.** Catch The
+  Baltic was removed at the owner's request; its old addresses redirect home.
 - `package.json` is local tooling only (`"private": true`). The site itself has
-  no build step and ships no dependencies; keep it that way.
+  no build step beyond Pages' Jekyll and ships no dependencies; keep it that
+  way.
+- Commit messages and pull request descriptions never include a link to the
+  Claude session.

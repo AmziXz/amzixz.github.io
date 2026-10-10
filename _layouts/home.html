@@ -1,0 +1,271 @@
+---
+layout: base
+---
+{%- comment -%}
+  The home page: one long page in chapters. Wording from the language file,
+  links from _data/links.yml, the status light from _data/live.yml, photos
+  from _data/photos.yml. Each chapter: a numbered head, then its content.
+{%- endcomment -%}
+{%- include setup.html -%}
+{%- assign photos = site.data.photos -%}
+      <!-- The first screen, framed like a camera viewfinder: corner marks, the
+           status light where a camera shows REC, the time, and a ring light
+           behind the name with your portrait in it once there is one. The
+           light and the ring follow the pointer (assets/site.js). The name
+           comes first for screen readers; the grid sets it along the bottom. -->
+      <section class="hero{% if photos.hero != "" %} hero--photo{% endif %}" aria-labelledby="hero-name">
+        <div class="hero-light" aria-hidden="true"><i class="glow glow--a"></i><i class="glow glow--b"></i></div>
+        <div class="halo" aria-hidden="true">
+          <i class="halo-disc"></i>
+{%- if photos.hero != "" %}
+          <img class="halo-photo" src="{{ photos.hero | escape }}?v={{ v }}" alt="" />
+          <i class="halo-shade"></i>
+{%- endif %}
+          <span class="halo-spin"><i class="halo-glow"></i><i class="halo-ring"></i></span>
+        </div>
+        <!-- The ticker along the top of the first screen. The list is written
+             twice so the loop has no seam; the copy is hidden from screen
+             readers. -->
+        <div class="ticker">
+          <ul>
+{%- for line in t.ticker %}
+            <li>{{ line | escape }}</li>
+{%- endfor %}
+          </ul>
+          <ul aria-hidden="true">
+{%- for line in t.ticker %}
+            <li>{{ line | escape }}</li>
+{%- endfor %}
+          </ul>
+        </div>
+        <div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+        <div class="hero-inner">
+          <div class="hero-top">
+{%- if site.data.live.streaming %}
+            <a class="status status--live" href="{{ k.tiktok_live }}" rel="noopener"><i></i>{{ t.ui.live | escape }}</a>
+{%- else %}
+            <p class="status"><i></i>{{ t.ui.offline | escape }}</p>
+{%- endif %}
+            <p class="readout" aria-hidden="true">X <b data-readout-x>0000</b> Y <b data-readout-y>0000</b></p>
+            <p class="clock" data-clock data-lang="{{ page.lang }}"><span>{{ t.ui.clock_place | escape }}</span> <b data-clock-time>--:--:--</b> <span data-clock-date></span></p>
+          </div>
+
+          <h1 class="hero-name" id="hero-name"><span>AmziXz</span></h1>
+
+          <div class="hero-copy">
+            <p class="kicker">{{ t.hero.label | escape }}</p>
+            <p class="tagline">{{ t.hero.tagline_1 | escape }} <span>{{ t.hero.tagline_2 | escape }}</span></p>
+            <ul class="topics">
+{%- for topic in t.hero.topics %}
+              <li>{{ topic | escape }}</li>
+{%- endfor %}
+            </ul>
+          </div>
+
+          <div class="hero-side">
+            <dl class="hero-facts">
+{%- for f in t.hero.facts %}
+              <div><dt>{{ f.label | escape }}</dt><dd>{{ f.value | escape }}</dd></div>
+{%- endfor %}
+            </dl>
+            <div class="hero-actions">
+              <a class="pill pill--primary" href="#work" data-magnet>{{ t.hero.cta | escape }}{% include icon.html name="down" %}</a>
+              <a class="pill" href="#ventures" data-magnet>{{ t.hero.secondary | escape }}</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 01 · The work: the two platforms, each with a photo in a
+           viewfinder frame. -->
+      <section class="chapter" id="work" aria-labelledby="work-title">
+        <div class="wrap">
+          {% include section-head.html id="work" n="01" label=t.work.label title=t.work.title lede=t.work.lede %}
+
+          <article class="feature" data-reveal>
+            <div class="feature-copy">
+              <span class="channel-icon channel-icon--youtube">{% include icon.html name="youtube" %}</span>
+              <h3>{{ t.work.phone.title | escape }}</h3>
+              <p>{{ t.work.phone.text | escape }}</p>
+              <ul class="tags">
+{%- for tag in t.work.phone.tags %}
+                <li>{{ tag | escape }}</li>
+{%- endfor %}
+              </ul>
+              <a class="link-go" href="{{ k.youtube_phone }}" rel="noopener">{{ t.work.phone.link | escape }}{% include icon.html name="arrow" %}</a>
+            </div>
+            <figure class="shot shot--video">
+              <span class="shot-tag"><i></i>YouTube</span>
+              <img src="{{ photos.work_phone | escape }}?v={{ v }}" alt="{{ t.work.phone.photo_alt | escape }}" loading="lazy" />
+              <span class="shot-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            </figure>
+          </article>
+
+          <article class="feature feature--flip" data-reveal>
+            <div class="feature-copy">
+              <span class="channel-icon channel-icon--tiktok">{% include icon.html name="tiktok" %}</span>
+              <h3>{{ t.work.cars.title | escape }}</h3>
+              <p>{{ t.work.cars.text | escape }}</p>
+              <ul class="tags">
+{%- for tag in t.work.cars.tags %}
+                <li>{{ tag | escape }}</li>
+{%- endfor %}
+              </ul>
+              <a class="link-go" href="{{ k.tiktok }}" rel="noopener">{{ t.work.cars.link | escape }}{% include icon.html name="arrow" %}</a>
+            </div>
+            <figure class="shot">
+              <span class="shot-tag"><i></i>TikTok</span>
+              <img src="{{ photos.work_cars | escape }}?v={{ v }}" alt="{{ t.work.cars.photo_alt | escape }}" loading="lazy" />
+              <span class="shot-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            </figure>
+          </article>
+        </div>
+      </section>
+
+      <!-- 02 · Latest: Phone Guru's uploads playlist (always the newest video
+           first) and the TikTok profile. Both load only when they scroll
+           near the screen. -->
+      <section class="chapter" id="latest" aria-labelledby="latest-title">
+        <div class="wrap">
+          {% include section-head.html id="latest" n="02" label=t.latest.label title=t.latest.title lede=t.latest.lede %}
+
+          <div class="latest">
+            <article class="panel panel--video" data-reveal>
+              <header class="panel-head">
+                <h3>{% include icon.html name="youtube" %}{{ t.latest.youtube | escape }}</h3>
+                <a class="link-go" href="{{ k.youtube_phone }}/videos" rel="noopener">{{ t.latest.youtube_more | escape }}{% include icon.html name="arrow" %}</a>
+              </header>
+              <div class="player">
+                <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list={{ k.youtube_phone_uploads }}" title="{{ t.latest.youtube_frame | escape }}" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+              <footer class="panel-foot">
+                <a class="link-go" href="{{ k.youtube_main }}" rel="noopener">{{ t.latest.main_more | escape }} · {{ k.youtube_main_handle }}{% include icon.html name="arrow" %}</a>
+              </footer>
+            </article>
+
+            <article class="panel panel--tiktok" data-reveal>
+              <header class="panel-head">
+                <h3>{% include icon.html name="tiktok" %}{{ t.latest.tiktok | escape }}</h3>
+                <a class="link-go" href="{{ k.tiktok }}" rel="noopener">{{ t.latest.tiktok_more | escape }}{% include icon.html name="arrow" %}</a>
+              </header>
+              <div class="tiktok-slot" data-tiktok>
+                <blockquote class="tiktok-embed" cite="{{ k.tiktok }}" data-unique-id="{{ k.tiktok_handle | remove: '@' }}" data-embed-from="embed_page" data-embed-type="creator" style="max-width: 780px; min-width: 288px">
+                  <section><a target="_blank" rel="noopener" href="{{ k.tiktok }}">{{ k.tiktok_handle }}</a></section>
+                </blockquote>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 · Channels: every place to find AmziXz, then the Discord box. -->
+      <section class="chapter" id="channels" aria-labelledby="channels-title">
+        <div class="wrap">
+          {% include section-head.html id="channels" n="03" label=t.channels.label title=t.channels.title lede=t.channels.lede %}
+          <div data-reveal>
+{% include channels.html %}
+          </div>
+{% include discord.html %}
+        </div>
+      </section>
+
+      <!-- 04 · Ventures: the two that exist, then the roadmap. -->
+      <section class="chapter" id="ventures" aria-labelledby="ventures-title">
+        <div class="wrap">
+          {% include section-head.html id="ventures" n="04" label=t.ventures.label title=t.ventures.title lede=t.ventures.lede %}
+
+          <div class="ventures">
+            <a class="venture" href="{{ k.services }}{{ home }}" rel="noopener" data-reveal data-spot>
+              <span class="venture-top">
+                <span class="venture-plate"><img src="/assets/logo.png?v={{ v }}" alt="" width="256" height="256" loading="lazy" /></span>
+                <span class="badge badge--live">{{ t.ui.status_live | escape }}</span>
+              </span>
+              <span class="venture-name">{{ t.ventures.services.name | escape }}</span>
+              <span class="venture-text">{{ t.ventures.services.text | escape }}</span>
+              <span class="venture-foot">{{ t.ventures.services.link | escape }}{% include icon.html name="arrow" %}</span>
+            </a>
+            <article class="venture" data-reveal data-spot>
+              <span class="venture-top">
+                <span class="venture-plate"><img src="/assets/logos/blue-eye-energy.png?v={{ v }}" alt="" width="256" height="256" loading="lazy" /></span>
+                <span class="badge badge--building">{{ t.ui.status_building | escape }}</span>
+              </span>
+              <h3 class="venture-name">{{ t.ventures.bee.name | escape }}</h3>
+              <p class="venture-text">{{ t.ventures.bee.text | escape }}</p>
+              <p class="venture-foot"><span>{{ t.ventures.bee.role | escape }}</span><span aria-hidden="true">·</span><span>{{ t.ventures.bee.invest | escape }}: <a href="mailto:{{ k.email }}">{{ k.email }}</a></span></p>
+            </article>
+          </div>
+
+          <div class="roadmap" data-reveal>
+            <div class="roadmap-head">
+              <h3>{{ t.ventures.planned_title | escape }}</h3>
+              <p>{{ t.ventures.planned_text | escape }}</p>
+            </div>
+            <ol class="roadmap-list">
+{%- for item in t.ventures.planned %}
+              <li>
+                <span class="roadmap-n">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+                <span class="roadmap-name">{{ item.name | escape }}</span>
+                <span class="roadmap-text">{{ item.text | escape }}</span>
+                <span class="badge badge--planned">{{ t.ui.status_planned | escape }}</span>
+              </li>
+{%- endfor %}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 · Work with me: the three kinds of work, then how to start. -->
+      <section class="chapter" id="collab" aria-labelledby="collab-title">
+        <div class="wrap">
+          {% include section-head.html id="collab" n="05" label=t.collab.label title=t.collab.title lede=t.collab.lede %}
+
+          <ul class="offers" role="list">
+            <li class="offer" data-reveal data-spot>
+              <span class="offer-n">01</span>
+              <span class="offer-icon">{% include icon.html name="live" %}</span>
+              <h3>{{ t.collab.stream.name | escape }}</h3>
+              <p>{{ t.collab.stream.text | escape }}</p>
+            </li>
+            <li class="offer" data-reveal data-spot>
+              <span class="offer-n">02</span>
+              <span class="offer-icon">{% include icon.html name="car" %}</span>
+              <h3>{{ t.collab.events.name | escape }}</h3>
+              <p>{{ t.collab.events.text | escape }}</p>
+            </li>
+            <li class="offer" data-reveal data-spot>
+              <span class="offer-n">03</span>
+              <span class="offer-icon">{% include icon.html name="phone" %}</span>
+              <h3>{{ t.collab.reviews.name | escape }}</h3>
+              <p>{{ t.collab.reviews.text | escape }}</p>
+            </li>
+          </ul>
+
+          <div class="cta-row" data-reveal>
+            <a class="pill pill--primary" href="{{ k.telegram }}" rel="noopener" data-magnet>{% include icon.html name="telegram" %}{{ t.collab.cta | escape }}</a>
+            <a class="pill" href="mailto:{{ k.email }}" data-magnet>{% include icon.html name="mail" %}{{ t.collab.secondary | escape }}</a>
+            <p class="note">{{ t.collab.note | escape }}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 and 07 · Shop (soon) and support, side by side. -->
+      <section class="chapter chapter--duo" id="shop" aria-label="{{ t.shop.label | escape }} · {{ t.support.label | escape }}">
+        <div class="wrap duo">
+          <article class="duo-card" data-reveal data-spot>
+            <p class="chapter-index"><span class="chapter-n">06</span><span class="chapter-label">{{ t.shop.label | escape }}</span><span class="badge badge--soon">{{ t.ui.soon | escape }}</span></p>
+            <span class="duo-icon">{% include icon.html name="bag" %}</span>
+            <h2>{{ t.shop.title | escape }}</h2>
+            <p>{{ t.shop.text | escape }}</p>
+            <a class="pill" href="{{ k.discord }}" rel="noopener" data-magnet>{% include icon.html name="discord" %}{{ t.shop.cta | escape }}</a>
+          </article>
+          <article class="duo-card duo-card--warm" id="support" data-reveal data-spot>
+            <p class="chapter-index"><span class="chapter-n">07</span><span class="chapter-label">{{ t.support.label | escape }}</span></p>
+            <span class="duo-icon">{% include icon.html name="buymeacoffee" %}</span>
+            <h2>{{ t.support.title | escape }}</h2>
+            <p>{{ t.support.text | escape }}</p>
+            <a class="pill pill--primary" href="{{ k.coffee }}" rel="noopener" data-magnet>{% include icon.html name="buymeacoffee" %}{{ t.support.cta | escape }}</a>
+          </article>
+        </div>
+      </section>
+{{ content }}

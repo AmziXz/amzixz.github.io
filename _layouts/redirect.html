@@ -1,0 +1,24 @@
+{%- comment -%}
+  An old address that now lives somewhere else. Set in the page's front
+  matter:
+
+    to:    where it goes now ("/#work", "/lv/#ventures")
+    lang:  en or lv
+
+  The meta refresh works without script; the script skips the extra history
+  entry. Search engines are told the new address is the real one.
+{%- endcomment -%}
+<!DOCTYPE html>
+<html lang="{{ page.lang }}">
+  <head>
+    <meta charset="UTF-8" />
+    <title>AmziXz</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="{{ site.origin }}{{ page.to | split: '#' | first }}" />
+    <meta http-equiv="refresh" content="0; url={{ page.to }}" />
+    <script>location.replace({{ page.to | jsonify }});</script>
+  </head>
+  <body>
+    <p><a href="{{ page.to }}">{{ site.origin }}{{ page.to }}</a></p>
+  </body>
+</html>

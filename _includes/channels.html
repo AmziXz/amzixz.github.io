@@ -1,0 +1,89 @@
+{%- comment -%}
+  Every channel, as a grid of cards. Used on the home page and the contact
+  page. Names and blurbs from the language file, handles and links from
+  _data/links.yml. Kick is a card without a link until links.yml has its
+  address.
+{%- endcomment -%}
+<ul class="channels" role="list">
+  <li>
+    <a class="channel" href="{{ k.youtube_phone }}" rel="noopener" data-spot>
+      <span class="channel-icon channel-icon--youtube">{% include icon.html name="youtube" %}</span>
+      <span class="channel-name">{{ t.channels.youtube_phone.name | escape }}</span>
+      <span class="channel-handle">{{ k.youtube_phone_handle }}</span>
+      <span class="channel-blurb">{{ t.channels.youtube_phone.blurb | escape }}</span>
+      <span class="channel-go">{% include icon.html name="arrow" %}</span>
+    </a>
+  </li>
+  <li>
+    <a class="channel" href="{{ k.youtube_main }}" rel="noopener" data-spot>
+      <span class="channel-icon channel-icon--youtube">{% include icon.html name="youtube" %}</span>
+      <span class="channel-name">{{ t.channels.youtube_main.name | escape }}</span>
+      <span class="channel-handle">{{ k.youtube_main_handle }}</span>
+      <span class="channel-blurb">{{ t.channels.youtube_main.blurb | escape }}</span>
+      <span class="channel-go">{% include icon.html name="arrow" %}</span>
+    </a>
+  </li>
+  <li>
+    <a class="channel" href="{{ k.tiktok }}" rel="noopener" data-spot>
+      <span class="channel-icon channel-icon--tiktok">{% include icon.html name="tiktok" %}</span>
+      <span class="channel-name">{{ t.channels.tiktok.name | escape }}{% if site.data.live.streaming %} <span class="badge badge--live-now">{{ t.ui.live | escape }}</span>{% endif %}</span>
+      <span class="channel-handle">{{ k.tiktok_handle }}</span>
+      <span class="channel-blurb">{{ t.channels.tiktok.blurb | escape }}</span>
+      <span class="channel-go">{% include icon.html name="arrow" %}</span>
+    </a>
+  </li>
+  <li>
+{%- if k.kick != "" %}
+    <a class="channel" href="{{ k.kick }}" rel="noopener" data-spot>
+      <span class="channel-icon channel-icon--kick">{% include icon.html name="kick" %}</span>
+      <span class="channel-name">{{ t.channels.kick.name | escape }}</span>
+      <span class="channel-handle">kick.com</span>
+      <span class="channel-blurb">{{ t.channels.kick.blurb | escape }}</span>
+      <span class="channel-go">{% include icon.html name="arrow" %}</span>
+    </a>
+{%- else %}
+    <div class="channel is-soon" data-spot>
+      <span class="channel-icon channel-icon--kick">{% include icon.html name="kick" %}</span>
+      <span class="channel-name">{{ t.channels.kick.name | escape }} <span class="badge badge--soon">{{ t.ui.soon | escape }}</span></span>
+      <span class="channel-handle">kick.com</span>
+      <span class="channel-blurb">{{ t.channels.kick.blurb | escape }}</span>
+    </div>
+{%- endif %}
+  </li>
+  <li>
+    <a class="channel" href="{{ k.discord }}" rel="noopener" data-spot>
+      <span class="channel-icon channel-icon--discord">{% include icon.html name="discord" %}</span>
+      <span class="channel-name">{{ t.channels.discord.name | escape }}</span>
+      <span class="channel-handle">{{ t.channels.discord.handle | escape }}</span>
+      <span class="channel-blurb">{{ t.channels.discord.blurb | escape }}</span>
+      <span class="channel-go">{% include icon.html name="arrow" %}</span>
+    </a>
+  </li>
+  <li>
+    <a class="channel" href="{{ k.telegram }}" rel="noopener" data-spot>
+      <span class="channel-icon channel-icon--telegram">{% include icon.html name="telegram" %}</span>
+      <span class="channel-name">{{ t.channels.telegram.name | escape }}</span>
+      <span class="channel-handle">{{ k.telegram_handle }}</span>
+      <span class="channel-blurb">{{ t.channels.telegram.blurb | escape }}</span>
+      <span class="channel-go">{% include icon.html name="arrow" %}</span>
+    </a>
+  </li>
+  <li>
+    <a class="channel" href="{{ k.github }}" rel="me noopener" data-spot>
+      <span class="channel-icon channel-icon--github">{% include icon.html name="github" %}</span>
+      <span class="channel-name">{{ t.channels.github.name | escape }}</span>
+      <span class="channel-handle">@AmziXz</span>
+      <span class="channel-blurb">{{ t.channels.github.blurb | escape }}</span>
+      <span class="channel-go">{% include icon.html name="arrow" %}</span>
+    </a>
+  </li>
+  <li>
+    <a class="channel" href="mailto:{{ k.email }}" data-spot>
+      <span class="channel-icon channel-icon--email">{% include icon.html name="mail" %}</span>
+      <span class="channel-name">{{ t.channels.email.name | escape }}</span>
+      <span class="channel-handle">{{ k.email }}</span>
+      <span class="channel-blurb">{{ t.channels.email.blurb | escape }}</span>
+      <span class="channel-go">{% include icon.html name="arrow" %}</span>
+    </a>
+  </li>
+</ul>

@@ -1,0 +1,64 @@
+---
+layout: base
+---
+{%- comment -%}
+  The Contact page: the quickest ways in, the Discord box, every channel, and
+  the questions that come up most.
+{%- endcomment -%}
+{%- include setup.html -%}
+{%- assign p = t.contact -%}
+{%- capture aside -%}
+      <nav class="toc" aria-label="{{ t.ui.on_this_page | escape }}">
+        <p class="toc-title">{{ t.ui.on_this_page | escape }}</p>
+        <ol>
+          <li><a href="#reach"><span>01</span>{{ p.reach_label | escape }}</a></li>
+          <li><a href="#channels"><span>02</span>{{ p.channels_label | escape }}</a></li>
+          <li><a href="#faq"><span>03</span>{{ p.faq_label | escape }}</a></li>
+        </ol>
+      </nav>
+{%- endcapture -%}
+{% include page-head.html %}
+
+      <section class="doc" id="reach" aria-labelledby="reach-title" data-reveal>
+        <div class="wrap doc-grid">
+          <p class="doc-label"><span>[ 01 ]</span>{{ p.reach_label | escape }}</p>
+          <div class="doc-body">
+            <h2 id="reach-title">{{ p.reach_title | escape }}</h2>
+            <ul class="reach" role="list">
+              <li><a href="{{ k.telegram }}" rel="noopener" data-spot><span class="channel-icon channel-icon--telegram">{% include icon.html name="telegram" %}</span><span class="reach-name">Telegram</span><span class="reach-value">{{ k.telegram_handle }}</span>{% include icon.html name="arrow" %}</a></li>
+              <li><a href="mailto:{{ k.email }}" data-spot><span class="channel-icon channel-icon--email">{% include icon.html name="mail" %}</span><span class="reach-name">{{ t.channels.email.name | escape }}</span><span class="reach-value">{{ k.email }}</span>{% include icon.html name="arrow" %}</a></li>
+              <li><a href="{{ k.github }}" rel="me noopener" data-spot><span class="channel-icon channel-icon--github">{% include icon.html name="github" %}</span><span class="reach-name">GitHub</span><span class="reach-value">@AmziXz</span>{% include icon.html name="arrow" %}</a></li>
+            </ul>
+            <p class="note">{{ p.reach_note | escape }}</p>
+{% include discord.html %}
+          </div>
+        </div>
+      </section>
+
+      <section class="doc" id="channels" aria-labelledby="channels-title" data-reveal>
+        <div class="wrap doc-grid">
+          <p class="doc-label"><span>[ 02 ]</span>{{ p.channels_label | escape }}</p>
+          <div class="doc-body">
+            <h2 id="channels-title">{{ p.channels_title | escape }}</h2>
+{% include channels.html %}
+          </div>
+        </div>
+      </section>
+
+      <section class="doc" id="faq" aria-labelledby="faq-title" data-reveal>
+        <div class="wrap doc-grid">
+          <p class="doc-label"><span>[ 03 ]</span>{{ p.faq_label | escape }}</p>
+          <div class="doc-body">
+            <h2 id="faq-title">{{ p.faq_title | escape }}</h2>
+            <div class="faq">
+{%- for f in p.faq %}
+              <details>
+                <summary>{{ f.question | escape }}<i aria-hidden="true"></i></summary>
+                <p>{{ f.answer | escape }}</p>
+              </details>
+{%- endfor %}
+            </div>
+          </div>
+        </div>
+      </section>
+{{ content }}

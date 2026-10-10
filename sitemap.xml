@@ -1,88 +1,20 @@
+---
+# Every page, in every language, with its translations. Add a page's slug
+# here when you add a page.
+slugs: ["/", "/about", "/uses", "/contact"]
+---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
+{%- for slug in page.slugs %}
+{%- for l in site.data.languages %}
   <url>
-    <loc>https://amzixz.id.lv/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amzixz.id.lv/"/>
-    <xhtml:link rel="alternate" hreflang="lv" href="https://amzixz.id.lv/lv/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://amzixz.id.lv/"/>
+    <loc>{{ site.origin }}{{ l.prefix }}{{ slug }}</loc>
+{%- for a in site.data.languages %}
+    <xhtml:link rel="alternate" hreflang="{{ a.code }}" href="{{ site.origin }}{{ a.prefix }}{{ slug }}"/>
+{%- endfor %}
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ site.origin }}{{ site.data.languages.first.prefix }}{{ slug }}"/>
   </url>
-  <url>
-    <loc>https://amzixz.id.lv/lv/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amzixz.id.lv/"/>
-    <xhtml:link rel="alternate" hreflang="lv" href="https://amzixz.id.lv/lv/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://amzixz.id.lv/"/>
-  </url>
-  <url>
-    <loc>https://amzixz.id.lv/projects</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amzixz.id.lv/projects"/>
-    <xhtml:link rel="alternate" hreflang="lv" href="https://amzixz.id.lv/lv/projects"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://amzixz.id.lv/projects"/>
-  </url>
-  <url>
-    <loc>https://amzixz.id.lv/lv/projects</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amzixz.id.lv/projects"/>
-    <xhtml:link rel="alternate" hreflang="lv" href="https://amzixz.id.lv/lv/projects"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://amzixz.id.lv/projects"/>
-  </url>
-  <url>
-    <loc>https://amzixz.id.lv/ventures</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amzixz.id.lv/ventures"/>
-    <xhtml:link rel="alternate" hreflang="lv" href="https://amzixz.id.lv/lv/ventures"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://amzixz.id.lv/ventures"/>
-  </url>
-  <url>
-    <loc>https://amzixz.id.lv/lv/ventures</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amzixz.id.lv/ventures"/>
-    <xhtml:link rel="alternate" hreflang="lv" href="https://amzixz.id.lv/lv/ventures"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://amzixz.id.lv/ventures"/>
-  </url>
-  <url>
-    <loc>https://amzixz.id.lv/about</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amzixz.id.lv/about"/>
-    <xhtml:link rel="alternate" hreflang="lv" href="https://amzixz.id.lv/lv/about"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://amzixz.id.lv/about"/>
-  </url>
-  <url>
-    <loc>https://amzixz.id.lv/lv/about</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amzixz.id.lv/about"/>
-    <xhtml:link rel="alternate" hreflang="lv" href="https://amzixz.id.lv/lv/about"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://amzixz.id.lv/about"/>
-  </url>
-  <url>
-    <loc>https://amzixz.id.lv/contact</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amzixz.id.lv/contact"/>
-    <xhtml:link rel="alternate" hreflang="lv" href="https://amzixz.id.lv/lv/contact"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://amzixz.id.lv/contact"/>
-  </url>
-  <url>
-    <loc>https://amzixz.id.lv/lv/contact</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amzixz.id.lv/contact"/>
-    <xhtml:link rel="alternate" hreflang="lv" href="https://amzixz.id.lv/lv/contact"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://amzixz.id.lv/contact"/>
-  </url>
-  <url>
-    <loc>https://amzixz.id.lv/uses</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amzixz.id.lv/uses"/>
-    <xhtml:link rel="alternate" hreflang="lv" href="https://amzixz.id.lv/lv/uses"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://amzixz.id.lv/uses"/>
-  </url>
-  <url>
-    <loc>https://amzixz.id.lv/lv/uses</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amzixz.id.lv/uses"/>
-    <xhtml:link rel="alternate" hreflang="lv" href="https://amzixz.id.lv/lv/uses"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://amzixz.id.lv/uses"/>
-  </url>
-  <url>
-    <loc>https://amzixz.id.lv/catch-the-baltic</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amzixz.id.lv/catch-the-baltic"/>
-    <xhtml:link rel="alternate" hreflang="lv" href="https://amzixz.id.lv/lv/catch-the-baltic"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://amzixz.id.lv/catch-the-baltic"/>
-  </url>
-  <url>
-    <loc>https://amzixz.id.lv/lv/catch-the-baltic</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://amzixz.id.lv/catch-the-baltic"/>
-    <xhtml:link rel="alternate" hreflang="lv" href="https://amzixz.id.lv/lv/catch-the-baltic"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://amzixz.id.lv/catch-the-baltic"/>
-  </url>
+{%- endfor %}
+{%- endfor %}
 </urlset>

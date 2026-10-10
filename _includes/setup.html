@@ -1,0 +1,17 @@
+{%- comment -%}
+  The variables every layout starts with. Included at the top of each layout,
+  because Jekyll does not pass a layout's variables on to the layout around
+  it.
+
+    t      the wording for this page's language (_data/lang/<code>.yml)
+    k      every outside link (_data/links.yml)
+    here   this language's entry in _data/languages.yml
+    home   this language's home page: / or /lv/
+    v      the cache-buster for /assets
+{%- endcomment -%}
+{%- assign t = site.data.lang[page.lang] -%}
+{%- assign k = site.data.links -%}
+{%- assign langs = site.data.languages -%}
+{%- for l in langs -%}{%- if l.code == page.lang -%}{%- assign here = l -%}{%- endif -%}{%- endfor -%}
+{%- assign home = here.prefix | append: "/" -%}
+{%- assign v = site.asset_version -%}

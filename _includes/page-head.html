@@ -1,0 +1,19 @@
+{%- comment -%}
+  The top of every page except the home page: a breadcrumb, the title, one
+  paragraph, and on the right whatever the layout captured as `aside` (the
+  page's contents, or a photo). Expects `p`, the page's section of the
+  language file.
+{%- endcomment -%}
+<header class="page-head">
+  <div class="frame frame--page" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="wrap page-head-grid">
+    <div class="page-head-main">
+      <p class="crumb"><a href="{{ home }}">AmziXz</a><span aria-hidden="true">/</span><span>{{ p.label | escape }}</span></p>
+      <h1 class="page-title">{{ p.title | escape }}</h1>
+      <p class="page-lede">{{ p.lede | escape }}</p>
+    </div>
+    <aside class="page-aside">
+{{ aside }}
+    </aside>
+  </div>
+</header>

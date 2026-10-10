@@ -1,0 +1,15 @@
+{%- comment -%}
+  The Discord box: an invite and the server's live widget (who is online).
+  The widget only loads when it scrolls near the screen.
+{%- endcomment -%}
+<div class="community" data-reveal>
+  <div class="community-copy">
+    <span class="channel-icon channel-icon--discord">{% include icon.html name="discord" %}</span>
+    <h3>{{ t.channels.community_title | escape }}</h3>
+    <p>{{ t.channels.community_text | escape }}</p>
+    <a class="pill pill--primary" href="{{ k.discord }}" rel="noopener" data-magnet>{{ t.channels.community_cta | escape }}{% include icon.html name="arrow" %}</a>
+  </div>
+  <div class="community-widget">
+    <iframe title="{{ t.channels.widget | escape }}" src="https://discord.com/widget?id={{ k.discord_widget_id }}&amp;theme=dark" loading="lazy" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+  </div>
+</div>

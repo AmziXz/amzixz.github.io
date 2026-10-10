@@ -1,220 +1,189 @@
 # amzixz.github.io
 
-Personal site for **AmziXz** — a static, dependency-free site served straight from
-this repository by GitHub Pages at **<https://amzixz.id.lv>**.
+Personal site for **AmziXz**, served by GitHub Pages at **<https://amzixz.id.lv>**.
 
-The repository is still named `amzixz.github.io`, but that is only the repo name.
-The live host is the custom domain `amzixz.id.lv`, set by the `CNAME` file in this
-directory — GitHub Pages reads it and 301s `amzixz.github.io` across. **Do not
-delete `CNAME`**; removing it drops the domain and the site reverts to the
-`github.io` host. Every canonical URL, `hreflang`, `og:` tag and `sitemap.xml`
-entry points at `amzixz.id.lv`; keep new ones consistent, or search engines get a
-canonical that redirects away from the page it is on.
+The repository is named `amzixz.github.io`, but the live host is the custom
+domain `amzixz.id.lv`, set by the `CNAME` file here. **Do not delete `CNAME`**:
+the domain drops and the site falls back to `github.io`. Every canonical URL,
+`hreflang`, `og:` tag and sitemap entry uses `amzixz.id.lv`.
 
-## Structure
+## Editing the words
+
+Every word on the site is in two files:
+
+- `_data/lang/en.yml`, English
+- `_data/lang/lv.yml`, Latvian
+
+Open one on github.com, press the pencil, change the text between the quotes,
+commit. The site updates in about a minute. The top of each file explains the
+rules; the short version: keep the quotes, keep the keys, and keep both files
+in step.
+
+If something breaks (a lost quote, a key missing from one language), GitHub
+refuses to publish and emails you. The previous version stays live, so a
+mistake never shows on the site.
+
+Other things you can switch without touching code:
+
+| File | What it holds |
+|---|---|
+| `_data/live.yml` | `streaming: true` while you are live on TikTok: the status light turns on and links to the stream |
+| `_data/links.yml` | Every outside link and handle; the Kick address goes here when the channel is live |
+| `_data/photos.yml` | Your portrait for the ring on the first screen and the About page, and the two photos in "The work" |
+
+## How the pages are built
+
+GitHub Pages runs Jekyll on every push. There is no other build step and
+nothing to install for the site itself.
 
 ```
-index.html            Home — full-viewport hero, work, ventures, socials, embeds
-about.html            About
-projects.html         Work (the nav label; the filename stays projects.html)
-ventures.html         Ventures — Catch The Baltic, Blue Eye Energy, what's planned
-contact.html          Contact details, socials, FAQ
-uses.html             Gear and software
-catch-the-baltic.html Catch The Baltic — the organisation
-404.html              Not-found page
-sitemap.xml           All 14 pages with hreflang alternates
+_config.yml           Strict mode, the domain, the asset version, what not to publish
+_data/
+  lang/en.yml         Every English word
+  lang/lv.yml         Every Latvian word (same keys)
+  languages.yml       The two languages and their address prefix ("" and "/lv")
+  links.yml           Outside links and handles
+  live.yml            The status light
+  photos.yml          Photo slots
+_layouts/
+  base.html           <head>, top bar, floating menu, loading screen, footer
+  home.html           The home page: first screen and its seven chapters
+  about.html          About   } the calmer page design: a page head, then
+  uses.html           Uses    } numbered sections with their label in a
+  contact.html        Contact } column on the left
+  redirect.html       Old addresses that moved
+_includes/
+  setup.html          The variables every layout starts with
+  page-head.html      The top of every page except home
+  section-head.html   A numbered chapter head on the home page
+  channels.html       The grid of channels (home and contact)
+  discord.html        The Discord box with the live widget
+  icon.html           Every icon, by name
+index.html            Front matter only: which layout, language and address
+about.html, uses.html, contact.html    the same
+lv/                   The same files for Latvian
+projects.html, ventures.html, catch-the-baltic.html (and lv/)
+                      Redirects: old addresses now go to the home page
+404.html              Not found, with both home pages
+sitemap.xml           Every page in both languages, built from a list
 robots.txt            Allows everything, points at the sitemap
-CNAME                 The custom domain — deleting it drops amzixz.id.lv
-lv/                   Latvian versions of every page above except 404
-serve.js              Local preview server, Node (mimics Pages URL handling)
-serve.py              The same server in Python, for machines without Node
-package.json          Local tooling only — never served, no build step
 assets/
-  style.css           Everything — tokens, both palettes, @font-face, components
-  fonts/              woff2 files (latin + latin-ext; latin-ext = Latvian)
-  lang.js             Remembers the EN/LV choice across pages
-  theme.js            Remembers the light/dark choice
-  menu.js             Mobile navigation menu
-  reveal.js           Scroll reveals
-  logos/              Brand logo drop folder — see its README
-  photos/             Photo drop folder — see its README
-  logo.png            256px circular badge — header icon and favicon
-  logo-512.png        512px — apple-touch-icon
-  og-image.png        1200x630 share banner
+  site.css            The whole design: tokens for both themes, every component
+  site.js             Loading screen, clock, the light and ring, name fitting,
+                      reveals, card light, the TikTok loader
+  theme.js            Dark/light, remembered; runs before first paint
+  lang.js             Remembers EN/LV across pages
+  fonts/              Unbounded, Geist, Geist Mono (OFL); latin + latin-ext
+  logos/              Venture logos, see its README
+  photos/             Photos, see its README
+  logo.png, logo-512.png, og-image.png
+docs/                 Notes from the August 2026 redesign, superseded; kept for history
+serve.js, check.js, package.json, tsconfig.json
+                      Local tooling, never published
 ```
 
-There is no `fonts.css` any more. The `@font-face` rules live in `style.css`
-because a second stylesheet has to download and parse before any woff2 request
-can even start, costing a full round-trip on every cold load.
+A page file is front matter only:
 
-There is no build step. Edit the HTML/CSS and push to `main`; Pages redeploys.
-
-## URLs
-
-Pages serves **extensionless** URLs: `/about` resolves to `about.html`
-automatically. Every internal link uses that form, root-absolute:
-
-```html
-<a href="/about">About</a>          <!-- not about.html, not ./about -->
-<link rel="stylesheet" href="/assets/style.css" />
+```yaml
+---
+layout: about     # which template
+lang: lv          # which language file
+slug: /about      # address without the language prefix
+key: about        # which meta: entry holds its title and description
+nav: about        # which floating-menu item is lit (or none)
+---
 ```
 
-Keep new links in that shape, and point `canonical` / `og:url` at the
-extensionless URL so search engines index one address per page.
+Strict mode (`_config.yml`) makes a missing key a failed build instead of a
+blank on the page. Every output in a template goes through `| escape` (or
+`| jsonify` in JSON-LD), so a quote or `&` in the wording can never break the
+markup.
 
-The `.html` files are still the real files on disk — Pages does the mapping, so
-nothing needs renaming or moving into directories.
+## The design
 
-## Local preview
+Direction, from the owner's references: dark cinematic. Near-black with grain
+and a dot grid, a purple-and-blue light that follows the pointer, a giant
+AmziXz, glass pill controls, a floating menu at the bottom, and small "live"
+details: a status light, a Tallinn clock, a ticker, a loading counter.
 
-Two interchangeable servers, because not every machine this repo is edited from
-has both runtimes. Use whichever you have:
+- **The home page** is the show: the first screen is a camera viewfinder
+  (corners, REC-style status, pointer readout, clock) with a ring light behind
+  the name and the portrait inside it once there is one. Then seven numbered
+  chapters: the work, latest uploads, channels, ventures, work with me, shop,
+  support.
+- **The other pages** are calmer on purpose, as on the old site: a page head
+  with a breadcrumb, a big title and one paragraph, then sections that read
+  like a document, labels in a left column.
+- **Type**: Unbounded for display (the name at 420, headlines lighter still),
+  Geist for text, Geist Mono for labels. The name is always written
+  **AmziXz**; nothing that shows it is ever uppercased.
+- **Colour**: tokens per theme at the top of `site.css`. Purple and blue from
+  the logo, warm orange for live and soon, green for running. Every text
+  colour is measured against its theme's background (AA or better).
 
-```bash
-node serve.js          # http://localhost:8000, or `node serve.js 3000`
-npm start              # the same thing
+### Motion
 
-python serve.py        # identical behaviour, if you have Python
-```
+All of it is optional. Under `prefers-reduced-motion` nothing moves, follows
+the pointer or rises in, and the loading screen never shows. Without
+JavaScript nothing is hidden: the reveals, the arrival sequence and the
+loading screen are all switched on by script.
 
-They must stay behaviourally identical — extensionless URLs, `/dir/` to
-`dir/index.html`, and a real 404 status on the fallback page. Change one, change
-the other.
+### Themes
 
-**Do not open the files directly.** Under `file://`:
-
-- root-absolute paths like `/assets/style.css` resolve against your `C:` drive,
-  so no CSS loads;
-- extensionless links have no server to resolve them, so navigation 404s;
-- the TikTok and Discord embeds refuse to load, because `file://` pages are
-  treated as unique origins with no host.
-
-`serve.py` exists because Python's built-in `http.server` does not resolve
-`/about` to `about.html`, so plain `python -m http.server` would 404 on every
-link even though the deployed site works.
+Dark is the default. `assets/theme.js` sets `data-theme` before first paint
+from the remembered choice; the sun/moon switch flips it. It must stay a
+synchronous `<head>` script, or the wrong theme flashes first.
 
 ## Languages
 
-English lives at the root, Latvian under `/lv/`. Pages pair up one-to-one:
-`/about` <-> `/lv/about`.
+English at the root, Latvian under `/lv/`, paired one to one (`/about` and
+`/lv/about`). Once you are in Latvian, every link keeps you there; and
+`assets/lang.js` remembers the switch, reading the other version's address
+from the page's own `hreflang` link.
 
-Language persists two ways, deliberately layered:
+**Adding a page:** a layout, a front-matter file in each language, its
+`meta:` entry and wording in both language files, and its slug in
+`sitemap.xml`'s list.
 
-1. **Structurally.** Every link on an LV page points at another LV page, so once
-   you are in Latvian you stay there. Works with JavaScript off, and it is what
-   search engines follow.
-2. **`assets/lang.js`.** Records the choice when the EN/LV switch is clicked,
-   and on a later visit sends you to the version you picked. It reads the
-   counterpart URL from the page's own `<link rel="alternate" hreflang>` rather
-   than constructing it, so a page without a translation stays put.
+## Local preview and checks
 
-**Adding a page:** create both versions, give each the `hreflang` pair pointing
-at the other, and set the switch hrefs in the header. Miss the `hreflang` and
-the switch still works, but the remembered preference will not follow.
+Node only (Python is not on every machine here):
+
+```bash
+npm install       # once per machine: liquidjs + js-yaml for the preview
+npm start         # http://localhost:8000, renders the templates like Jekyll
+npm run check     # both language files: same keys, same list lengths, the
+                  # name written AmziXz, the Uses "for sale" box in range
+npm run typecheck # serve.js and check.js
+```
+
+`serve.js` renders the Jekyll templates with liquidjs in strict mode and
+serves extensionless URLs and the 404 page like Pages does. It matches the
+real build; still, build once with real Jekyll after changing a template.
+
+Do not open the files directly: they are templates, and root-absolute paths
+(`/assets/site.css`) do not resolve under `file://`.
 
 ## Cache busting
 
-Everything in `/assets` is referenced with a `?v=N` query string:
+Every `/assets` reference carries `?v={{ site.asset_version }}`. Pages caches
+assets for ten minutes and browsers far longer, so after changing anything in
+`/assets`, add one to `asset_version` in `_config.yml`. Every page follows.
+Currently `12`.
 
-```html
-<link rel="stylesheet" href="/assets/style.css?v=6" />
-```
+## Embeds
 
-GitHub Pages serves assets with `Cache-Control: max-age=600`, and browsers hold
-images and stylesheets far longer than that. Without the version, editing
-`style.css` or replacing `logo.png` leaves returning visitors on the old copy —
-new HTML with stale CSS, which breaks the layout rather than just looking dated.
+- **Latest from Phone Guru** plays the channel's uploads playlist
+  (`youtube_phone_uploads` in `links.yml`: the channel ID with UC changed to
+  UU), so the newest video is always first, with no updating by hand.
+- **TikTok** loads its script only when the box scrolls near.
+- **Discord** is the server widget, lazy-loaded, following the theme.
 
-**After changing anything in `/assets`, bump the number in every page** — and
-bump *every* reference, not just the one you edited. The number drifted apart
-once already (scripts on `?v=4`, the stylesheet on `?v=5`), which leaves
-returning visitors running old JavaScript against new CSS. From the repo root:
-
-```bash
-node --input-type=module -e "
-import {readFile,writeFile,glob} from 'node:fs/promises';
-const V=7;
-for await (const f of glob(['*.html','lv/*.html']))
-  await writeFile(f,(await readFile(f,'utf8')).replace(/\?v=\d+/g,'?v='+V),'utf8');
-"
-```
-
-Currently at `?v=6`. Bump `V` above to the next number, then check nothing was
-missed:
-
-```bash
-grep -ho '?v=[0-9]*' *.html lv/*.html | sort -u   # should print one line
-```
-
-## Theme
-
-Light and dark are both first-class. The palette is declared three times, and
-all three are load-bearing:
-
-1. **Light on bare `:root`** — the base.
-2. **Dark under `@media (prefers-color-scheme: dark)`**, guarded as
-   `:root:not([data-theme="light"])` — so someone who explicitly chose light
-   keeps light even on a dark-mode OS.
-3. **Dark again under `:root[data-theme="dark"]`** — so the toggle can override
-   a light-mode OS.
-
-Drop any one of those and the toggle stops working in one direction.
-
-`assets/theme.js` **must stay a synchronous `<head>` script.** Deferring it
-means it runs after first paint, so the wrong palette flashes before being
-corrected.
-
-## Adding things
-
-**A venture card** — copy a `.venture-card` block in `ventures.html`, change the
-name, description, role, and the `status-pill` modifier (`--live`,
-`--building`, `--planned`). Planned entries are `<div>`, not `<a>`: they have
-nowhere to link to.
-
-**A logo** — drop the file in `assets/logos/` and follow that folder's README.
-Logos sit inside a `brand-plate` because a white-background JPEG on a dark page
-shows as a white box.
-
-**A photo** — drop it in `assets/photos/` and follow that folder's README. Every
-slot renders as a designed gradient panel until a real file exists, so a
-half-finished page never looks broken.
-
-## Motion
-
-`assets/reveal.js` fades elements marked `data-reveal` up as they scroll in.
-Three rules keep it from being annoying, and all three matter:
-
-- The hidden start state is applied by script (`.reveal-ready`), never in the
-  HTML. If the script fails to load, nothing is hidden.
-- Elements are unobserved once revealed, so nothing re-animates on scroll back.
-- Anything already on screen at load reveals immediately.
-
-## Conventions
-
-- **Design tokens** are CSS custom properties in `:root`. Change colours there,
-  not inline.
-- **`--gutter`** is the single source of truth for the page margin. Full-bleed
-  elements cancel it with a negative margin; if the two drift apart the page
-  gains a horizontal scrollbar.
-- **Contrast**: the gradient and raw brand purple are for large type, borders,
-  and accents only — never small body text. Purple clears WCAG AA by too thin a
-  margin to spend on 16px paragraphs.
-- **Motion** uses the shared `--ease-out` / `--dur-*` variables. UI transitions
-  stay under ~300ms; hover effects are gated behind
-  `@media (hover: hover) and (pointer: fine)` so they don't stick on touch.
-- **Accessibility**: every page has a skip link, a `:focus-visible` ring, and
-  `aria-current="page"` on the active nav item. Keep those when adding pages.
-- **Header**: below 860px the nav links collapse behind the menu button; the language
-  switch and theme toggle stay in the bar. The links are a plain `<ul>` that CSS hides
-  at narrow widths, so they still work with JavaScript off.
-- **Adding a page**: copy an existing page's `<head>` block and update `<title>`,
-  `description`, `canonical`, and the `og:` tags. Add the link to both the header
-  nav and the footer nav.
+Brave Shields and uBlock often block these. That is expected, not a bug in the
+page: test with shields down first.
 
 ## Notes
 
-- Anything committed here is publicly served. Keep local tooling output out of
-  the repo.
-- Third-party embeds (TikTok `embed.js`, the Discord widget, Buy Me a Coffee)
-  are commonly blocked by Brave Shields and uBlock. That is expected and not a
-  bug in the page — test with shields down before investigating.
+- Anything committed here is public. Local tooling output stays out of the
+  repo (`.gitignore`, and `exclude` in `_config.yml`).
+- Icons are from Simple Icons (CC0) for brand marks, drawn by hand otherwise.

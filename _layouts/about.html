@@ -1,0 +1,60 @@
+---
+layout: base
+---
+{%- comment -%}
+  The About page. The calmer design every page but the home page shares: a
+  page head (includes/page-head.html), then numbered sections with their
+  label in a column on the left. Wording from the "about" section of the
+  language file; the photo from _data/photos.yml.
+{%- endcomment -%}
+{%- include setup.html -%}
+{%- assign p = t.about -%}
+{%- assign photo = site.data.photos.about -%}
+{%- capture aside -%}
+{%- if photo != "" %}
+      <figure class="portrait">
+        <img src="{{ photo | escape }}?v={{ v }}" alt="{{ p.photo_alt | escape }}" />
+        <span class="shot-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      </figure>
+{%- else %}
+      <nav class="toc" aria-label="{{ t.ui.on_this_page | escape }}">
+        <p class="toc-title">{{ t.ui.on_this_page | escape }}</p>
+        <ol>
+{%- for s in p.sections %}
+          <li><a href="#s{{ forloop.index }}"><span>0{{ forloop.index }}</span>{{ s.label | escape }}</a></li>
+{%- endfor %}
+          <li><a href="#next"><span>0{{ p.sections.size | plus: 1 }}</span>{{ p.next_label | escape }}</a></li>
+        </ol>
+      </nav>
+{%- endif %}
+{%- endcapture -%}
+{% include page-head.html %}
+{%- for s in p.sections %}
+
+      <section class="doc" id="s{{ forloop.index }}" aria-labelledby="s{{ forloop.index }}-title" data-reveal>
+        <div class="wrap doc-grid">
+          <p class="doc-label"><span>[ 0{{ forloop.index }} ]</span>{{ s.label | escape }}</p>
+          <div class="doc-body">
+            <h2 id="s{{ forloop.index }}-title">{{ s.title | escape }}</h2>
+{%- for para in s.text %}
+            <p>{{ para | escape }}</p>
+{%- endfor %}
+          </div>
+        </div>
+      </section>
+{%- endfor %}
+
+      <section class="doc" id="next" aria-labelledby="next-title" data-reveal>
+        <div class="wrap doc-grid">
+          <p class="doc-label"><span>[ 0{{ p.sections.size | plus: 1 }} ]</span>{{ p.next_label | escape }}</p>
+          <div class="doc-body">
+            <h2 id="next-title">{{ p.next_title | escape }}</h2>
+            <p>{{ p.next_text | escape }}</p>
+            <div class="doc-actions">
+              <a class="pill pill--primary" href="{{ home }}#work" data-magnet>{{ p.next_cta | escape }}{% include icon.html name="arrow" %}</a>
+              <a class="pill" href="{{ home }}#ventures" data-magnet>{{ p.next_secondary | escape }}</a>
+            </div>
+          </div>
+        </div>
+      </section>
+{{ content }}

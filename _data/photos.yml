@@ -1,0 +1,19 @@
+# Photos that slot into the design. Leave a value "" and the design works
+# without it; put a file in assets/photos/ and its path here to switch it on.
+# See assets/photos/README.md for sizes.
+
+# A portrait of you, inside the ring light on the first screen. Any photo
+# works: it is cropped to a circle. Keep your face in the upper half, since
+# the giant AmziXz runs across the lower half. Square, about 1200×1200px
+# (it is drawn up to about 600px wide, twice that on sharp screens).
+# A cut-out (transparent background, like portrait.webp) looks best: it
+# stands on the ring's dark disc and catches its light.
+hero: "/assets/photos/portrait.webp"
+
+# A portrait for the About page, beside the title. Portrait shape (4:5),
+# about 1000×1250px.
+about: ""
+
+# The two photos in "The work" on the home page.
+work_phone: "/assets/photos/work-phone.jpg"
+work_cars: "/assets/photos/work-cars.jpg"

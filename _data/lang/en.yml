@@ -1,0 +1,384 @@
+# ENGLISH: every word on amzixz.id.lv
+#
+# HOW TO EDIT
+#   Change the text between the double quotes. Leave everything else alone.
+#
+#     tagline_1: "Curious about everything."    <- change this part
+#     ^^^^^^^^^                                     never this part (the key)
+#
+#   - Keep the double quotes around every text.
+#   - To use a double quote inside a text, use the curly ones: “like this”.
+#   - Lines starting with # are notes like this one. They never show on the site.
+#   - The name is always written AmziXz.
+#   - lv.yml has exactly the same keys. If you add or remove a line here, do
+#     the same there.
+#
+# IF YOU MAKE A MISTAKE
+#   The site will not publish the change. The previous version stays live and
+#   GitHub emails you that the Pages build failed. Undo the edit (or fix the
+#   quote/indent you broke) and commit again.
+
+# What search engines and link previews show for each page
+meta:
+  share_description: "Phone modding on YouTube, car content and streams on TikTok, and the companies I'm building."
+  home:
+    title: "AmziXz · Phone modding, cars and streams"
+    description: "AmziXz mods phone software on YouTube (custom ROMs, root, debloating), makes car content and streams on TikTok, co-owns Blue Eye Energy and runs AmziXz Services in Latvia."
+  about:
+    title: "About · AmziXz"
+    description: "Content creator from Latvia: phone modding on YouTube, car content and live streams on TikTok, and the companies AmziXz is building."
+  uses:
+    title: "Uses · AmziXz"
+    description: "The phones, modding tools, computer and filming gear behind the AmziXz videos and streams."
+  contact:
+    title: "Contact · AmziXz"
+    description: "How to reach AmziXz: Telegram, email, Discord and every channel, plus answers to the questions that come up most."
+  notfound:
+    title: "Not found · AmziXz"
+    description: "This page isn't here."
+  job_title: "Content creator"
+
+# Screen-reader labels and the small words around the page
+ui:
+  skip: "Skip to content"
+  pages: "Pages"
+  language: "Language"
+  theme_to_dark: "Switch to dark theme"
+  theme_to_light: "Switch to light theme"
+  email: "Email AmziXz"
+  loading: "Loading"
+  scroll: "Scroll"
+  on_this_page: "On this page"
+  back_to_top: "Back to top"
+  # The live clock in the corner of the first screen
+  clock_place: "Tallinn"
+  # The status light (switched in _data/live.yml)
+  live: "Live on TikTok"
+  offline: "Offline"
+  # The small badges on channels and ventures
+  soon: "Soon"
+  status_live: "Live"
+  status_building: "Building"
+  status_planned: "Planned"
+
+# The floating menu at the bottom of the screen, and the footer links
+nav:
+  home: "Home"
+  work: "Work"
+  ventures: "Ventures"
+  about: "About"
+  contact: "Contact"
+  uses: "Uses"
+  services: "Services"
+  github: "GitHub"
+
+# THE HOME PAGE, top to bottom
+
+# The first screen
+hero:
+  label: "Content creator"
+  tagline_1: "Curious about everything."
+  tagline_2: "Building most of it."
+  # Shown in this order, with a small mark between them
+  topics:
+    - "Cars"
+    - "Motorcycles"
+    - "Systems"
+    - "Music"
+    - "And whatever's next"
+  cta: "See the work"
+  secondary: "What I'm building"
+  # Three short facts on the first screen (laptops with a short screen leave
+  # them out)
+  facts:
+    - label: "Based in"
+      value: "Latvia"
+    - label: "Building"
+      value: "Blue Eye Energy"
+    - label: "Fastest contact"
+      value: "Telegram · @AmziXz"
+
+# The line that scrolls along the top of the first screen, in this order
+ticker:
+  - "Phone modding on YouTube"
+  - "Car content & streams on TikTok"
+  - "Blue Eye Energy, soon"
+  - "Kick, soon"
+  - "Join the Discord"
+
+# 01: the two platforms. The photos are set in _data/photos.yml.
+work:
+  label: "The work"
+  title: "Two platforms, two very different rooms."
+  lede: "One is careful and technical. The other is whatever is happening at the time. I wouldn't want to give either of them up."
+  phone:
+    title: "Phone modding on YouTube"
+    text: "Custom ROMs, rooting, and stripping out software you never asked for. I run every step on a real phone before I film it, so you don't end up with a brick."
+    tags:
+      - "Android"
+      - "Custom ROMs"
+      - "Root"
+    link: "Watch on YouTube"
+    photo_alt: "Thumbnail: which phone is best for modding"
+  cars:
+    title: "Car content and streams on TikTok"
+    text: "Car clips, builds and live streams. Shot on my phone with a DJI Osmo Mobile 8 gimbal and cut in DaVinci Resolve. Nothing is scripted."
+    tags:
+      - "Cars"
+      - "Live"
+      - "Unscripted"
+    link: "Watch on TikTok"
+    photo_alt: "Talking to two drivers through the window of a silver BMW estate"
+
+# 02: the newest uploads. They update by themselves.
+latest:
+  label: "Latest"
+  title: "Fresh off the channels."
+  lede: "These update by themselves whenever something new goes up."
+  youtube: "Latest from Phone Guru"
+  youtube_frame: "Phone Guru: the latest uploads on YouTube"
+  youtube_more: "All videos"
+  main_more: "Main channel"
+  tiktok: "Latest on TikTok"
+  tiktok_more: "Open TikTok"
+
+# 03: every channel. The handles and links are in _data/links.yml.
+channels:
+  label: "Channels"
+  title: "Around the internet."
+  lede: "Each of these is a different thing. Pick whichever one you came for."
+  youtube_phone:
+    name: "YouTube · Phone Guru"
+    blurb: "Phone modding guides. ROMs, root, debloating."
+  youtube_main:
+    name: "YouTube · Main"
+    blurb: "The main channel: everything that isn't phone modding."
+  tiktok:
+    name: "TikTok"
+    blurb: "Car content and live streams. Nothing scripted."
+  kick:
+    name: "Kick"
+    blurb: "Streaming here soon, too."
+  discord:
+    name: "Discord"
+    handle: "Join the server"
+    blurb: "Updates, early drops, and help with builds."
+  telegram:
+    name: "Telegram"
+    blurb: "Fastest way to reach me. I check it most."
+  github:
+    name: "GitHub"
+    blurb: "Projects and code."
+  email:
+    name: "Email"
+    blurb: "Best for anything that needs a paper trail."
+  # The Discord box with the live member list
+  community_title: "Join the Discord"
+  community_text: "Hang out for updates, early drops and shared experiments."
+  community_cta: "Join the server"
+  widget: "AmziXz Discord server widget"
+
+# 04: the companies
+ventures:
+  label: "Ventures"
+  title: "What I'm building."
+  lede: "One is running, one is being built, and the rest are plans. Each one says which."
+  services:
+    name: "AmziXz Services"
+    text: "We build websites, tools and apps for people, or lay the groundwork that a larger development team can take further."
+    link: "services.amzixz.id.lv"
+  bee:
+    name: "Blue Eye Energy"
+    text: "An energy drink company I co-own with a friend. Not on shelves yet: we're still putting the pieces together, and currently raising."
+    role: "Co-owner"
+    invest: "Investment enquiries"
+  planned_title: "On the roadmap"
+  planned_text: "None of these exist yet. They're here because this is where I'm heading, and the people I want to build them with should know."
+  # Shown in this order, numbered 01, 02, ...
+  planned:
+    - name: "Car tuning shop"
+      text: "A workshop doing the kind of builds I already make content about."
+    - name: "Parts store"
+      text: "Tuning parts, OEM parts and the everyday ones, sold properly, with advice attached."
+    - name: "Reengineered classic parts"
+      text: "Old-school car parts, remade to last longer than the originals did."
+    - name: "Logistics & sourcing"
+      text: "A middleman that finds you the right supplier or delivery company, instead of leaving you to guess."
+
+# 05: the kinds of work I take on
+collab:
+  label: "Work with me"
+  title: "Let's make something together."
+  lede: "Three kinds of work I take on. Tell me what you have in mind rather than sending a template, and I'll actually reply."
+  stream:
+    name: "Live stream deals"
+    text: "Sponsored segments and product features in my TikTok live streams."
+  events:
+    name: "Car & event collabs"
+    text: "Car meets, shows and events. I come along, film it and share it with my audience."
+  reviews:
+    name: "Phone & tech reviews"
+    text: "Phones and tech, tested in my own hands first, then reviewed on YouTube."
+  cta: "Message me on Telegram"
+  secondary: "Send an email"
+  note: "Telegram is fastest. Email if it needs a paper trail."
+
+# 06: merch, and buying me a coffee
+shop:
+  label: "Shop"
+  title: "Merch is on the way."
+  text: "AmziXz merch is in the works. Join the Discord to hear first when it drops."
+  cta: "Join the Discord"
+support:
+  label: "Support"
+  title: "Support the build."
+  text: "If you enjoy the work, fuel the next iteration."
+  cta: "Buy me a coffee"
+
+# The bottom of every page
+footer:
+  label: "Got an idea?"
+  title: "Let's talk."
+  made: "Made in Latvia"
+
+# THE OTHER PAGES
+
+about:
+  label: "About"
+  title: "I'm AmziXz."
+  lede: "Content creator from Latvia. I make things, I break things on purpose, and lately I've started building companies around the things I care about."
+  # Read out for your photo, once there is one (_data/photos.yml)
+  photo_alt: "AmziXz"
+  # Each section: a small label, a title, then its paragraphs in order
+  sections:
+    - label: "On camera"
+      title: "What I make"
+      text:
+        - "On YouTube I mod phone software: custom ROMs, root, debloating, and generally pushing devices past what they shipped with. I do it because I'm into IT and electronics, and I run every step on my own hardware first, which is why the tutorials work instead of bricking your phone."
+        - "On TikTok I make car content and stream live. Unedited, on the move, whatever's actually happening. Everything gets shot on my phone with a DJI Osmo Mobile 8 gimbal and cut in DaVinci Resolve."
+    - label: "Off camera"
+      title: "What I'm building"
+      text:
+        - "I co-own Blue Eye Energy, an energy drink company I'm building with a friend. It isn't on shelves yet: we're still assembling the pieces, and we're currently raising."
+        - "I also run AmziXz Services. We build websites, tools and apps for people, or lay the groundwork that a larger development team can take further."
+        - "Longer term I want to build in the places I already spend my time: car tuning, parts, reengineered classic components that outlast the originals, and logistics. Those are plans rather than businesses today, and the ventures list on the home page says which is which."
+  next_label: "Next"
+  next_title: "Where to go from here"
+  next_text: "If you're here for one of these things, you'll probably tolerate the rest."
+  next_cta: "See the work"
+  next_secondary: "What I'm building"
+
+uses:
+  label: "Uses"
+  title: "What I use."
+  lede: "The gear and software behind the videos and the streams. People ask about this constantly, so here it is in one place. Everything listed is what I actually use: no affiliate links, nothing I haven't touched."
+  # Each group: a title, then name and value pairs.
+  groups:
+    - title: "Phones"
+      items:
+        - name: "Daily driver"
+          value: "Nothing Phone (2), on Nothing OS for now, moving to Infinity X"
+        - name: "Test device"
+          value: "Poco X3 Pro (codename vayu), the one I flash first so you don't have to"
+        - name: "Privacy phone"
+          value: "A separate device running GrapheneOS"
+        - name: "ROMs I run most"
+          value: "Infinity X, GrapheneOS, Nothing OS"
+    - title: "Modding tools"
+      items:
+        - name: "Recovery"
+          value: "OrangeFox, on anything with an unlocked bootloader"
+        - name: "Root"
+          value: "KernelSU Next, or Magisk Kitsune"
+    - title: "Computer"
+      items:
+        - name: "CPU"
+          value: "Intel i7-10700F"
+        - name: "GPU"
+          value: "RTX 3060 12GB"
+        - name: "RAM"
+          value: "32GB"
+        - name: "Storage"
+          value: "500GB SSD + 1TB HDD"
+        - name: "Motherboard"
+          value: "Gigabyte H470M DS3H"
+        - name: "Wi-Fi / Bluetooth"
+          value: "TP-Link Wi-Fi 6E card"
+        - name: "Extras"
+          value: "Additional USB port card"
+    - title: "Monitors"
+      items:
+        - name: "Main"
+          value: "Xiaomi 27″ 2K, 180Hz"
+        - name: "Second"
+          value: "Arzopa 1080p 144Hz, small and portable"
+        - name: "Stand"
+          value: "Dual arm for both"
+    - title: "Peripherals"
+      items:
+        - name: "Keyboard"
+          value: "Attack Shark X82PRO: wireless, wired or Bluetooth"
+        - name: "Mouse"
+          value: "Razer Cobra Pro, wireless"
+        - name: "Mic"
+          value: "Maono PD200X with stand"
+        - name: "Speakers"
+          value: "Edifier M60"
+        - name: "Network"
+          value: "Ugreen Cat8 cable"
+    - title: "Filming & streaming"
+      items:
+        - name: "Camera"
+          value: "My daily driver, the Nothing Phone (2)"
+        - name: "Gimbal"
+          value: "DJI Osmo Mobile 8"
+        - name: "Mic"
+          value: "Maono PD200X"
+        - name: "Lighting"
+          value: "None. Whatever light is in the room."
+        - name: "Editing"
+          value: "DaVinci Resolve Studio"
+  # The "for sale" box sits under this group (3 = the third, Computer). Set
+  # it to 0 when the setup is sold and the box disappears.
+  sale_group: 3
+  sale_label: "For sale"
+  sale_text: "This whole setup, the tower, both monitors and everything in the peripherals list, is for sale right now."
+  sale_price: "€2000"
+  sale_cta: "Message me on Telegram"
+  next_cta: "See the work"
+  next_secondary: "Ask me about something"
+
+contact:
+  label: "Contact"
+  title: "Say hi."
+  lede: "Questions, collab ideas, or just want to say hi? Any of these work."
+  reach_label: "Reach out"
+  reach_title: "The quickest ways in"
+  reach_note: "Telegram is the fastest: I check it more than anything else. Email is better if it needs a paper trail."
+  channels_label: "Channels"
+  channels_title: "Everywhere else"
+  faq_label: "Questions"
+  faq_title: "Questions I get a lot"
+  # Shown in this order. Each one opens when clicked.
+  faq:
+    - question: "What's the fastest way to reach you?"
+      answer: "Telegram, at t.me/AmziXz. I check it more than email, so you'll hear back sooner there."
+    - question: "What do you actually make?"
+      answer: "Phone modding guides (custom ROMs, rooting, debloating) on @PhoneGuruAmziXz, and car content and live streams on TikTok. Everything else goes on @AmziXz."
+    - question: "What is Blue Eye Energy?"
+      answer: "An energy drink company I co-own with a friend. It isn't on shelves yet: we're still building it, and we're currently raising."
+    - question: "What is AmziXz Services?"
+      answer: "We build websites, tools and apps for people, or lay the groundwork that a larger development team can take further. Everything about it is at services.amzixz.id.lv."
+    - question: "Are you open to sponsorships and partnerships?"
+      answer: "Yes: sponsorships, partnerships, and building with other creators. Telegram is fastest; email if it needs a paper trail. Tell me what you have in mind rather than sending a template, and I'll actually reply."
+    - question: "Are you open to collabs?"
+      answer: "Yes, collabs and feedback both. Message me on Telegram and tell me what you have in mind."
+
+# The page people land on when an address doesn't exist
+notfound:
+  label: "404"
+  title: "This page isn't here."
+  text: "It may have moved when the site was rebuilt. Everything is one click from the home page."
+  cta: "Go to the home page"
+  # The same, for Latvian visitors
+  other: "Latviski: uz sākumlapu"
