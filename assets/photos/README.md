@@ -6,7 +6,7 @@ ever looks broken while you gather them.
 
 | Slot in photos.yml | Where it appears | Best shape | Now |
 |---|---|---|---|
-| `hero` | Inside the ring light on the first screen, behind the giant AmziXz | Square, about 800×800px | `portrait.webp` |
+| `hero` | Inside the ring light on the first screen, behind the giant AmziXz | Square, about 1200×1200px | `portrait.webp` (800px, all the source photo allows) |
 | `about` | Beside the title on the About page | Portrait 4:5, about 1000×1250px | empty |
 | `work_phone` | "Phone modding on YouTube" on the home page | 16:9 | `work-phone.jpg` (365×209, a bigger copy would look sharper) |
 | `work_cars` | "Car content and streams on TikTok" | 4:3 | `work-cars.jpg` |
@@ -31,6 +31,9 @@ will look better still; a cut-out with a transparent background works best.
 
 - **JPEG** for photos, each **under 400 KB**. Resize before uploading: a phone
   shoots 4000px wide, about four times more than needed.
+- **The ring portrait** is the exception: a cut-out as **WebP with
+  transparency** (JPEG has none). It stays small; `portrait.webp` is about
+  20 KB.
 - Lowercase names with hyphens: `me-ring.jpg`, not `Me Ring.JPG`.
 - After replacing a file under the same name, add one to `asset_version` in
   `_config.yml`, or returning visitors keep the old copy.

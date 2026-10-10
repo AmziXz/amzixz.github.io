@@ -94,7 +94,7 @@
   --spot: rgba(139, 92, 246, 0.16);
   --dock-bg: rgba(16, 13, 22, 0.82);
   --portrait-bloom: rgba(139, 92, 246, 0.24);
-  --portrait-glow: rgba(139, 92, 246, 0.38);
+  --portrait-glow: rgba(139, 92, 246, 0.26);
 
   --glass: rgba(255, 255, 255, 0.06);
   --glass-line: rgba(255, 255, 255, 0.14);
@@ -135,7 +135,7 @@
   --spot: rgba(124, 58, 237, 0.1);
   --dock-bg: rgba(255, 255, 255, 0.86);
   --portrait-bloom: rgba(139, 92, 246, 0.16);
-  --portrait-glow: rgba(124, 58, 237, 0.2);
+  --portrait-glow: rgba(124, 58, 237, 0.14);
 
   --glass: rgba(255, 255, 255, 0.55);
   --glass-line: rgba(21, 18, 28, 0.12);
@@ -749,8 +749,11 @@ ol {
    portrait, when _data/photos.yml has one, sits on the disc inside the rim
    and does not turn. */
 .halo {
-  --size: min(64vh, 46vw, 40rem);
+  --size: min(64vh, 46vw, 56rem);
   position: absolute;
+  /* Moved every frame while the pointer moves: kept on its own layer so
+     the disc and the portrait are drawn once, not on every frame. */
+  will-change: transform;
   left: 50%;
   top: calc(var(--top-h) + var(--ticker-h) + (100% - var(--top-h) - var(--ticker-h)) * 0.46);
   width: var(--size);
@@ -771,12 +774,15 @@ ol {
 }
 
 .halo-disc {
-  background: radial-gradient(closest-side, var(--halo-core) 0%, var(--halo-core) 86%, transparent 100%);
+  background:
+    var(--disc-bloom, none),
+    radial-gradient(closest-side, var(--halo-core) 0%, var(--halo-core) 86%, transparent 100%);
 }
 
 .halo-spin {
   display: block;
   transform: rotate(var(--halo-turn, 20deg));
+  will-change: transform;
 }
 
 .halo-ring,
@@ -813,10 +819,8 @@ ol {
    violet bloom behind it and a soft glow around it, so he reads as lit by
    the ring; the foot fades into the page so the name in front stays
    readable. */
-.hero--photo .halo-disc {
-  background:
-    radial-gradient(circle at 50% 36%, var(--portrait-bloom), transparent 58%),
-    radial-gradient(closest-side, var(--halo-core) 0%, var(--halo-core) 86%, transparent 100%);
+.hero--photo {
+  --disc-bloom: radial-gradient(circle at 50% 36%, var(--portrait-bloom), transparent 58%);
 }
 
 .halo-photo {
@@ -828,16 +832,11 @@ ol {
   border-radius: 50%;
   object-fit: cover;
   object-position: 50% 30%;
-  filter: drop-shadow(0 0 14px var(--portrait-glow));
+  filter: drop-shadow(0 0 8px var(--portrait-glow));
 }
 
-/* Light theme: the dark letters cross him, so he fades out before them
-   instead of washing to grey. */
-[data-theme="light"] .halo-photo {
-  -webkit-mask-image: linear-gradient(180deg, #000 48%, transparent 74%);
-  mask-image: linear-gradient(180deg, #000 48%, transparent 74%);
-}
-
+/* Light theme: no dark shade over him (it would wash the shirt to grey);
+   the photo's own fade starts just above where the letters cross. */
 [data-theme="light"] .halo-shade {
   display: none;
 }
@@ -871,14 +870,70 @@ ol {
   text-shadow: 0 1px 18px var(--bg), 0 0 2px var(--bg);
 }
 
-@media (max-width: 63.99rem) {
+/* Screens from 1024 to 1280px wide: a smaller ring, so the tagline stays
+   off the face, and the spec sheet steps aside, as on short laptops. */
+@media (min-width: 64rem) and (max-width: 79.99rem) {
   .hero--photo .halo {
-    --size: min(64vw, 22rem);
+    --size: min(56vh, 34vw, 40rem);
+  }
+
+  .hero--photo .hero-facts {
+    display: none;
+  }
+}
+
+@media (min-width: 64rem) and (max-width: 71.99rem) {
+  .hero--photo .halo {
+    --size: min(56vh, 30vw, 40rem);
+  }
+}
+
+@media (min-width: 64rem) {
+  .hero--photo .topics {
+    max-width: 38ch;
+  }
+}
+
+/* One column: the ring sits under the status row, no taller than about a
+   third of the screen, and the name crosses its lower part. The buttons
+   come straight after the name, so even a short phone screen ends on them
+   above the floating menu; the tagline and the spec sheet follow. */
+@media (max-width: 63.99rem) {
+  .hero--photo {
+    --ring: min(64vw, 22rem, 34vh);
+    --ring: min(64vw, 22rem, 34svh);
+  }
+
+  .hero--photo .halo {
+    --size: var(--ring);
     top: calc(var(--top-h) + var(--ticker-h) + 4.5rem + var(--size) / 2);
   }
 
   .hero--photo .hero-name {
-    margin-top: calc(min(64vw, 22rem) * 0.62);
+    margin-top: calc(var(--ring) * 0.6);
+  }
+
+  .hero--photo .hero-inner {
+    grid-template-rows: auto auto auto auto 1fr;
+    grid-template-areas:
+      "top"
+      "name"
+      "acts"
+      "copy"
+      "facts";
+  }
+
+  .hero--photo .hero-side {
+    display: contents;
+  }
+
+  .hero--photo .hero-actions {
+    grid-area: acts;
+  }
+
+  .hero--photo .hero-facts {
+    grid-area: facts;
+    align-self: end;
   }
 }
 
@@ -1039,10 +1094,12 @@ ol {
 .readout {
   display: none;
   gap: 0.35rem;
+  color: var(--muted);
+  text-shadow: 0 1px 12px var(--bg), 0 0 2px var(--bg);
 }
 
 .readout b {
-  color: var(--muted);
+  color: var(--ink);
   font-weight: 400;
 }
 
@@ -1084,6 +1141,8 @@ ol {
   letter-spacing: -0.045em;
   white-space: nowrap;
   filter: drop-shadow(0 0 0.18em var(--name-glow));
+  /* It drifts with the pointer; on its own layer its glow is drawn once. */
+  will-change: translate;
 }
 
 .hero-name > span {
@@ -2946,5 +3005,10 @@ body:not(.is-home) .foot {
   .ticker ul:first-child {
     flex-wrap: wrap;
     padding-inline: var(--gutter);
+  }
+
+  /* It follows the pointer, which reduced motion switches off. */
+  .js .readout {
+    display: none;
   }
 }

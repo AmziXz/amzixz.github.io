@@ -125,7 +125,8 @@
         halo.style.setProperty("--sx", (px * 28).toFixed(1) + "px");
         halo.style.setProperty("--sy", (py * 18).toFixed(1) + "px");
       }
-      if (name) name.style.translate = (px * -18).toFixed(1) + "px " + (py * -8).toFixed(1) + "px";
+      /* Whole pixels, so the name's layer is never resampled between them. */
+      if (name) name.style.translate = Math.round(px * -18) + "px " + Math.round(py * -8) + "px";
       if (still) {
         moving = false;
         return;

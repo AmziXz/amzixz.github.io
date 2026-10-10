@@ -4,7 +4,8 @@
 
 # A portrait of you, inside the ring light on the first screen. Any photo
 # works: it is cropped to a circle. Keep your face in the upper half, since
-# the giant AmziXz runs across the lower half. Square, about 800×800px.
+# the giant AmziXz runs across the lower half. Square, about 1200×1200px
+# (it is drawn up to about 600px wide, twice that on sharp screens).
 # A cut-out (transparent background, like portrait.webp) looks best: it
 # stands on the ring's dark disc and catches its light.
 hero: "/assets/photos/portrait.webp"

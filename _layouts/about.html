@@ -13,7 +13,7 @@ layout: base
 {%- capture aside -%}
 {%- if photo != "" %}
       <figure class="portrait">
-        <img src="{{ photo }}?v={{ v }}" alt="{{ p.photo_alt | escape }}" />
+        <img src="{{ photo | escape }}?v={{ v }}" alt="{{ p.photo_alt | escape }}" />
         <span class="shot-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
       </figure>
 {%- else %}

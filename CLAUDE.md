@@ -107,13 +107,14 @@ missing key fails the build instead of publishing a blank.
 - Anything committed here is **public and served by Pages**. `.claude/` and
   `node_modules/` are gitignored for that reason; keep it that way.
   `_config.yml` keeps the notes and local tooling (`package.json`,
-  `serve.js`, `check.js`, `tsconfig.json`, `docs/`) from being published; add
-  any new tooling file to its `exclude` list.
+  `serve.js`, `check.js`, `tsconfig.json`, `docs/`, the READMEs in
+  `assets/`) from being published; add any new tooling or notes file to its
+  `exclude` list.
 - The name is always written **AmziXz**: never "AMZIXZ" or "amzixz" on the
   page, so never put `text-transform: uppercase` on anything that shows it.
   `npm run check` catches it in the language files.
 - After changing anything in `/assets`, add one to `asset_version` in
-  `_config.yml`. Every page follows. Currently `11`.
+  `_config.yml`. Every page follows. Currently `12`.
 - Run `npm run check`, and build once with real Jekyll if you changed a
   template: the preview matches it, but GitHub is the one that publishes.
 - New text colours are tokens defined for both themes; measure each against

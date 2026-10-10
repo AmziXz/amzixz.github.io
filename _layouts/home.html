@@ -18,7 +18,7 @@ layout: base
         <div class="halo" aria-hidden="true">
           <i class="halo-disc"></i>
 {%- if photos.hero != "" %}
-          <img class="halo-photo" src="{{ photos.hero }}?v={{ v }}" alt="" />
+          <img class="halo-photo" src="{{ photos.hero | escape }}?v={{ v }}" alt="" />
           <i class="halo-shade"></i>
 {%- endif %}
           <span class="halo-spin"><i class="halo-glow"></i><i class="halo-ring"></i></span>
@@ -97,7 +97,7 @@ layout: base
             </div>
             <figure class="shot shot--video">
               <span class="shot-tag"><i></i>YouTube</span>
-              <img src="{{ photos.work_phone }}?v={{ v }}" alt="{{ t.work.phone.photo_alt | escape }}" loading="lazy" />
+              <img src="{{ photos.work_phone | escape }}?v={{ v }}" alt="{{ t.work.phone.photo_alt | escape }}" loading="lazy" />
               <span class="shot-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
             </figure>
           </article>
@@ -116,7 +116,7 @@ layout: base
             </div>
             <figure class="shot">
               <span class="shot-tag"><i></i>TikTok</span>
-              <img src="{{ photos.work_cars }}?v={{ v }}" alt="{{ t.work.cars.photo_alt | escape }}" loading="lazy" />
+              <img src="{{ photos.work_cars | escape }}?v={{ v }}" alt="{{ t.work.cars.photo_alt | escape }}" loading="lazy" />
               <span class="shot-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
             </figure>
           </article>
