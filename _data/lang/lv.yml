@@ -1,0 +1,84 @@
+# LATVIEŠU: visi vārdi lapā amzixz.id.lv/lv/
+#
+# KĀ LABOT
+#   Maini tekstu starp pēdiņām. Visu pārējo atstāj, kā ir.
+#
+#     tagline_1: "Ziņkārīgs par visu."    <- maini šo daļu
+#     ^^^^^^^^^                               nekad šo (atslēgu)
+#
+#   - Katram tekstam jāpaliek pēdiņās "…".
+#   - Ja tekstā vajag pēdiņas, lieto latviešu „šādas”.
+#   - Rindas, kas sākas ar #, ir piezīmes kā šī. Lapā tās neparādās.
+#   - Vārds vienmēr tiek rakstīts AmziXz.
+#   - en.yml ir tieši tādas pašas atslēgas. Ja šeit pievieno vai dzēs rindu,
+#     dari to pašu tur.
+#
+# JA KAUT KO SALAUZ
+#   Izmaiņas netiks publicētas. Iepriekšējā versija paliek tiešsaistē, un
+#   GitHub atsūta e-pastu, ka Pages būvējums neizdevās. Atsauc labojumu (vai
+#   izlabo salauzto pēdiņu/atkāpi) un saglabā vēlreiz.
+
+# Ko meklētājprogrammas un saišu priekšskatījumi rāda par katru lapu
+meta:
+  share_description: "Telefonu modificēšana YouTube, auto saturs un tiešraides TikTok un uzņēmumi, ko veidoju."
+  # Sākumlapa
+  home:
+    title: "AmziXz · Telefonu modificēšana, auto un tiešraides"
+    description: "AmziXz modificē telefonu programmatūru YouTube (pielāgotās ROM, root, liekās programmatūras noņemšana), veido auto saturu un tiešraides TikTok un ir Blue Eye Energy līdzīpašnieks Latvijā."
+  job_title: "Satura veidotājs"
+
+# Ekrāna lasītāju uzraksti un sīkie vārdi lapā
+ui:
+  skip: "Pāriet uz saturu"
+  pages: "Lapas"
+  language: "Valoda"
+  theme_to_dark: "Pārslēgt uz tumšo režīmu"
+  theme_to_light: "Pārslēgt uz gaišo režīmu"
+  email: "Rakstīt AmziXz e-pastu"
+  loading: "Ielādē"
+  scroll: "Ritini"
+  # Pulkstenis pirmā ekrāna stūrī
+  clock_place: "Tallina"
+  # Statusa gaismiņa (pārslēdz failā _data/live.yml)
+  live: "Tiešraidē TikTok"
+  offline: "Bezsaistē"
+  soon: "Drīzumā"
+
+# Peldošā izvēlne ekrāna apakšā
+nav:
+  home: "Sākums"
+  work: "Darbi"
+  ventures: "Uzņēmumi"
+  about: "Par mani"
+  contact: "Kontakti"
+
+# Pirmais ekrāns
+hero:
+  label: "Satura veidotājs"
+  tagline_1: "Ziņkārīgs par visu."
+  tagline_2: "Lielāko daļu arī būvēju."
+  # Rādās šādā secībā ar mazu zīmi starp tiem
+  topics:
+    - "Auto"
+    - "Motocikli"
+    - "Sistēmas"
+    - "Mūzika"
+    - "Un kas nākamais"
+  cta: "Apskati darbus"
+  secondary: "Ko es veidoju"
+  # Trīs mazie fakti pirmā ekrāna apakšā
+  facts:
+    - label: "Atrodas"
+      value: "Latvijā"
+    - label: "Veidoju"
+      value: "Blue Eye Energy"
+    - label: "Ātrākā saziņa"
+      value: "Telegram · @AmziXz"
+
+# Rinda, kas slīd pirmā ekrāna apakšā, šādā secībā
+ticker:
+  - "Telefonu modificēšana YouTube"
+  - "Auto saturs un tiešraides TikTok"
+  - "Blue Eye Energy, drīzumā"
+  - "Kick, drīzumā"
+  - "Pievienojies Discord"

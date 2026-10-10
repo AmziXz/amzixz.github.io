@@ -3,12 +3,12 @@
  * Loaded synchronously in <head>, NOT deferred: a deferred script runs after
  * first paint, so the wrong palette would flash before being corrected.
  *
- * First visit follows prefers-color-scheme — an explicit OS-level light
- * preference is never overridden. Once the toggle is clicked the choice is
- * stored and wins from then on, in both directions.
+ * Dark first (the owner's choice, 2026-10-10): a first visit is dark whatever
+ * the system says. Once the sun/moon switch is clicked the choice is stored
+ * and wins from then on, in both directions.
  *
- * With JavaScript off the button is inert but the system preference still
- * applies through CSS alone, so both palettes stay reachable.
+ * With JavaScript off the page is dark (the stylesheet's default) and the
+ * switch does nothing.
  */
 (function () {
   "use strict";
@@ -34,14 +34,10 @@
 
   /* Applied before first paint. Everything below waits for the DOM. */
   var saved = read();
-  if (saved === "dark" || saved === "light") root.setAttribute("data-theme", saved);
+  root.setAttribute("data-theme", saved === "light" ? "light" : "dark");
 
   function effective() {
-    var attr = root.getAttribute("data-theme");
-    if (attr === "dark" || attr === "light") return attr;
-    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
+    return root.getAttribute("data-theme") === "light" ? "light" : "dark";
   }
 
   function sync(button) {
@@ -67,17 +63,5 @@
       sync(button);
     });
 
-    /* If the visitor has never chosen, follow the system as it changes. */
-    if (!read() && window.matchMedia) {
-      var mq = window.matchMedia("(prefers-color-scheme: dark)");
-      var onChange = function () {
-        if (!read()) sync(button);
-      };
-      if (mq.addEventListener) {
-        mq.addEventListener("change", onChange);
-      } else if (mq.addListener) {
-        mq.addListener(onChange);
-      }
-    }
   });
 })();

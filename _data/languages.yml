@@ -1,0 +1,16 @@
+# The languages the site is published in, in the order the switch shows them.
+# The first one is the default: it lives at / and gets the 404 page.
+#
+# A page's address in each language is the prefix below + the page's slug
+# (set in the page's front matter): "" + "/about" = /about,
+# "/lv" + "/about" = /lv/about.
+- code: en
+  name: English
+  short: EN
+  prefix: ""
+  locale: en_GB
+- code: lv
+  name: Latviešu
+  short: LV
+  prefix: "/lv"
+  locale: lv_LV

@@ -1,0 +1,32 @@
+# GitHub Pages builds this site with Jekyll. It does three jobs here:
+#
+# 1. Builds every page from one template per kind of page (_layouts/) and the
+#    wording in _data/lang/en.yml and _data/lang/lv.yml.
+# 2. Fails the build on a missing or misspelled key instead of publishing a
+#    blank. A failed build leaves the previous version live, and GitHub emails
+#    the owner.
+# 3. Keeps working notes and local tooling off the public site.
+
+# Used for canonical URLs, hreflang, og: tags and the sitemap. Deliberately
+# not site.url: GitHub's metadata plugin rewrites that one.
+origin: "https://amzixz.id.lv"
+
+# The ?v=N cache-buster on every /assets reference. Bump it after changing
+# anything in /assets; one number, every page follows.
+asset_version: 7
+
+liquid:
+  error_mode: strict
+  strict_filters: true
+  strict_variables: true
+
+exclude:
+  - README.md
+  - CLAUDE.md
+  - docs/
+  - package.json
+  - package-lock.json
+  - serve.js
+  - check.js
+  - tsconfig.json
+  - node_modules/

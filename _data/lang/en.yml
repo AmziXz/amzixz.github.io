@@ -1,0 +1,84 @@
+# ENGLISH: every word on amzixz.id.lv
+#
+# HOW TO EDIT
+#   Change the text between the double quotes. Leave everything else alone.
+#
+#     tagline_1: "Curious about everything."    <- change this part
+#     ^^^^^^^^^                                     never this part (the key)
+#
+#   - Keep the double quotes around every text.
+#   - To use a double quote inside a text, use the curly ones: “like this”.
+#   - Lines starting with # are notes like this one. They never show on the site.
+#   - The name is always written AmziXz.
+#   - lv.yml has exactly the same keys. If you add or remove a line here, do
+#     the same there.
+#
+# IF YOU MAKE A MISTAKE
+#   The site will not publish the change. The previous version stays live and
+#   GitHub emails you that the Pages build failed. Undo the edit (or fix the
+#   quote/indent you broke) and commit again.
+
+# What search engines and link previews show for each page
+meta:
+  share_description: "Phone modding on YouTube, car content and streams on TikTok, and the companies I'm building."
+  # The home page
+  home:
+    title: "AmziXz · Phone modding, cars and streams"
+    description: "AmziXz mods phone software on YouTube (custom ROMs, root, debloating), makes car content and streams on TikTok, and co-owns Blue Eye Energy in Latvia."
+  job_title: "Content creator"
+
+# Screen-reader labels and the small words around the page
+ui:
+  skip: "Skip to content"
+  pages: "Pages"
+  language: "Language"
+  theme_to_dark: "Switch to dark theme"
+  theme_to_light: "Switch to light theme"
+  email: "Email AmziXz"
+  loading: "Loading"
+  scroll: "Scroll"
+  # The live clock in the corner of the first screen
+  clock_place: "Tallinn"
+  # The status light (switched in _data/live.yml)
+  live: "Live on TikTok"
+  offline: "Offline"
+  soon: "Soon"
+
+# The floating menu at the bottom of the screen
+nav:
+  home: "Home"
+  work: "Work"
+  ventures: "Ventures"
+  about: "About"
+  contact: "Contact"
+
+# The first screen
+hero:
+  label: "Content creator"
+  tagline_1: "Curious about everything."
+  tagline_2: "Building most of it."
+  # Shown in this order, with a small mark between them
+  topics:
+    - "Cars"
+    - "Motorcycles"
+    - "Systems"
+    - "Music"
+    - "And whatever's next"
+  cta: "See the work"
+  secondary: "What I'm building"
+  # The three small facts at the bottom of the first screen
+  facts:
+    - label: "Based in"
+      value: "Latvia"
+    - label: "Building"
+      value: "Blue Eye Energy"
+    - label: "Fastest contact"
+      value: "Telegram · @AmziXz"
+
+# The line that scrolls along the bottom of the first screen, in this order
+ticker:
+  - "Phone modding on YouTube"
+  - "Car content & streams on TikTok"
+  - "Blue Eye Energy, soon"
+  - "Kick, soon"
+  - "Join the Discord"

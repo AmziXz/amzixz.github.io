@@ -1,0 +1,74 @@
+---
+layout: base
+---
+{%- comment -%}
+  The home page: one long page in chapters. Wording from the language file,
+  links from _data/links.yml, the status light from _data/live.yml, photos
+  from _data/photos.yml.
+{%- endcomment -%}
+{%- assign t = site.data.lang[page.lang] -%}
+{%- assign k = site.data.links -%}
+{%- assign photo = site.data.photos.hero -%}
+{%- assign v = site.asset_version -%}
+      <!-- The first screen, framed like a camera viewfinder: corner marks, the
+           status light where a camera shows REC, and the time. The purple
+           light follows the pointer (assets/site.js). -->
+      <section class="hero" aria-labelledby="hero-name">
+        <div class="hero-light" aria-hidden="true"><i class="glow glow--a"></i><i class="glow glow--b"></i></div>
+{%- if photo != "" %}
+        <img class="hero-photo" src="{{ photo }}?v={{ v }}" alt="" />
+{%- endif %}
+        <!-- The ticker along the top of the first screen. The list is written
+             twice so the loop has no seam; the copy is hidden from screen
+             readers. -->
+        <div class="ticker">
+          <ul>
+{%- for line in t.ticker %}
+            <li>{{ line | escape }}</li>
+{%- endfor %}
+          </ul>
+          <ul aria-hidden="true">
+{%- for line in t.ticker %}
+            <li>{{ line | escape }}</li>
+{%- endfor %}
+          </ul>
+        </div>
+        <div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+        <div class="hero-inner">
+          <div class="hero-top">
+{%- if site.data.live.streaming %}
+            <a class="status status--live" href="{{ k.tiktok_live }}" rel="noopener"><i></i>{{ t.ui.live | escape }}</a>
+{%- else %}
+            <p class="status"><i></i>{{ t.ui.offline | escape }}</p>
+{%- endif %}
+            <p class="clock" data-clock data-lang="{{ page.lang }}"><span>{{ t.ui.clock_place | escape }}</span> <b data-clock-time>--:--:--</b> <span data-clock-date></span></p>
+          </div>
+
+          <div class="hero-main">
+            <p class="kicker">{{ t.hero.label | escape }}</p>
+            <h1 class="hero-name" id="hero-name"><span>AmziXz</span></h1>
+            <div class="hero-sub">
+              <p class="tagline">{{ t.hero.tagline_1 | escape }} <span>{{ t.hero.tagline_2 | escape }}</span></p>
+              <div class="hero-actions">
+                <a class="pill pill--primary" href="#work">{{ t.hero.cta | escape }}</a>
+                <a class="pill" href="#ventures">{{ t.hero.secondary | escape }}</a>
+              </div>
+            </div>
+            <ul class="topics">
+{%- for topic in t.hero.topics %}
+              <li>{{ topic | escape }}</li>
+{%- endfor %}
+            </ul>
+          </div>
+
+          <dl class="hero-facts">
+{%- for f in t.hero.facts %}
+            <div><dt>{{ f.label | escape }}</dt><dd>{{ f.value | escape }}</dd></div>
+{%- endfor %}
+          </dl>
+        </div>
+
+      </section>
+
+{{ content }}

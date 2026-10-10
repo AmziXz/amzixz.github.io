@@ -1,0 +1,9 @@
+# The status light in the top corner of the first screen.
+#
+#   streaming: true    while you are live on TikTok (the light turns on and
+#                      links to the stream)
+#   streaming: false   the rest of the time
+#
+# The site cannot see your stream by itself, so this is switched by hand. It
+# takes about a minute after you commit for the site to update.
+streaming: false
