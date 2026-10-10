@@ -95,3 +95,5 @@ They are on the machine PATH already.
   Currently `?v=6`.
 - `package.json` is local tooling only (`"private": true`). The site itself has
   no build step and ships no dependencies; keep it that way.
+- Commit messages and pull request descriptions never include a link to the
+  Claude session.

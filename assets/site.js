@@ -4,13 +4,17 @@
  *    visit only (the script in <head> decides that).
  * 2. The Tallinn clock in the corner of the first screen.
  * 3. The light: two pools of purple and blue that follow the pointer, each
- *    at its own speed, easing rather than snapping.
+ *    at its own speed, easing rather than snapping. The ring light turns its
+ *    bright side toward the pointer and drifts with it while the name drifts
+ *    the other way, and the readout shows where the pointer is.
  * 4. The giant AmziXz is sized to fill the width.
  * 5. On the home page, the floating menu lights the chapter you are in.
+ * 6. The main buttons lean a little toward the pointer.
  *
- * Under prefers-reduced-motion the light stays still and the loading screen
- * never shows. Without this script the page reads normally: the name has a
- * CSS size, the light sits in its resting place, the clock shows dashes.
+ * Under prefers-reduced-motion nothing follows the pointer and the loading
+ * screen never shows. Without this script the page reads normally: the name
+ * has a CSS size, the light and the ring sit in their resting places, the
+ * clock shows dashes.
  */
 (function () {
   "use strict";
@@ -28,7 +32,11 @@
     var tick = function (now) {
       var p = Math.min(1, (now - started) / DURATION);
       var eased = 1 - Math.pow(1 - p, 3);
-      if (count) count.textContent = String(Math.round(eased * 100));
+      if (count) {
+        count.textContent = String(Math.round(eased * 100));
+        /* The number gains weight as it climbs, up to the name's own. */
+        count.style.fontWeight = String(Math.round(200 + eased * 220));
+      }
       if (bar) bar.style.setProperty("--p", eased.toFixed(3));
       if (p < 1) {
         requestAnimationFrame(tick);
@@ -75,19 +83,27 @@
   /* ---------- 3. The light ---------- */
 
   var hero = document.querySelector(".hero");
+  var name = document.querySelector(".hero-name");
   var light = hero && hero.querySelector(".hero-light");
+  var halo = hero && hero.querySelector(".halo");
+  var readX = hero && hero.querySelector("[data-readout-x]");
+  var readY = hero && hero.querySelector("[data-readout-y]");
   if (light) {
-    var pos = { ax: 0.3, ay: 0.45, bx: 0.75, by: 0.6 };
-    var goal = { ax: 0.3, ay: 0.45, bx: 0.75, by: 0.6 };
+    var pos = { ax: 0.3, ay: 0.45, bx: 0.75, by: 0.6, turn: 20 };
+    var goal = { ax: 0.3, ay: 0.45, bx: 0.75, by: 0.6, turn: 20 };
     var moving = false;
+    var pad = function (n) {
+      return ("0000" + Math.max(0, Math.round(n))).slice(-4);
+    };
 
     var frame = function () {
       var still = true;
       for (var key in goal) {
         var d = goal[key] - pos[key];
-        if (Math.abs(d) > 0.0005) still = false;
-        /* The purple pool is quicker than the blue: depth. */
-        pos[key] += d * (key.charAt(0) === "a" ? 0.08 : 0.045);
+        if (Math.abs(d) > (key === "turn" ? 0.05 : 0.0005)) still = false;
+        /* The purple pool is quicker than the blue: depth. The ring turns
+           at the purple pool's pace. */
+        pos[key] += d * (key.charAt(0) === "b" ? 0.045 : 0.08);
       }
       var w = hero.clientWidth;
       var h = hero.clientHeight;
@@ -95,6 +111,16 @@
       light.style.setProperty("--ay", (pos.ay * h).toFixed(1) + "px");
       light.style.setProperty("--bx", (pos.bx * w).toFixed(1) + "px");
       light.style.setProperty("--by", (pos.by * h).toFixed(1) + "px");
+      /* Depth: the ring (far) drifts with the pointer, the name (near)
+         against it, a few pixels each way. */
+      var px = pos.ax - 0.5;
+      var py = pos.ay - 0.5;
+      if (halo) {
+        halo.style.setProperty("--halo-turn", pos.turn.toFixed(2) + "deg");
+        halo.style.setProperty("--sx", (px * 28).toFixed(1) + "px");
+        halo.style.setProperty("--sy", (py * 18).toFixed(1) + "px");
+      }
+      if (name) name.style.translate = (px * -18).toFixed(1) + "px " + (py * -8).toFixed(1) + "px";
       if (still) {
         moving = false;
         return;
@@ -113,6 +139,16 @@
       /* The blue pool answers from the opposite side. */
       goal.bx = 1 - x * 0.6;
       goal.by = 0.35 + y * 0.4;
+      if (halo) {
+        /* The ring's bright side sits at the top of its gradient; turn it to
+           face the pointer, the short way round. */
+        var ring = halo.getBoundingClientRect();
+        var angle = (Math.atan2(event.clientY - (ring.top + ring.height / 2), event.clientX - (ring.left + ring.width / 2)) * 180) / Math.PI + 90;
+        var diff = ((((angle - goal.turn) % 360) + 540) % 360) - 180;
+        goal.turn += diff;
+      }
+      if (readX) readX.textContent = pad(event.clientX - box.left);
+      if (readY) readY.textContent = pad(event.clientY - box.top);
       if (!moving) {
         moving = true;
         requestAnimationFrame(frame);
@@ -125,8 +161,7 @@
 
   /* ---------- 4. The name, fitted ---------- */
 
-  var name = document.querySelector(".hero-name");
-  var wide = window.matchMedia("(min-width: 48rem)");
+  var wide = window.matchMedia("(min-width: 64rem)");
   var fit = function () {
     if (!name || !hero) return;
     name.style.fontSize = "";
@@ -135,16 +170,20 @@
     var base = parseFloat(window.getComputedStyle(name).fontSize);
     var natural = inner.getBoundingClientRect().width;
     if (!natural) return;
-    /* As wide as the column... */
-    var size = Math.min((base * name.clientWidth) / natural, 360);
+    /* As wide as the frame (the name itself is centred, so measure the box
+       it sits in)... */
+    var box = window.getComputedStyle(name.parentElement);
+    var room = name.parentElement.clientWidth - parseFloat(box.paddingLeft) - parseFloat(box.paddingRight);
+    var size = Math.min((base * room) / natural, 420);
     name.style.fontSize = size.toFixed(1) + "px";
     /* ...unless that pushes the first screen past the window: then shrink
-       by exactly the overflow (the name's box is 0.86 of its font size).
-       Phones scroll, so they keep the width fit. */
+       by exactly the overflow (the name's line is a fixed share of its font
+       size). Phones scroll, so they keep the width fit. */
     if (!wide.matches) return;
     var over = hero.offsetHeight - window.innerHeight;
     if (over > 0) {
-      size = Math.max(size - over / 0.86, base * 0.6);
+      var share = parseFloat(window.getComputedStyle(name).lineHeight) / size || 0.8;
+      size = Math.max(size - over / share, base * 0.6);
       name.style.fontSize = size.toFixed(1) + "px";
     }
   };
@@ -185,5 +224,22 @@
       requestAnimationFrame(light2);
     }, { passive: true });
     light2();
+  }
+
+  /* ---------- 6. Buttons that lean in ---------- */
+
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-magnet]"), function (el) {
+      el.addEventListener("pointermove", function (event) {
+        if (reduced.matches) return;
+        var box = el.getBoundingClientRect();
+        var dx = (event.clientX - (box.left + box.width / 2)) / box.width;
+        var dy = (event.clientY - (box.top + box.height / 2)) / box.height;
+        el.style.translate = (dx * 8).toFixed(1) + "px " + (dy * 6).toFixed(1) + "px";
+      });
+      el.addEventListener("pointerleave", function () {
+        el.style.translate = "";
+      });
+    });
   }
 })();

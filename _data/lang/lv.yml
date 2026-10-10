@@ -66,7 +66,8 @@ hero:
     - "Un kas nākamais"
   cta: "Apskati darbus"
   secondary: "Ko es veidoju"
-  # Trīs mazie fakti pirmā ekrāna apakšā
+  # Trīs īsi fakti pirmajā ekrānā (klēpjdatoros ar zemu ekrānu tie netiek
+  # rādīti)
   facts:
     - label: "Atrodas"
       value: "Latvijā"
@@ -75,7 +76,7 @@ hero:
     - label: "Ātrākā saziņa"
       value: "Telegram · @AmziXz"
 
-# Rinda, kas slīd pirmā ekrāna apakšā, šādā secībā
+# Rinda, kas slīd pirmā ekrāna augšdaļā, šādā secībā
 ticker:
   - "Telefonu modificēšana YouTube"
   - "Auto saturs un tiešraides TikTok"

@@ -11,10 +11,13 @@ layout: base
 {%- assign photo = site.data.photos.hero -%}
 {%- assign v = site.asset_version -%}
       <!-- The first screen, framed like a camera viewfinder: corner marks, the
-           status light where a camera shows REC, and the time. The purple
-           light follows the pointer (assets/site.js). -->
+           status light where a camera shows REC, the time, and a ring light
+           behind the name. The light and the ring follow the pointer
+           (assets/site.js). The name comes first for screen readers; the grid
+           sets it along the bottom. -->
       <section class="hero" aria-labelledby="hero-name">
         <div class="hero-light" aria-hidden="true"><i class="glow glow--a"></i><i class="glow glow--b"></i></div>
+        <div class="halo" aria-hidden="true"><i class="halo-glow"></i><i class="halo-ring"></i></div>
 {%- if photo != "" %}
         <img class="hero-photo" src="{{ photo }}?v={{ v }}" alt="" />
 {%- endif %}
@@ -42,19 +45,15 @@ layout: base
 {%- else %}
             <p class="status"><i></i>{{ t.ui.offline | escape }}</p>
 {%- endif %}
+            <p class="readout" aria-hidden="true">X <b data-readout-x>0000</b> Y <b data-readout-y>0000</b></p>
             <p class="clock" data-clock data-lang="{{ page.lang }}"><span>{{ t.ui.clock_place | escape }}</span> <b data-clock-time>--:--:--</b> <span data-clock-date></span></p>
           </div>
 
-          <div class="hero-main">
+          <h1 class="hero-name" id="hero-name"><span>AmziXz</span></h1>
+
+          <div class="hero-copy">
             <p class="kicker">{{ t.hero.label | escape }}</p>
-            <h1 class="hero-name" id="hero-name"><span>AmziXz</span></h1>
-            <div class="hero-sub">
-              <p class="tagline">{{ t.hero.tagline_1 | escape }} <span>{{ t.hero.tagline_2 | escape }}</span></p>
-              <div class="hero-actions">
-                <a class="pill pill--primary" href="#work">{{ t.hero.cta | escape }}</a>
-                <a class="pill" href="#ventures">{{ t.hero.secondary | escape }}</a>
-              </div>
-            </div>
+            <p class="tagline">{{ t.hero.tagline_1 | escape }} <span>{{ t.hero.tagline_2 | escape }}</span></p>
             <ul class="topics">
 {%- for topic in t.hero.topics %}
               <li>{{ topic | escape }}</li>
@@ -62,11 +61,17 @@ layout: base
             </ul>
           </div>
 
-          <dl class="hero-facts">
+          <div class="hero-side">
+            <dl class="hero-facts">
 {%- for f in t.hero.facts %}
-            <div><dt>{{ f.label | escape }}</dt><dd>{{ f.value | escape }}</dd></div>
+              <div><dt>{{ f.label | escape }}</dt><dd>{{ f.value | escape }}</dd></div>
 {%- endfor %}
-          </dl>
+            </dl>
+            <div class="hero-actions">
+              <a class="pill pill--primary" href="#work" data-magnet>{{ t.hero.cta | escape }}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" /></svg></a>
+              <a class="pill" href="#ventures" data-magnet>{{ t.hero.secondary | escape }}</a>
+            </div>
+          </div>
         </div>
 
       </section>

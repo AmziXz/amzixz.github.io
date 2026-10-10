@@ -8,9 +8,10 @@
    the light theme. Purple and blue come from the AmziXz logo; one warm orange
    marks things that are live or coming soon.
 
-   Type: Unbounded (heavy, rounded) for the name and headlines, Geist for
-   text, Geist Mono for small labels. All three OFL, self-hosted, latin plus
-   the Latin Extended-A block that carries Latvian. */
+   Type: Unbounded (wide and rounded; the name at a light 420, headlines at
+   500) for display, Geist for text, Geist Mono for small labels. All three
+   OFL, self-hosted, latin plus the Latin Extended-A block that carries
+   Latvian. */
 
 @font-face {
   font-family: "Unbounded";
@@ -95,7 +96,15 @@
 
   --glow-a: rgba(139, 92, 246, 0.5);
   --glow-b: rgba(59, 130, 246, 0.32);
-  --name-glow: 0 0 0.3em rgba(139, 92, 246, 0.42), 0 0 1.1em rgba(139, 92, 246, 0.24);
+  --name-glow: rgba(139, 92, 246, 0.5);
+  --name-top: #ffffff;
+  --name-foot: #c9bbf5;
+  --halo-hi: #efe9ff;
+  --halo-hi-b: #a78bfa;
+  --halo-lo: rgba(139, 92, 246, 0.32);
+  --halo-off: rgba(96, 165, 250, 0.2);
+  --halo-core: rgba(11, 10, 15, 0.7);
+  --halo-glow: 0.9;
   --dots: rgba(255, 255, 255, 0.07);
   --grain: 0.06;
 }
@@ -121,7 +130,15 @@
 
   --glow-a: rgba(139, 92, 246, 0.32);
   --glow-b: rgba(59, 130, 246, 0.22);
-  --name-glow: 0 0 0.35em rgba(139, 92, 246, 0.22);
+  --name-glow: rgba(139, 92, 246, 0.26);
+  --name-top: #15121c;
+  --name-foot: #4c1d95;
+  --halo-hi: #7c3aed;
+  --halo-hi-b: #8b5cf6;
+  --halo-lo: rgba(124, 58, 237, 0.28);
+  --halo-off: rgba(37, 99, 235, 0.22);
+  --halo-core: rgba(255, 255, 255, 0.5);
+  --halo-glow: 0.55;
   --dots: rgba(21, 18, 28, 0.07);
   --grain: 0.035;
 }
@@ -142,7 +159,7 @@
 
   --gutter: clamp(1rem, 0.6rem + 2vw, 2.5rem);
   --top-h: 4.5rem;
-  --ticker-h: 3rem;
+  --ticker-h: 2.75rem;
   --dock-space: 6rem;
   --max: 82rem;
 }
@@ -218,9 +235,9 @@ h2,
 h3 {
   margin: 0;
   font-family: var(--display);
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.05;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   text-wrap: balance;
 }
 
@@ -321,8 +338,15 @@ ol {
   white-space: nowrap;
   transition:
     transform 160ms var(--ease),
+    translate 400ms var(--ease),
     box-shadow var(--dur) var(--ease),
     background-color var(--dur) var(--ease);
+}
+
+.pill svg {
+  width: 1rem;
+  height: 1rem;
+  margin-right: -0.2rem;
 }
 
 .pill:active {
@@ -377,9 +401,9 @@ ol {
   min-height: 2.75rem;
   margin-right: auto;
   font-family: var(--display);
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-size: 1.02rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
   text-decoration: none;
 }
 
@@ -535,6 +559,25 @@ ol {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 0 22px -4px rgba(124, 58, 237, 0.9);
 }
 
+/* Narrow phones: the Latvian labels are longer, so the items tighten, and
+   below 336px Home steps aside (the logo in the top bar goes home too). */
+@media (max-width: 24rem) {
+  .dock ul {
+    gap: 0;
+  }
+
+  .dock a {
+    padding-inline: 0.45rem;
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 21rem) {
+  .dock li:first-child {
+    display: none;
+  }
+}
+
 @media (hover: hover) and (pointer: fine) {
   .dock a:hover {
     color: var(--ink);
@@ -582,10 +625,10 @@ ol {
 .loader-count {
   font-family: var(--display);
   font-size: clamp(4rem, 2rem + 10vw, 9rem);
-  font-weight: 800;
+  font-weight: 200;
   line-height: 1;
   letter-spacing: -0.04em;
-  text-shadow: var(--name-glow);
+  filter: drop-shadow(0 0 0.2em var(--name-glow));
   font-variant-numeric: tabular-nums;
 }
 
@@ -616,7 +659,12 @@ ol {
   }
 }
 
-/* ---------- Hero: a camera viewfinder ---------- */
+/* ---------- Hero: a camera viewfinder ----------
+
+   Status, a pointer readout and the clock along the top of the frame, the
+   tagline and a small spec sheet in the middle, and the name as the floor of
+   the screen, edge to edge. On phones the name moves up under the status
+   row, so it is the first thing you see. */
 
 .hero {
   position: relative;
@@ -658,11 +706,91 @@ ol {
   transform: translate3d(var(--bx, 75vw), var(--by, 60vh), 0);
 }
 
-/* Your portrait, when there is one (_data/photos.yml), behind the name. */
+/* The ring light behind the name: a dark disc with a lit rim, brightest on
+   the side facing the pointer (site.js turns it; on touch screens it turns
+   slowly by itself). One hairline ring, one blurred copy for the glow, both
+   turned with a transform so the blur is drawn once. */
+.halo {
+  --size: min(64vh, 46vw, 40rem);
+  position: absolute;
+  left: 50%;
+  top: calc(var(--top-h) + var(--ticker-h) + (100% - var(--top-h) - var(--ticker-h)) * 0.46);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  transform: translate(calc(-50% + var(--sx, 0px)), calc(-50% + var(--sy, 0px))) rotate(var(--halo-turn, 20deg));
+  pointer-events: none;
+}
+
+.halo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--halo-core) 0%, var(--halo-core) 86%, transparent 100%);
+}
+
+.halo-ring,
+.halo-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from -40deg,
+    var(--halo-lo) 0deg,
+    var(--halo-hi-b) 25deg,
+    var(--halo-hi) 40deg,
+    var(--halo-hi-b) 60deg,
+    var(--halo-lo) 130deg,
+    var(--halo-off) 180deg,
+    var(--halo-lo) 250deg,
+    var(--halo-lo) 360deg
+  );
+}
+
+.halo-ring {
+  -webkit-mask-image: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px));
+  mask-image: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px));
+}
+
+.halo-glow {
+  inset: -2.5rem;
+  -webkit-mask-image: radial-gradient(farthest-side, transparent 72%, #000 88%, transparent 100%);
+  mask-image: radial-gradient(farthest-side, transparent 72%, #000 88%, transparent 100%);
+  filter: blur(18px);
+  opacity: var(--halo-glow);
+  will-change: transform;
+}
+
+/* One column: the ring sits just under the status row, so the name crosses
+   its top and the tagline sits inside it. */
+@media (max-width: 63.99rem) {
+  .halo {
+    --size: min(78vw, 26rem);
+    top: calc(var(--top-h) + var(--ticker-h) + 3.75rem + var(--size) / 2);
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .halo {
+    animation: halo-turn 40s linear infinite;
+  }
+}
+
+@keyframes halo-turn {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Your portrait, when there is one (_data/photos.yml), inside the ring. */
 .hero-photo {
   position: absolute;
   left: 50%;
-  bottom: 3.5rem;
+  bottom: 4.75rem;
   height: min(78%, 46rem);
   width: auto;
   max-width: none;
@@ -672,7 +800,8 @@ ol {
   pointer-events: none;
 }
 
-/* Viewfinder corners. The bottom pair stays clear of the floating menu. */
+/* Viewfinder corners. The bottom pair stays clear of the floating menu. On
+   arrival they close in from outside, like a camera finding focus. */
 .frame {
   position: absolute;
   inset: calc(var(--top-h) + var(--ticker-h) + 0.75rem) var(--gutter) 4.75rem;
@@ -687,24 +816,28 @@ ol {
 }
 
 .frame i:nth-child(1) {
+  --from: -0.9rem, -0.9rem;
   top: 0;
   left: 0;
   border-width: 1.5px 0 0 1.5px;
 }
 
 .frame i:nth-child(2) {
+  --from: 0.9rem, -0.9rem;
   top: 0;
   right: 0;
   border-width: 1.5px 1.5px 0 0;
 }
 
 .frame i:nth-child(3) {
+  --from: -0.9rem, 0.9rem;
   bottom: 0;
   left: 0;
   border-width: 0 0 1.5px 1.5px;
 }
 
 .frame i:nth-child(4) {
+  --from: 0.9rem, 0.9rem;
   bottom: 0;
   right: 0;
   border-width: 0 1.5px 1.5px 0;
@@ -713,20 +846,62 @@ ol {
 .hero-inner {
   position: relative;
   display: grid;
-  grid-template-rows: auto 1fr auto;
-  gap: clamp(0.85rem, 2.6vh, 2rem);
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto auto 1fr;
+  grid-template-areas:
+    "top"
+    "name"
+    "copy"
+    "side";
+  gap: clamp(1.25rem, 3vh, 2rem);
   margin: 0.75rem var(--gutter) 4.75rem;
   padding: clamp(0.8rem, 2.2vh, 1.5rem) clamp(1rem, 0.5rem + 1.5vw, 2rem);
 }
 
+@media (min-width: 64rem) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "top top"
+      "copy side"
+      "name name";
+    column-gap: 3rem;
+    padding-bottom: clamp(0.5rem, 1.6vh, 1rem);
+  }
+}
+
 .hero-top {
+  grid-area: top;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem 1.5rem;
+  color: var(--faint);
   font-family: var(--mono);
   font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 48rem) {
+  .hero-top {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  .hero-top .status {
+    grid-column: 1;
+  }
+
+  .hero-top .readout {
+    grid-column: 2;
+  }
+
+  .hero-top .clock {
+    grid-column: 3;
+    justify-self: end;
+  }
 }
 
 /* Where a camera shows REC. Grey when offline; warm and pulsing when live. */
@@ -762,12 +937,28 @@ ol {
   }
 }
 
+/* Where the pointer is, in pixels, like the readout on a camera screen.
+   Pointer screens only. */
+.readout {
+  display: none;
+  gap: 0.35rem;
+}
+
+.readout b {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+@media (min-width: 48rem) and (hover: hover) and (pointer: fine) {
+  .js .readout {
+    display: inline-flex;
+  }
+}
+
 .clock {
   display: flex;
   align-items: baseline;
   gap: 0.6rem;
-  color: var(--faint);
-  font-variant-numeric: tabular-nums;
 }
 
 .clock b {
@@ -775,16 +966,43 @@ ol {
   font-weight: 500;
 }
 
-.hero-main {
+/* The name. Fitted to the width by site.js; this is its size before that,
+   and without script. Always "AmziXz", never in capitals. Lit from above:
+   white at the top, a little purple at the foot. */
+.hero-name {
+  grid-area: name;
+  align-self: end;
+  justify-self: center;
+  font-size: clamp(4rem, min(19vw, 30vh), 17rem);
+  font-weight: 420;
+  line-height: 0.8;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+  filter: drop-shadow(0 0 0.18em var(--name-glow));
+}
+
+.hero-name > span {
+  display: inline-block;
+  padding: 0.12em 0.04em 0.02em;
+  margin: -0.12em -0.04em -0.02em;
+  background: linear-gradient(180deg, var(--name-top) 35%, var(--name-foot) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-copy {
+  grid-area: copy;
   display: grid;
-  align-content: center;
-  gap: clamp(0.6rem, 2vh, 1.25rem);
+  align-content: end;
+  justify-items: start;
+  gap: clamp(0.75rem, 2vh, 1.25rem);
 }
 
 .kicker {
   color: var(--muted);
   font-family: var(--mono);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
 }
 
 .kicker::before {
@@ -797,35 +1015,76 @@ ol {
   color: var(--accent);
 }
 
-/* The name. Fitted to the width by site.js; this is its size before that,
-   and without script. Always "AmziXz", never in capitals. */
-.hero-name {
-  margin-left: -0.04em;
-  font-size: clamp(4rem, min(19vw, 30vh), 17rem);
-  font-weight: 800;
-  line-height: 0.86;
-  letter-spacing: -0.035em;
-  text-shadow: var(--name-glow);
-  white-space: nowrap;
-}
-
-.hero-sub {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem 2rem;
-}
-
 .tagline {
-  max-width: 34rem;
-  font-size: clamp(1.1rem, 1rem + 0.5vw, 1.45rem);
-  font-weight: 550;
-  line-height: 1.3;
+  max-width: 17ch;
+  font-size: clamp(1.6rem, min(1.1rem + 1.8vw, 5.4vh), 2.75rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
 .tagline span {
   color: var(--muted);
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.8rem;
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
+.topics li + li::before {
+  content: "/";
+  margin-right: 0.8rem;
+  color: var(--accent);
+}
+
+.hero-side {
+  grid-area: side;
+  display: grid;
+  align-content: end;
+  gap: clamp(1rem, 2.6vh, 1.5rem);
+}
+
+/* A small spec sheet: label left, value right, a hairline between rows. */
+.hero-facts {
+  display: grid;
+  grid-template-columns: auto auto;
+  min-width: min(100%, 21rem);
+}
+
+.hero-facts div {
+  display: contents;
+}
+
+.hero-facts dt,
+.hero-facts dd {
+  padding-block: clamp(0.3rem, 1vh, 0.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.hero-facts div:last-child dt,
+.hero-facts div:last-child dd {
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-facts dt {
+  padding-right: 2.5rem;
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  line-height: 1.6rem;
+}
+
+.hero-facts dd {
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.6rem;
+  text-align: right;
 }
 
 .hero-actions {
@@ -834,49 +1093,104 @@ ol {
   gap: 0.6rem;
 }
 
-.topics {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 0.9rem;
-  color: var(--faint);
-  font-family: var(--mono);
-  font-size: 0.8rem;
-}
-
-.topics li + li::before {
-  content: "/";
-  margin-right: 0.9rem;
-  color: var(--accent);
-}
-
-.hero-facts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
-  gap: 0.75rem 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--line);
-}
-
-.hero-facts div {
-  display: grid;
-  gap: 0.15rem;
-}
-
-.hero-facts dt {
-  color: var(--faint);
-  font-family: var(--mono);
-  font-size: 0.75rem;
-}
-
-.hero-facts dd {
-  font-size: 0.95rem;
-  font-weight: 500;
+.hero-actions .pill {
+  flex: 1 1 auto;
 }
 
 @media (min-width: 48rem) {
+  .hero-actions .pill {
+    flex: none;
+  }
+}
+
+@media (min-width: 64rem) {
+  .hero-actions {
+    justify-content: flex-end;
+  }
+}
+
+/* Short laptop screens: the name matters more than the spec sheet, so the
+   sheet steps aside and the tagline may run on one line. */
+@media (min-width: 64rem) and (max-height: 760px) {
   .hero-facts {
-    grid-template-columns: repeat(3, auto);
-    justify-content: start;
+    display: none;
+  }
+
+  .tagline {
+    max-width: none;
+  }
+}
+
+/* ---------- Arrival ----------
+
+   When the page opens (or the loading screen starts to lift): the corners
+   close in, the name is uncovered left to right behind a moving edge, and
+   the rest rises into place. Script-only, so nothing is ever hidden when
+   script is off; reduced motion makes it instant. */
+
+@property --reveal {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 130%;
+}
+
+.js .hero-name > span {
+  -webkit-mask-image: linear-gradient(100deg, #000 calc(var(--reveal) - 18%), transparent var(--reveal));
+  mask-image: linear-gradient(100deg, #000 calc(var(--reveal) - 18%), transparent var(--reveal));
+  animation: reveal 1.5s var(--ease) 0.1s both;
+}
+
+.js .frame i {
+  animation: focus 1.1s var(--ease) both;
+}
+
+.js .hero-top,
+.js .hero-copy,
+.js .hero-side {
+  animation: rise 1s var(--ease) both;
+}
+
+.js .hero-top {
+  animation-delay: 0.2s;
+}
+
+.js .hero-copy {
+  animation-delay: 0.45s;
+}
+
+.js .hero-side {
+  animation-delay: 0.6s;
+}
+
+/* Hold everything while the loading screen is still counting. */
+.is-loading:not(.is-lifting) .hero-name > span,
+.is-loading:not(.is-lifting) .frame i,
+.is-loading:not(.is-lifting) .hero-top,
+.is-loading:not(.is-lifting) .hero-copy,
+.is-loading:not(.is-lifting) .hero-side {
+  animation-play-state: paused;
+}
+
+@keyframes reveal {
+  from {
+    --reveal: -5%;
+  }
+  to {
+    --reveal: 130%;
+  }
+}
+
+@keyframes focus {
+  from {
+    opacity: 0;
+    transform: translate(var(--from));
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
   }
 }
 
@@ -890,7 +1204,7 @@ ol {
   height: var(--ticker-h);
   overflow: hidden;
   border-block: 1px solid var(--line);
-  background: color-mix(in srgb, var(--bg) 60%, transparent);
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
@@ -900,23 +1214,24 @@ ol {
   flex: none;
   align-items: center;
   min-height: var(--ticker-h);
-  animation: ticker 36s linear infinite;
+  animation: ticker 40s linear infinite;
 }
 
 .ticker li {
   display: flex;
   align-items: center;
+  color: var(--muted);
   font-family: var(--display);
-  font-size: clamp(0.85rem, 0.8rem + 0.3vw, 1.05rem);
-  font-weight: 500;
+  font-size: clamp(0.78rem, 0.74rem + 0.2vw, 0.9rem);
+  font-weight: 400;
   white-space: nowrap;
 }
 
 .ticker li::after {
   content: "✦";
-  margin-inline: 1.5rem;
+  margin-inline: 1.6rem;
   color: var(--accent);
-  font-size: 0.8em;
+  font-size: 0.75em;
 }
 
 @keyframes ticker {
@@ -948,6 +1263,7 @@ main {
   *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
   }
 

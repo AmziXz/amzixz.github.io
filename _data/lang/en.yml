@@ -66,7 +66,8 @@ hero:
     - "And whatever's next"
   cta: "See the work"
   secondary: "What I'm building"
-  # The three small facts at the bottom of the first screen
+  # Three short facts on the first screen (laptops with a short screen leave
+  # them out)
   facts:
     - label: "Based in"
       value: "Latvia"
@@ -75,7 +76,7 @@ hero:
     - label: "Fastest contact"
       value: "Telegram · @AmziXz"
 
-# The line that scrolls along the bottom of the first screen, in this order
+# The line that scrolls along the top of the first screen, in this order
 ticker:
   - "Phone modding on YouTube"
   - "Car content & streams on TikTok"
