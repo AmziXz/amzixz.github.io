@@ -10,9 +10,14 @@
  * 4. The giant AmziXz is sized to fill the width.
  * 5. On the home page, the floating menu lights the chapter you are in.
  * 6. The main buttons lean a little toward the pointer.
+ * 7. Blocks rise into place the first time they scroll into view, and
+ *    cards light up under the pointer.
+ * 8. The TikTok embed's script loads only when its box comes near; the
+ *    Discord widget follows the theme; the top bar gets a backdrop once the
+ *    page scrolls.
  *
- * Under prefers-reduced-motion nothing follows the pointer and the loading
- * screen never shows. Without this script the page reads normally: the name
+ * Under prefers-reduced-motion nothing follows the pointer, nothing rises,
+ * and the loading screen never shows. Without this script the page reads normally: the name
  * has a CSS size, the light and the ring sit in their resting places, the
  * clock shows dashes.
  */
@@ -241,5 +246,97 @@
         el.style.translate = "";
       });
     });
+  }
+
+  /* ---------- 7. Rising in, and the light on cards ---------- */
+
+  var reveals = document.querySelectorAll("[data-reveal]");
+  var showAll = function () {
+    Array.prototype.forEach.call(reveals, function (el) {
+      el.classList.add("is-in");
+    });
+  };
+  if (reduced.matches || !("IntersectionObserver" in window)) {
+    showAll();
+  } else {
+    var seen = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-in");
+          seen.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -6% 0px", threshold: 0.04 }
+    );
+    Array.prototype.forEach.call(reveals, function (el) {
+      seen.observe(el);
+    });
+  }
+
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    document.addEventListener(
+      "pointermove",
+      function (event) {
+        var card = event.target && event.target.closest ? event.target.closest("[data-spot]") : null;
+        if (!card) return;
+        var box = card.getBoundingClientRect();
+        card.style.setProperty("--mx", (event.clientX - box.left).toFixed(0) + "px");
+        card.style.setProperty("--my", (event.clientY - box.top).toFixed(0) + "px");
+      },
+      { passive: true }
+    );
+  }
+
+  /* The Discord widget follows the theme switch. */
+  var widgets = document.querySelectorAll('iframe[src*="discord.com/widget"]');
+  if (widgets.length) {
+    var syncWidgets = function () {
+      var theme = root.getAttribute("data-theme") === "light" ? "light" : "dark";
+      Array.prototype.forEach.call(widgets, function (frame) {
+        var src = frame.getAttribute("src");
+        var next = src.replace(/theme=(dark|light)/, "theme=" + theme);
+        if (next !== src) frame.setAttribute("src", next);
+      });
+    };
+    syncWidgets();
+    if ("MutationObserver" in window) {
+      new MutationObserver(syncWidgets).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+    }
+  }
+
+  /* The top bar's backdrop, once the page has scrolled. */
+  var bar = document.querySelector(".top");
+  if (bar) {
+    var mark = function () {
+      bar.classList.toggle("is-scrolled", window.scrollY > 24);
+    };
+    window.addEventListener("scroll", mark, { passive: true });
+    mark();
+  }
+
+  /* ---------- 8. TikTok, when it comes near ---------- */
+
+  var tiktok = document.querySelector("[data-tiktok]");
+  var loadTikTok = function () {
+    var script = document.createElement("script");
+    script.src = "https://www.tiktok.com/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+  };
+  if (tiktok) {
+    if ("IntersectionObserver" in window) {
+      var near = new IntersectionObserver(
+        function (entries) {
+          if (!entries.some(function (entry) { return entry.isIntersecting; })) return;
+          near.disconnect();
+          loadTikTok();
+        },
+        { rootMargin: "800px 0px" }
+      );
+      near.observe(tiktok);
+    } else {
+      loadTikTok();
+    }
   }
 })();

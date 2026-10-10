@@ -88,6 +88,10 @@
 
   --accent: #b79cff;      /* purple you can read */
   --warm: #ff9a62;        /* live and soon */
+  --ok: #4ade80;          /* running */
+
+  --card-bg: rgba(21, 18, 28, 0.72);
+  --spot: rgba(139, 92, 246, 0.16);
 
   --glass: rgba(255, 255, 255, 0.06);
   --glass-line: rgba(255, 255, 255, 0.14);
@@ -122,6 +126,10 @@
 
   --accent: #6d28d9;
   --warm: #b8400b;
+  --ok: #166534;
+
+  --card-bg: rgba(255, 255, 255, 0.72);
+  --spot: rgba(124, 58, 237, 0.1);
 
   --glass: rgba(255, 255, 255, 0.55);
   --glass-line: rgba(21, 18, 28, 0.12);
@@ -235,7 +243,7 @@ h2,
 h3 {
   margin: 0;
   font-family: var(--display);
-  font-weight: 500;
+  font-weight: 420;
   line-height: 1.05;
   letter-spacing: -0.03em;
   text-wrap: balance;
@@ -386,6 +394,23 @@ ol {
   padding-top: env(safe-area-inset-top);
 }
 
+/* Once the page scrolls, the bar gets a soft backdrop so text passing
+   under it never collides with the name. */
+.top::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -2rem;
+  z-index: -1;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 94%, transparent) 45%, transparent);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+  pointer-events: none;
+}
+
+.top.is-scrolled::before {
+  opacity: 1;
+}
+
 .top-inner {
   display: flex;
   align-items: center;
@@ -513,7 +538,7 @@ ol {
 }
 
 @media (max-width: 30rem) {
-  .brand span {
+  .top .brand span {
     display: none;
   }
 }
@@ -682,6 +707,8 @@ ol {
 .hero-light {
   position: absolute;
   inset: 0;
+  -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent);
+  mask-image: linear-gradient(180deg, #000 70%, transparent);
   pointer-events: none;
 }
 
@@ -708,8 +735,10 @@ ol {
 
 /* The ring light behind the name: a dark disc with a lit rim, brightest on
    the side facing the pointer (site.js turns it; on touch screens it turns
-   slowly by itself). One hairline ring, one blurred copy for the glow, both
-   turned with a transform so the blur is drawn once. */
+   slowly by itself). One hairline ring and one blurred copy for the glow,
+   turned together with a transform so the blur is drawn once. Your
+   portrait, when _data/photos.yml has one, sits on the disc inside the rim
+   and does not turn. */
 .halo {
   --size: min(64vh, 46vw, 40rem);
   position: absolute;
@@ -718,23 +747,31 @@ ol {
   width: var(--size);
   height: var(--size);
   border-radius: 50%;
-  transform: translate(calc(-50% + var(--sx, 0px)), calc(-50% + var(--sy, 0px))) rotate(var(--halo-turn, 20deg));
+  transform: translate(calc(-50% + var(--sx, 0px)), calc(-50% + var(--sy, 0px)));
   pointer-events: none;
 }
 
-.halo::before {
-  content: "";
+.halo-disc,
+.halo-spin,
+.halo-ring,
+.halo-glow,
+.halo-shade {
   position: absolute;
   inset: 0;
   border-radius: 50%;
+}
+
+.halo-disc {
   background: radial-gradient(closest-side, var(--halo-core) 0%, var(--halo-core) 86%, transparent 100%);
+}
+
+.halo-spin {
+  display: block;
+  transform: rotate(var(--halo-turn, 20deg));
 }
 
 .halo-ring,
 .halo-glow {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
   background: conic-gradient(
     from -40deg,
     var(--halo-lo) 0deg,
@@ -762,6 +799,26 @@ ol {
   will-change: transform;
 }
 
+/* The portrait: cropped to the circle, face in the upper half, the foot
+   fading into the page so the name in front of it stays readable. */
+.halo-photo {
+  position: absolute;
+  inset: 4px;
+  width: calc(100% - 8px);
+  height: calc(100% - 8px);
+  max-width: none;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 22%;
+}
+
+.halo-shade {
+  inset: 4px;
+  background:
+    radial-gradient(closest-side, transparent 72%, color-mix(in srgb, var(--bg) 55%, transparent) 100%),
+    linear-gradient(180deg, transparent 38%, color-mix(in srgb, var(--bg) 82%, transparent) 92%);
+}
+
 /* One column: the ring sits just under the status row, so the name crosses
    its top and the tagline sits inside it. */
 @media (max-width: 63.99rem) {
@@ -771,33 +828,43 @@ ol {
   }
 }
 
+/* With a portrait, the text keeps off the face: on wide screens the
+   tagline stays on two lines and gets a soft shadow; in one column the ring
+   moves up under the status row and the name crosses its lower edge, as on
+   wide screens. */
+.hero--photo .tagline {
+  max-width: 17ch;
+}
+
+.hero--photo .hero-copy,
+.hero--photo .hero-facts {
+  text-shadow: 0 1px 18px var(--bg), 0 0 2px var(--bg);
+}
+
+@media (max-width: 63.99rem) {
+  .hero--photo .halo {
+    --size: min(64vw, 22rem);
+    top: calc(var(--top-h) + var(--ticker-h) + 4.5rem + var(--size) / 2);
+  }
+
+  .hero--photo .hero-name {
+    margin-top: calc(min(64vw, 22rem) * 0.62);
+  }
+}
+
 @media (hover: none), (pointer: coarse) {
-  .halo {
+  .halo-spin {
     animation: halo-turn 40s linear infinite;
   }
 }
 
 @keyframes halo-turn {
   from {
-    transform: translate(-50%, -50%) rotate(0deg);
+    transform: rotate(0deg);
   }
   to {
-    transform: translate(-50%, -50%) rotate(360deg);
+    transform: rotate(360deg);
   }
-}
-
-/* Your portrait, when there is one (_data/photos.yml), inside the ring. */
-.hero-photo {
-  position: absolute;
-  left: 50%;
-  bottom: 4.75rem;
-  height: min(78%, 46rem);
-  width: auto;
-  max-width: none;
-  transform: translateX(-50%);
-  -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent 100%);
-  mask-image: linear-gradient(180deg, #000 60%, transparent 100%);
-  pointer-events: none;
 }
 
 /* Viewfinder corners. The bottom pair stays clear of the floating menu. On
@@ -964,6 +1031,14 @@ ol {
 .clock b {
   color: var(--ink);
   font-weight: 500;
+}
+
+/* Narrow phones: the time stays, the date steps aside, so the status row
+   stays one line (Latvian dates are long). */
+@media (max-width: 26rem) {
+  [data-clock-date] {
+    display: none;
+  }
 }
 
 /* The name. Fitted to the width by site.js; this is its size before that,
@@ -1246,13 +1321,1558 @@ ol {
   }
 }
 
-/* ---------- Footer space ----------
+/* ---------- Page width ---------- */
 
-   The dock floats over the bottom of the page; keep the last content clear
-   of it. */
+.wrap {
+  width: min(100% - 2 * var(--gutter), var(--max));
+  margin-inline: auto;
+}
+
+/* ---------- Things every section uses ---------- */
+
+/* A card that lights up under the pointer: site.js sets --mx and --my. */
+[data-spot] {
+  position: relative;
+  isolation: isolate;
+}
+
+[data-spot]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(24rem circle at var(--mx, 50%) var(--my, 0%), var(--spot), transparent 62%);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-spot]:hover::before {
+    opacity: 1;
+  }
+}
+
+.icon {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+}
+
+/* A link with an arrow that leans the way it goes. */
+.link-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--ink);
+  font-weight: 550;
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 0.3em;
+  transition: text-decoration-color var(--dur) var(--ease);
+}
+
+.link-go .icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--accent);
+  transition: transform var(--dur) var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link-go:hover {
+    text-decoration-color: var(--accent);
+  }
+
+  .link-go:hover .icon {
+    transform: translate(2px, -2px);
+  }
+}
+
+.pill .icon {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+/* Small status labels: live (green), building and soon (warm), planned
+   (an outline). */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.18rem 0.6rem;
+  border: 1px solid;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.badge::before {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.badge--live {
+  border-color: color-mix(in srgb, var(--ok) 40%, transparent);
+  background: color-mix(in srgb, var(--ok) 10%, transparent);
+  color: var(--ok);
+}
+
+.badge--building,
+.badge--soon,
+.badge--live-now {
+  border-color: color-mix(in srgb, var(--warm) 40%, transparent);
+  background: color-mix(in srgb, var(--warm) 10%, transparent);
+  color: var(--warm);
+}
+
+.badge--live-now::before {
+  animation: pulse 1.6s ease-out infinite;
+}
+
+.badge--planned {
+  border-color: var(--line-strong);
+  color: var(--faint);
+}
+
+.badge--planned::before {
+  border: 1px solid currentColor;
+  background: transparent;
+}
+
+.note {
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
+/* Brand-coloured icon tiles for the channels. */
+.channel-icon {
+  --brand-c: var(--accent);
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.9rem;
+  background: color-mix(in srgb, var(--brand-c) 15%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brand-c) 28%, transparent);
+  color: var(--brand-c);
+}
+
+.channel-icon .icon {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.channel-icon--youtube {
+  --brand-c: #ff3d5a;
+}
+
+.channel-icon--tiktok {
+  --brand-c: #25f4ee;
+}
+
+.channel-icon--kick {
+  --brand-c: #53fc18;
+}
+
+.channel-icon--discord {
+  --brand-c: #7983f5;
+}
+
+.channel-icon--telegram {
+  --brand-c: #3bb4ee;
+}
+
+.channel-icon--github,
+.channel-icon--email {
+  --brand-c: var(--ink);
+}
+
+[data-theme="light"] .channel-icon--youtube {
+  --brand-c: #d6002a;
+}
+
+[data-theme="light"] .channel-icon--tiktok {
+  --brand-c: #0f766e;
+}
+
+[data-theme="light"] .channel-icon--kick {
+  --brand-c: #15803d;
+}
+
+[data-theme="light"] .channel-icon--discord {
+  --brand-c: #4752c4;
+}
+
+[data-theme="light"] .channel-icon--telegram {
+  --brand-c: #0369a1;
+}
+
+/* Arriving on screen: each block rises in once, the first time it is seen
+   (site.js adds .is-in). Script-only; reduced motion shows it at once. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition:
+    opacity 0.9s var(--ease),
+    transform 0.9s var(--ease);
+}
+
+.js [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Home: chapters ---------- */
+
+.chapter {
+  position: relative;
+  padding-top: clamp(5rem, 3.5rem + 6vw, 9rem);
+}
+
+.chapter-head {
+  display: grid;
+  gap: 1rem 3rem;
+  margin-bottom: clamp(2.25rem, 1.75rem + 2.5vw, 4rem);
+}
+
+.chapter-index {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
+.chapter-n {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--accent);
+}
+
+.chapter-n::after {
+  content: "";
+  width: 2.5rem;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+.chapter-head h2 {
+  max-width: 18ch;
+  font-size: clamp(2.1rem, 1.3rem + 3.4vw, 4.25rem);
+  font-weight: 380;
+  letter-spacing: -0.045em;
+}
+
+.chapter-lede {
+  max-width: 34rem;
+  color: var(--muted);
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
+}
+
+@media (min-width: 60rem) {
+  .chapter-head {
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 26rem);
+    align-items: end;
+  }
+
+  .chapter-index {
+    grid-column: 1 / -1;
+  }
+
+  .chapter-lede {
+    padding-bottom: 0.4rem;
+  }
+}
+
+/* ---------- 01 · The work ---------- */
+
+.feature {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  padding-block: clamp(1.75rem, 1.25rem + 2vw, 3rem);
+  border-top: 1px solid var(--line);
+}
+
+.feature-copy {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+  max-width: 32rem;
+}
+
+.feature-copy h3 {
+  font-size: clamp(1.5rem, 1.15rem + 1.3vw, 2.25rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+.feature-copy p {
+  color: var(--muted);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tags li {
+  padding: 0.2rem 0.65rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+}
+
+@media (min-width: 56rem) {
+  .feature {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(2.5rem, 1rem + 4vw, 5rem);
+  }
+
+  .feature--flip {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+
+  .feature--flip .feature-copy {
+    order: 2;
+  }
+}
+
+/* A photo framed like the first screen: viewfinder corners and a REC tag. */
+.shot {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.6);
+}
+
+.shot--video {
+  aspect-ratio: 16 / 9;
+}
+
+.shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease);
+}
+
+.shot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 10, 15, 0.35), transparent 30%, transparent 70%, rgba(11, 10, 15, 0.35));
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .feature:hover .shot img {
+    transform: scale(1.03);
+  }
+}
+
+.shot-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(11, 10, 15, 0.55);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: #f5f3f7;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+}
+
+.shot-tag i {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #ff5a5a;
+  box-shadow: 0 0 10px #ff5a5a;
+}
+
+.shot-corners {
+  position: absolute;
+  inset: 0.9rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.shot-corners i {
+  position: absolute;
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 0 solid rgba(255, 255, 255, 0.7);
+}
+
+.shot-corners i:nth-child(1) {
+  top: 0;
+  left: 0;
+  border-width: 1.5px 0 0 1.5px;
+  opacity: 0;
+}
+
+.shot-corners i:nth-child(2) {
+  top: 0;
+  right: 0;
+  border-width: 1.5px 1.5px 0 0;
+}
+
+.shot-corners i:nth-child(3) {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 1.5px 1.5px;
+}
+
+.shot-corners i:nth-child(4) {
+  right: 0;
+  bottom: 0;
+  border-width: 0 1.5px 1.5px 0;
+}
+
+/* ---------- 02 · Latest ---------- */
+
+.latest {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 62rem) {
+  .latest {
+    grid-template-columns: minmax(0, 1.7fr) minmax(20rem, 1fr);
+    align-items: start;
+  }
+}
+
+.panel {
+  padding: 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background: var(--card-bg);
+}
+
+.panel-head,
+.panel-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 0.5rem 0.6rem 0.9rem;
+}
+
+.panel-foot {
+  padding: 0.9rem 0.6rem 0.4rem;
+}
+
+.panel-head h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.panel--video .panel-head h3 .icon {
+  color: #ff3d5a;
+}
+
+.panel--tiktok .panel-head h3 .icon {
+  color: var(--ink);
+}
+
+.panel .link-go {
+  font-size: 0.88rem;
+}
+
+.player {
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: 1rem;
+  background: #000;
+}
+
+.player iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.tiktok-slot {
+  display: grid;
+  place-items: center;
+  min-height: 34rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--bg) 60%, transparent);
+}
+
+.latest > .panel {
+  min-width: 0;
+}
+
+/* TikTok's own markup asks for at least 288px; on the narrowest phones the
+   box clips it rather than widening the page. */
+.tiktok-slot .tiktok-embed {
+  width: 100%;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+/* ---------- 03 · Channels ---------- */
+
+.channels {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: 0.75rem;
+}
+
+.channel {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: start;
+  column-gap: 0.9rem;
+  height: 100%;
+  min-height: 9.75rem;
+  padding: 1.15rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: var(--card-bg);
+  text-decoration: none;
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.channel .channel-icon {
+  grid-row: span 2;
+}
+
+.channel-name {
+  align-self: end;
+  padding-right: 1.5rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.channel-handle {
+  overflow: hidden;
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.channel-blurb {
+  grid-column: 1 / -1;
+  margin-top: 0.9rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.channel-go {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.1rem;
+  color: var(--faint);
+  transition: color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.channel-go .icon {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.channel.is-soon {
+  border-style: dashed;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a.channel:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-2px);
+  }
+
+  a.channel:hover .channel-go {
+    color: var(--ink);
+    transform: translate(2px, -2px);
+  }
+}
+
+/* The Discord box. */
+.community {
+  display: grid;
+  gap: 1.75rem;
+  margin-top: 1rem;
+  padding: clamp(1.25rem, 0.75rem + 2vw, 2.5rem);
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(88, 101, 242, 0.24), transparent 55%),
+    var(--card-bg);
+}
+
+.community-copy {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+}
+
+.community-copy h3 {
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.6rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+
+.community-copy p {
+  max-width: 28rem;
+  color: var(--muted);
+}
+
+.community-widget iframe {
+  display: block;
+  width: 100%;
+  height: 25rem;
+  border: 0;
+  border-radius: 1rem;
+  background: #2b2d31;
+}
+
+[data-theme="light"] .community-widget iframe {
+  background: #f2f3f5;
+}
+
+@media (min-width: 52rem) {
+  .community {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 22rem);
+    align-items: center;
+  }
+}
+
+/* ---------- 04 · Ventures ---------- */
+
+.ventures {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 48rem) {
+  .ventures {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.venture {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-height: 19rem;
+  padding: clamp(1.25rem, 1rem + 1.2vw, 2.25rem);
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background: var(--card-bg);
+  text-decoration: none;
+  transition: border-color var(--dur) var(--ease);
+}
+
+.venture-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.venture-plate {
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  overflow: hidden;
+  border-radius: 1.1rem;
+  background: #0b0a0f;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12), 0 12px 30px -12px rgba(124, 58, 237, 0.55);
+}
+
+.venture-plate img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.venture-name {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.venture-text {
+  display: block;
+  max-width: 34rem;
+  color: var(--muted);
+}
+
+.venture-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.6rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
+.venture-foot a {
+  color: var(--ink);
+}
+
+a.venture .venture-foot {
+  color: var(--ink);
+}
+
+a.venture .venture-foot .icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--accent);
+  transition: transform var(--dur) var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a.venture:hover {
+    border-color: var(--line-strong);
+  }
+
+  a.venture:hover .venture-foot .icon {
+    transform: translate(2px, -2px);
+  }
+}
+
+/* The roadmap: the plans, as a numbered list with a dashed edge (they
+   don't exist yet). */
+.roadmap {
+  margin-top: 1rem;
+  padding: clamp(1.25rem, 1rem + 1.2vw, 2.25rem);
+  border: 1px dashed var(--line-strong);
+  border-radius: 1.5rem;
+}
+
+.roadmap-head {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 40rem;
+  margin-bottom: 1.25rem;
+}
+
+.roadmap-head h3 {
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.6rem);
+  font-weight: 420;
+  letter-spacing: -0.03em;
+}
+
+.roadmap-head p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.roadmap-list li {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 0.2rem 1rem;
+  padding-block: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.roadmap-n {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
+.roadmap-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.roadmap-text {
+  grid-column: 2 / 4;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.roadmap-list .badge {
+  grid-row: 1;
+  grid-column: 3;
+}
+
+@media (min-width: 56rem) {
+  .roadmap-list li {
+    grid-template-columns: 3rem minmax(12rem, 17rem) minmax(0, 1fr) auto;
+  }
+
+  .roadmap-text {
+    grid-column: 3;
+  }
+
+  .roadmap-list .badge {
+    grid-column: 4;
+  }
+}
+
+/* ---------- 05 · Work with me ---------- */
+
+.offers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 1rem;
+}
+
+.offer {
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+  min-height: 15rem;
+  padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background: var(--card-bg);
+}
+
+.offer-n {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
+.offer-icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1.75rem;
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent);
+  color: var(--accent);
+}
+
+.offer-icon .icon {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.offer h3 {
+  font-size: clamp(1.2rem, 1.05rem + 0.5vw, 1.45rem);
+  font-weight: 420;
+  letter-spacing: -0.03em;
+}
+
+.offer p {
+  color: var(--muted);
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin-top: 2rem;
+}
+
+/* ---------- 06, 07 · Shop and support ---------- */
+
+.duo {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 52rem) {
+  .duo {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.duo-card {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 1rem;
+  overflow: hidden;
+  min-height: 20rem;
+  padding: clamp(1.5rem, 1rem + 2vw, 3rem);
+  border: 1px solid var(--line);
+  border-radius: 1.75rem;
+  background:
+    radial-gradient(120% 120% at 100% 0%, rgba(139, 92, 246, 0.16), transparent 55%),
+    var(--card-bg);
+}
+
+.duo-card--warm {
+  background:
+    radial-gradient(120% 120% at 100% 0%, rgba(255, 154, 98, 0.16), transparent 55%),
+    var(--card-bg);
+}
+
+.duo-card h2 {
+  margin-top: auto;
+  padding-top: 2rem;
+  font-size: clamp(1.8rem, 1.3rem + 2vw, 3rem);
+  font-weight: 380;
+  letter-spacing: -0.045em;
+}
+
+.duo-card > p:not(.chapter-index) {
+  max-width: 26rem;
+  color: var(--muted);
+}
+
+/* A big faint copy of the icon in the corner. */
+.duo-icon {
+  position: absolute;
+  right: -1.5rem;
+  bottom: -2rem;
+  z-index: -1;
+  color: var(--ink);
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+.duo-icon .icon {
+  width: 12rem;
+  height: 12rem;
+}
+
+/* ---------- Footer ---------- */
 
 main {
+  padding-bottom: 0;
+}
+
+.foot {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(6rem, 4rem + 6vw, 10rem);
   padding-bottom: var(--dock-space);
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+}
+
+/* The light again, rising from the bottom edge. */
+.foot::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -30rem;
+  z-index: -1;
+  width: 70rem;
+  height: 50rem;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--glow-a), transparent);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.foot-cta {
+  display: grid;
+  justify-items: start;
+  gap: 1.5rem;
+  padding-block: clamp(3rem, 2rem + 4vw, 6rem) clamp(2.5rem, 2rem + 3vw, 4.5rem);
+}
+
+.foot-big {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15em;
+  font-family: var(--display);
+  font-size: clamp(3.25rem, 1.25rem + 9.5vw, 10.5rem);
+  font-weight: 360;
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+  text-decoration: none;
+  background: linear-gradient(180deg, var(--name-top) 30%, var(--name-foot) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.foot-arrow {
+  display: inline-grid;
+  color: var(--accent);
+  transition: transform 400ms var(--ease);
+}
+
+.foot-arrow .icon {
+  width: 0.55em;
+  height: 0.55em;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .foot-big:hover .foot-arrow {
+    transform: translate(0.08em, -0.08em);
+  }
+}
+
+.foot-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.foot-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2rem;
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.92rem;
+}
+
+.foot-bar .brand {
+  margin-right: 0;
+}
+
+.foot-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+}
+
+.foot-links a,
+.foot-top {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color var(--dur) var(--ease);
+}
+
+.foot-meta {
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+
+.foot-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+
+@media (min-width: 64rem) {
+  .foot-meta {
+    margin-left: auto;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .foot-links a:hover,
+  .foot-top:hover {
+    color: var(--ink);
+  }
+}
+
+/* ---------- The other pages ----------
+
+   Calmer than the home page, on purpose: a page head with a breadcrumb, a
+   big title and one paragraph, then sections that read like a document,
+   each with its label in a column on the left. */
+
+.page-head {
+  position: relative;
+  padding-top: calc(var(--top-h) + clamp(3.5rem, 2rem + 6vw, 7rem));
+  padding-bottom: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+  overflow: clip;
+  border-bottom: 1px solid var(--line);
+}
+
+.page-head::before {
+  content: "";
+  position: absolute;
+  top: -18rem;
+  right: -12rem;
+  z-index: -1;
+  width: 48rem;
+  height: 40rem;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--glow-a), transparent);
+  pointer-events: none;
+}
+
+/* On the other pages the corners sit out in the margin, clear of the
+   text, which keeps to the page width. */
+.frame--page {
+  inset: calc(var(--top-h) + 0.75rem) calc(var(--gutter) * 0.4) 1rem;
+}
+
+.page-head-grid {
+  position: relative;
+  display: grid;
+  gap: 2.5rem;
+}
+
+@media (min-width: 60rem) {
+  .page-head-grid {
+    grid-template-columns: minmax(0, 1fr) 17rem;
+    align-items: end;
+  }
+}
+
+.crumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+}
+
+.crumb a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.crumb span[aria-hidden] {
+  color: var(--accent);
+}
+
+.page-title {
+  margin-block: 1.25rem 1.5rem;
+  font-size: clamp(3rem, 1.4rem + 6.8vw, 7.75rem);
+  font-weight: 380;
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+  background: linear-gradient(180deg, var(--name-top) 35%, var(--name-foot) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 0.25em var(--name-glow));
+}
+
+.page-lede {
+  max-width: 40rem;
+  color: var(--muted);
+  font-size: clamp(1.05rem, 0.98rem + 0.4vw, 1.3rem);
+  line-height: 1.55;
+}
+
+.toc {
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--line-strong);
+}
+
+.toc-title {
+  margin-bottom: 0.75rem;
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+}
+
+.toc a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding-block: 0.3rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color var(--dur) var(--ease);
+}
+
+.toc a span {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .toc a:hover {
+    color: var(--ink);
+  }
+}
+
+.portrait {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+}
+
+.portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.doc {
+  padding-block: clamp(3rem, 2.25rem + 3vw, 5.5rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.doc--end {
+  border-bottom: 0;
+}
+
+.doc-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 60rem) {
+  .doc-grid {
+    grid-template-columns: 14rem minmax(0, 1fr);
+    gap: 3rem;
+  }
+}
+
+.doc-label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  align-self: start;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
+.doc-label span {
+  color: var(--accent);
+}
+
+h2.doc-label {
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h2.doc-label span {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+@media (min-width: 60rem) {
+  .doc-label {
+    position: sticky;
+    top: calc(var(--top-h) + 1.5rem);
+  }
+}
+
+.doc-body {
+  display: grid;
+  gap: 1.1rem;
+  max-width: 48rem;
+}
+
+.doc-body h2 {
+  margin-bottom: 0.4rem;
+  font-size: clamp(1.8rem, 1.3rem + 2vw, 2.9rem);
+  font-weight: 380;
+  letter-spacing: -0.045em;
+}
+
+.doc-body > p:not(.note) {
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+/* The last section runs straight into the footer: no second rule, no extra
+   gap. */
+main > section:last-child {
+  border-bottom: 0;
+}
+
+body:not(.is-home) .foot {
+  margin-top: 0;
+}
+
+.doc-body .community {
+  margin-top: 1rem;
+}
+
+.doc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+}
+
+/* Uses: a spec sheet per group. */
+.spec {
+  border-top: 1px solid var(--line);
+}
+
+.spec div {
+  display: grid;
+  gap: 0.15rem 1.5rem;
+  padding-block: 0.85rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.spec dt {
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+}
+
+.spec dd {
+  font-size: 1rem;
+}
+
+@media (min-width: 36rem) {
+  .spec div {
+    grid-template-columns: minmax(8rem, 12rem) minmax(0, 1fr);
+    align-items: baseline;
+  }
+}
+
+.sale {
+  display: grid;
+  justify-items: start;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  border: 1px solid color-mix(in srgb, var(--warm) 40%, transparent);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--warm) 7%, transparent);
+}
+
+.sale-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--warm);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
+.sale-label i {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 1.6s ease-out infinite;
+}
+
+.sale-text {
+  max-width: 34rem;
+  color: var(--muted);
+}
+
+.sale-price {
+  font-family: var(--display);
+  font-size: clamp(2rem, 1.6rem + 1.6vw, 3rem);
+  font-weight: 420;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+/* Contact: the quickest ways in, as big rows. */
+.reach {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.reach a {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "icon name go"
+    "icon value go";
+  align-items: center;
+  column-gap: 1rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--line);
+  border-radius: 1.15rem;
+  background: var(--card-bg);
+  text-decoration: none;
+  transition: border-color var(--dur) var(--ease);
+}
+
+.reach .channel-icon {
+  grid-area: icon;
+}
+
+.reach-name {
+  grid-area: name;
+  align-self: end;
+  font-weight: 600;
+}
+
+.reach-value {
+  grid-area: value;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  text-overflow: ellipsis;
+}
+
+.reach a > .icon {
+  grid-area: go;
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--faint);
+  transition: color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .reach a:hover {
+    border-color: var(--line-strong);
+  }
+
+  .reach a:hover > .icon {
+    color: var(--ink);
+    transform: translate(2px, -2px);
+  }
+}
+
+/* Questions that open. */
+.faq {
+  border-top: 1px solid var(--line);
+}
+
+.faq details {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-block: 1.15rem;
+  font-size: 1.05rem;
+  font-weight: 550;
+  list-style: none;
+  cursor: pointer;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+/* A plus that turns into a minus. */
+.faq summary i {
+  position: relative;
+  flex: none;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+}
+
+.faq summary i::before,
+.faq summary i::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.7rem;
+  height: 1.5px;
+  background: var(--accent);
+  transform: translate(-50%, -50%);
+  transition: transform var(--dur) var(--ease);
+}
+
+.faq summary i::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.faq details[open] summary i::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.faq details p {
+  max-width: 42rem;
+  padding-bottom: 1.25rem;
+  color: var(--muted);
+}
+
+/* ---------- 404 ---------- */
+
+.lost {
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-block: calc(var(--top-h) + 2rem) var(--dock-space);
+}
+
+.lost .frame--page {
+  inset: calc(var(--top-h) + 0.75rem) calc(var(--gutter) * 0.4) 4.75rem;
+}
+
+.lost .page-title {
+  font-size: clamp(2.5rem, 1.25rem + 5vw, 5.75rem);
+}
+
+.lost-inner {
+  display: grid;
+  justify-items: start;
+}
+
+.lost-code {
+  font-family: var(--display);
+  font-size: clamp(6rem, 3rem + 16vw, 16rem);
+  font-weight: 300;
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  background: linear-gradient(180deg, var(--name-top) 35%, var(--name-foot) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 0.2em var(--name-glow));
 }
 
 /* ---------- Reduced motion ---------- */

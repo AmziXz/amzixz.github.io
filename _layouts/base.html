@@ -7,21 +7,16 @@
     lang:   en or lv
     slug:   its address without the language prefix ("/" for home, "/about")
     nav:    which item of the floating menu is lit (home, work, ventures,
-            about, contact)
+            about, contact, or none)
     key:    which entry of the meta section of the language file holds its
-            title and description (home, about, uses, contact)
+            title and description (home, about, uses, contact, notfound)
 
   Every text goes through `escape` (or `jsonify` inside JSON-LD), so a quote
   or & in a translation can never break the markup. Strict mode in
   _config.yml fails the build on a missing key instead of publishing a blank.
 {%- endcomment -%}
-{%- assign t = site.data.lang[page.lang] -%}
-{%- assign k = site.data.links -%}
-{%- assign langs = site.data.languages -%}
-{%- for l in langs -%}{%- if l.code == page.lang -%}{%- assign here = l -%}{%- endif -%}{%- endfor -%}
-{%- assign v = site.asset_version -%}
+{%- include setup.html -%}
 {%- assign m = t.meta[page.key] -%}
-{%- assign home = here.prefix | append: "/" -%}
 <!DOCTYPE html>
 <html lang="{{ here.code }}" data-theme="dark">
   <head>
@@ -29,11 +24,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>{{ m.title | escape }}</title>
     <meta name="description" content="{{ m.description | escape }}" />
+{%- if page.key == "notfound" %}
+    <meta name="robots" content="noindex" />
+{%- else %}
     <link rel="canonical" href="{{ site.origin }}{{ here.prefix }}{{ page.slug }}" />
 {%- for l in langs %}
     <link rel="alternate" hreflang="{{ l.code }}" href="{{ site.origin }}{{ l.prefix }}{{ page.slug }}" />
 {%- endfor %}
     <link rel="alternate" hreflang="x-default" href="{{ site.origin }}{{ langs.first.prefix }}{{ page.slug }}" />
+{%- endif %}
     <link rel="icon" href="/assets/logo.png?v={{ v }}" type="image/png" />
     <link rel="apple-touch-icon" href="/assets/logo-512.png?v={{ v }}" />
     <meta name="theme-color" content="#0b0a0f" />
@@ -87,7 +86,7 @@
     </script>
   </head>
 
-  <body>
+  <body class="is-{{ page.key }}">
     <a class="skip" href="#main">{{ t.ui.skip | escape }}</a>
 
     <!-- Loading screen: first page of a visit only (see the script in <head>).
@@ -126,6 +125,36 @@
     <main id="main">
 {{ content }}
     </main>
+
+    <!-- The bottom of every page: one invitation to talk, then the small
+         links. -->
+    <footer class="foot">
+      <div class="wrap">
+        <div class="foot-cta">
+          <p class="kicker">{{ t.footer.label | escape }}</p>
+          <a class="foot-big" href="{{ k.telegram }}" rel="noopener">{{ t.footer.title | escape }}<span class="foot-arrow">{% include icon.html name="arrow" %}</span></a>
+          <div class="foot-actions">
+            <a class="pill" href="{{ k.telegram }}" rel="noopener" data-magnet>{% include icon.html name="telegram" %}{{ k.telegram_handle }}</a>
+            <a class="pill" href="mailto:{{ k.email }}" data-magnet>{% include icon.html name="mail" %}{{ k.email }}</a>
+          </div>
+        </div>
+        <div class="foot-bar">
+          <a class="brand" href="{{ home }}">
+            <img src="/assets/logo.png?v={{ v }}" alt="" width="256" height="256" loading="lazy" />
+            <span>AmziXz</span>
+          </a>
+          <nav class="foot-links" aria-label="{{ t.ui.pages | escape }}">
+            <a href="{{ here.prefix }}/about">{{ t.nav.about | escape }}</a>
+            <a href="{{ here.prefix }}/uses">{{ t.nav.uses | escape }}</a>
+            <a href="{{ here.prefix }}/contact">{{ t.nav.contact | escape }}</a>
+            <a href="{{ k.services }}{{ home }}" rel="noopener">{{ t.nav.services | escape }}</a>
+            <a href="{{ k.github }}" rel="me noopener">{{ t.nav.github | escape }}</a>
+          </nav>
+          <p class="foot-meta">© {{ site.time | date: "%Y" }} AmziXz · {{ t.footer.made | escape }}</p>
+          <a class="foot-top" href="#main">{{ t.ui.back_to_top | escape }}{% include icon.html name="up" %}</a>
+        </div>
+      </div>
+    </footer>
 
     <!-- The menu floats at the bottom of the screen, where a thumb reaches it.
          The page you are on is lit. -->

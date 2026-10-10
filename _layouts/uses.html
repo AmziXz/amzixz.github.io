@@ -1,0 +1,55 @@
+---
+layout: base
+---
+{%- comment -%}
+  The Uses page: each group of gear as a spec sheet, its title in the left
+  column. The "for sale" box goes under the group numbered uses.sale_group in
+  the language file (0: nowhere).
+{%- endcomment -%}
+{%- include setup.html -%}
+{%- assign p = t.uses -%}
+{%- capture aside -%}
+      <nav class="toc" aria-label="{{ t.ui.on_this_page | escape }}">
+        <p class="toc-title">{{ t.ui.on_this_page | escape }}</p>
+        <ol>
+{%- for g in p.groups %}
+          <li><a href="#g{{ forloop.index }}"><span>0{{ forloop.index }}</span>{{ g.title | escape }}</a></li>
+{%- endfor %}
+        </ol>
+      </nav>
+{%- endcapture -%}
+{% include page-head.html %}
+{%- for g in p.groups %}
+
+      <section class="doc" id="g{{ forloop.index }}" aria-labelledby="g{{ forloop.index }}-title" data-reveal>
+        <div class="wrap doc-grid">
+          <h2 class="doc-label" id="g{{ forloop.index }}-title"><span>[ 0{{ forloop.index }} ]</span>{{ g.title | escape }}</h2>
+          <div class="doc-body">
+            <dl class="spec">
+{%- for item in g.items %}
+              <div><dt>{{ item.name | escape }}</dt><dd>{{ item.value | escape }}</dd></div>
+{%- endfor %}
+            </dl>
+{%- if forloop.index == p.sale_group %}
+            <div class="sale">
+              <p class="sale-label"><i></i>{{ p.sale_label | escape }}</p>
+              <p class="sale-text">{{ p.sale_text | escape }}</p>
+              <p class="sale-price">{{ p.sale_price | escape }}</p>
+              <a class="pill pill--primary" href="{{ k.telegram }}" rel="noopener" data-magnet>{% include icon.html name="telegram" %}{{ p.sale_cta | escape }}</a>
+            </div>
+{%- endif %}
+          </div>
+        </div>
+      </section>
+{%- endfor %}
+
+      <section class="doc doc--end" data-reveal>
+        <div class="wrap doc-grid">
+          <span class="doc-label" aria-hidden="true"></span>
+          <div class="doc-body doc-actions">
+            <a class="pill pill--primary" href="{{ home }}#work" data-magnet>{{ p.next_cta | escape }}{% include icon.html name="arrow" %}</a>
+            <a class="pill" href="{{ here.prefix }}/contact" data-magnet>{{ p.next_secondary | escape }}</a>
+          </div>
+        </div>
+      </section>
+{{ content }}

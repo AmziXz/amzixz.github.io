@@ -4,9 +4,15 @@ youtube_main: "https://www.youtube.com/@AmziXz"
 youtube_main_handle: "@AmziXz"
 youtube_phone: "https://www.youtube.com/@PhoneGuruAmziXz"
 youtube_phone_handle: "@PhoneGuruAmziXz"
+# The playlist that always holds Phone Guru's newest uploads: the channel ID
+# with its UC changed to UU. The "Latest" section on the home page plays it.
+youtube_phone_uploads: "UUfpSAJvEOcSt7eb-b-6Yk3A"
 tiktok: "https://www.tiktok.com/@itsamzixz"
 tiktok_live: "https://www.tiktok.com/@itsamzixz/live"
 tiktok_handle: "@itsamzixz"
+# Kick: leave "" until the channel is live. The card then says "Soon"; put
+# the address here and it becomes a link.
+kick: ""
 telegram: "https://t.me/AmziXz"
 telegram_handle: "@AmziXz"
 discord: "https://discord.com/invite/zvb6F7vF"

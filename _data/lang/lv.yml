@@ -21,10 +21,21 @@
 # Ko meklētājprogrammas un saišu priekšskatījumi rāda par katru lapu
 meta:
   share_description: "Telefonu modificēšana YouTube, auto saturs un tiešraides TikTok un uzņēmumi, ko veidoju."
-  # Sākumlapa
   home:
     title: "AmziXz · Telefonu modificēšana, auto un tiešraides"
-    description: "AmziXz modificē telefonu programmatūru YouTube (pielāgotās ROM, root, liekās programmatūras noņemšana), veido auto saturu un tiešraides TikTok un ir Blue Eye Energy līdzīpašnieks Latvijā."
+    description: "AmziXz modificē telefonu programmatūru YouTube (pielāgotās ROM, root, liekās programmatūras noņemšana), veido auto saturu un tiešraides TikTok, ir Blue Eye Energy līdzīpašnieks un vada AmziXz Services Latvijā."
+  about:
+    title: "Par mani · AmziXz"
+    description: "Satura veidotājs no Latvijas: telefonu modificēšana YouTube, auto saturs un tiešraides TikTok un uzņēmumi, ko AmziXz veido."
+  uses:
+    title: "Aprīkojums · AmziXz"
+    description: "Telefoni, modificēšanas rīki, dators un filmēšanas tehnika, ar ko top AmziXz video un tiešraides."
+  contact:
+    title: "Kontakti · AmziXz"
+    description: "Kā sazināties ar AmziXz: Telegram, e-pasts, Discord un visi kanāli, kā arī atbildes uz biežāk uzdotajiem jautājumiem."
+  notfound:
+    title: "Lapa nav atrasta · AmziXz"
+    description: "Šīs lapas šeit nav."
   job_title: "Satura veidotājs"
 
 # Ekrāna lasītāju uzraksti un sīkie vārdi lapā
@@ -37,20 +48,31 @@ ui:
   email: "Rakstīt AmziXz e-pastu"
   loading: "Ielādē"
   scroll: "Ritini"
+  on_this_page: "Šajā lapā"
+  back_to_top: "Uz augšu"
   # Pulkstenis pirmā ekrāna stūrī
   clock_place: "Tallina"
   # Statusa gaismiņa (pārslēdz failā _data/live.yml)
   live: "Tiešraidē TikTok"
   offline: "Bezsaistē"
+  # Mazās zīmītes pie kanāliem un uzņēmumiem
   soon: "Drīzumā"
+  status_live: "Aktīvs"
+  status_building: "Tapšanā"
+  status_planned: "Plānots"
 
-# Peldošā izvēlne ekrāna apakšā
+# Peldošā izvēlne ekrāna apakšā un saites lapas apakšā
 nav:
   home: "Sākums"
   work: "Darbi"
   ventures: "Uzņēmumi"
   about: "Par mani"
   contact: "Kontakti"
+  uses: "Aprīkojums"
+  services: "Pakalpojumi"
+  github: "GitHub"
+
+# SĀKUMLAPA, no augšas uz leju
 
 # Pirmais ekrāns
 hero:
@@ -83,3 +105,280 @@ ticker:
   - "Blue Eye Energy, drīzumā"
   - "Kick, drīzumā"
   - "Pievienojies Discord"
+
+# 01: abas platformas. Fotogrāfijas norāda failā _data/photos.yml.
+work:
+  label: "Darbi"
+  title: "Divas platformas, divas pavisam dažādas pasaules."
+  lede: "Viena ir rūpīga un tehniska. Otra ir tas, kas tobrīd notiek. Ne no vienas negribētu atteikties."
+  phone:
+    title: "Telefonu modificēšana YouTube"
+    text: "Pielāgotās ROM, root un liekās programmatūras izmešana. Katru soli vispirms izmēģinu uz īsta telefona un tikai tad filmēju, lai tavs telefons nepārvērstos par ķieģeli."
+    tags:
+      - "Android"
+      - "Pielāgotās ROM"
+      - "Root"
+    link: "Skatīties YouTube"
+    photo_alt: "Video attēls: kurš telefons ir labākais modificēšanai"
+  cars:
+    title: "Auto saturs un tiešraides TikTok"
+    text: "Auto klipi, būvējumi un tiešraides. Filmēts ar telefonu un DJI Osmo Mobile 8 stabilizatoru, montēts DaVinci Resolve. Nekas nav pēc scenārija."
+    tags:
+      - "Auto"
+      - "Tiešraides"
+      - "Bez scenārija"
+    link: "Skatīties TikTok"
+    photo_alt: "Sarunājos ar diviem braucējiem caur sudrabaina BMW universāļa logu"
+
+# 02: jaunākie video. Tie atjaunojas paši.
+latest:
+  label: "Jaunākais"
+  title: "Svaigi no kanāliem."
+  lede: "Tie atjaunojas paši, tiklīdz parādās kaut kas jauns."
+  youtube: "Jaunākais no Phone Guru"
+  youtube_frame: "Phone Guru: jaunākie video YouTube"
+  youtube_more: "Visi video"
+  main_more: "Galvenais kanāls"
+  tiktok: "Jaunākais TikTok"
+  tiktok_more: "Atvērt TikTok"
+
+# 03: visi kanāli. Lietotājvārdi un saites ir failā _data/links.yml.
+channels:
+  label: "Kanāli"
+  title: "Visur internetā."
+  lede: "Katrs no tiem ir kaut kas cits. Izvēlies to, kura dēļ atnāci."
+  youtube_phone:
+    name: "YouTube · Phone Guru"
+    blurb: "Telefonu modificēšanas pamācības. ROM, root, liekās programmatūras noņemšana."
+  youtube_main:
+    name: "YouTube · Galvenais"
+    blurb: "Galvenais kanāls: viss, kas nav telefonu modificēšana."
+  tiktok:
+    name: "TikTok"
+    blurb: "Auto saturs un tiešraides. Nekas nav pēc scenārija."
+  kick:
+    name: "Kick"
+    blurb: "Drīzumā straumēšu arī šeit."
+  discord:
+    name: "Discord"
+    handle: "Pievienojies serverim"
+    blurb: "Jaunumi, pirmā piekļuve jaunām lietām un palīdzība ar būvējumiem."
+  telegram:
+    name: "Telegram"
+    blurb: "Ātrākais veids, kā ar mani sazināties. Tur skatos visbiežāk."
+  github:
+    name: "GitHub"
+    blurb: "Projekti un kods."
+  email:
+    name: "E-pasts"
+    blurb: "Vislabāk tam, kam vajag rakstisku pierakstu."
+  # Discord lodziņš ar dalībnieku sarakstu
+  community_title: "Pievienojies Discord"
+  community_text: "Ienāc pēc jaunumiem, pirmās piekļuves jaunām lietām un kopīgiem eksperimentiem."
+  community_cta: "Pievienoties serverim"
+  widget: "AmziXz Discord servera logrīks"
+
+# 04: uzņēmumi
+ventures:
+  label: "Uzņēmumi"
+  title: "Ko es veidoju."
+  lede: "Viens darbojas, viens top, pārējie ir plāni. Pie katra ir norādīts, kas ir kas."
+  services:
+    name: "AmziXz Services"
+    text: "Veidojam mājaslapas, rīkus un lietotnes cilvēkiem vai ieliekam pamatu, ko lielāka izstrādātāju komanda var attīstīt tālāk."
+    link: "services.amzixz.id.lv"
+  bee:
+    name: "Blue Eye Energy"
+    text: "Enerģijas dzēriena uzņēmums, ko veidoju kopā ar draugu. Vēl nav veikalos: joprojām liekam visu kopā un šobrīd piesaistām investīcijas."
+    role: "Līdzīpašnieks"
+    invest: "Jautājumi par investīcijām"
+  planned_title: "Nākotnes plāni"
+  planned_text: "Neviens no tiem vēl nepastāv. Tie ir šeit, jo uz turieni es eju, un cilvēkiem, ar kuriem gribu tos veidot, par to vajadzētu zināt."
+  # Rādās šādā secībā ar numuriem 01, 02, ...
+  planned:
+    - name: "Auto tūninga darbnīca"
+      text: "Darbnīca, kas veic tieši tādus būvējumus, par kādiem jau tagad veidoju saturu."
+    - name: "Detaļu veikals"
+      text: "Tūninga detaļas, oriģinālās (OEM) detaļas un ikdienas detaļas, pārdotas kārtīgi un ar padomu klāt."
+    - name: "Pārprojektētas klasisko auto detaļas"
+      text: "Vecās skolas auto detaļas, pārtaisītas tā, lai kalpotu ilgāk nekā oriģinālās."
+    - name: "Loģistika un piegādātāju meklēšana"
+      text: "Starpnieks, kas atrod tev piemērotāko piegādātāju vai pārvadātāju, lai nav jāmin pašam."
+
+# 05: darbi, ko uzņemos
+collab:
+  label: "Sadarbība"
+  title: "Radīsim kaut ko kopā."
+  lede: "Trīs veidu darbi, ko uzņemos. Pastāsti, ko esi iedomājies, nevis sūti sagatavi, un es tiešām atbildēšu."
+  stream:
+    name: "Tiešraižu sadarbības"
+    text: "Sponsorēti segmenti un produktu prezentācijas manās TikTok tiešraidēs."
+  events:
+    name: "Auto un pasākumu sadarbības"
+    text: "Auto saieti, izstādes un pasākumi. Es atbraucu, nofilmēju un parādu to savai auditorijai."
+  reviews:
+    name: "Telefonu un tehnikas apskati"
+    text: "Telefoni un tehnika, vispirms pārbaudīti manās rokās, tad apskatīti YouTube."
+  cta: "Raksti man Telegram"
+  secondary: "Sūtīt e-pastu"
+  note: "Telegram ir ātrākais. E-pasts, ja vajag rakstisku pierakstu."
+
+# 06: atribūtika un kafija
+shop:
+  label: "Veikals"
+  title: "Atribūtika jau ceļā."
+  text: "AmziXz atribūtika jau tiek gatavota. Pievienojies Discord, lai pirmais uzzinātu, kad tā būs pieejama."
+  cta: "Pievienoties Discord"
+support:
+  label: "Atbalsts"
+  title: "Atbalsti darbu."
+  text: "Ja tev patīk tas, ko daru, atbalsti nākamo soli."
+  cta: "Uzsauc man kafiju"
+
+# Katras lapas apakšā
+footer:
+  label: "Ir ideja?"
+  title: "Parunāsim."
+  made: "Radīts Latvijā"
+
+# PĀRĒJĀS LAPAS
+
+about:
+  label: "Par mani"
+  title: "Es esmu AmziXz."
+  lede: "Satura veidotājs no Latvijas. Es taisu lietas, apzināti tās salauzu, un pēdējā laikā esmu sācis veidot uzņēmumus ap to, kas mani patiešām interesē."
+  # Ekrāna lasītājs to nolasa pie tavas fotogrāfijas, kad tā būs (_data/photos.yml)
+  photo_alt: "AmziXz"
+  # Katrai sadaļai: mazs uzraksts, virsraksts, tad rindkopas pēc kārtas
+  sections:
+    - label: "Kamerā"
+      title: "Ko es veidoju"
+      text:
+        - "YouTube es modificēju telefonu programmatūru: pielāgotās ROM, root, liekās programmatūras noņemšana un ierīču iespējas tālāk par to, ar ko tās nāca no rūpnīcas. To daru, jo mani interesē IT un elektronika, un katru soli vispirms izmēģinu uz savas ierīces. Tāpēc pamācības strādā, nevis sabojā tavu telefonu."
+        - "TikTok es veidoju auto saturu un vadu tiešraides. Bez montāžas, kustībā, tieši tā, kā notiek. Viss tiek filmēts ar telefonu un DJI Osmo Mobile 8 stabilizatoru un montēts DaVinci Resolve."
+    - label: "Ārpus kameras"
+      title: "Ko es būvēju"
+      text:
+        - "Esmu Blue Eye Energy līdzīpašnieks. Tas ir enerģijas dzēriena uzņēmums, ko veidoju kopā ar draugu. Tas vēl nav veikalos: joprojām liekam visu kopā un šobrīd piesaistām investīcijas."
+        - "Vadu arī AmziXz Services. Veidojam mājaslapas, rīkus un lietotnes cilvēkiem vai ieliekam pamatu, ko lielāka izstrādātāju komanda var attīstīt tālāk."
+        - "Ilgtermiņā gribu būvēt tur, kur jau tāpat pavadu laiku: auto tūnings, detaļas, pārprojektētas klasiskās detaļas, kas kalpo ilgāk par oriģinālajām, un loģistika. Šodien tie ir plāni, nevis uzņēmumi, un uzņēmumu sarakstā sākumlapā ir norādīts, kas ir kas."
+  next_label: "Tālāk"
+  next_title: "Kur doties tālāk"
+  next_text: "Ja esi šeit kādas vienas lietas dēļ, droši vien paciesi arī pārējās."
+  next_cta: "Apskati darbus"
+  next_secondary: "Ko es veidoju"
+
+uses:
+  label: "Aprīkojums"
+  title: "Ar ko strādāju."
+  lede: "Tehnika un programmas, ar ko top video un tiešraides. Par to jautā nemitīgi, tāpēc te viss ir vienuviet. Viss uzskaitītais ir tas, ko tiešām lietoju: bez partneru saitēm un bez nekā, ko neesmu turējis rokās."
+  # Katrai grupai: virsraksts, tad nosaukuma un vērtības pāri.
+  groups:
+    - title: "Telefoni"
+      items:
+        - name: "Ikdienas telefons"
+          value: "Nothing Phone (2), pagaidām ar Nothing OS, pāreju uz Infinity X"
+        - name: "Testa ierīce"
+          value: "Poco X3 Pro (kodnosaukums vayu): uz tā visu izmēģinu pirmo, lai tev nebūtu jāriskē ar savējo"
+        - name: "Privātuma telefons"
+          value: "Atsevišķa ierīce ar GrapheneOS"
+        - name: "Biežāk lietotās ROM"
+          value: "Infinity X, GrapheneOS, Nothing OS"
+    - title: "Modificēšanas rīki"
+      items:
+        - name: "Recovery"
+          value: "OrangeFox, jebkurai ierīcei ar atbloķētu bootloader"
+        - name: "Root"
+          value: "KernelSU Next vai Magisk Kitsune"
+    - title: "Dators"
+      items:
+        - name: "Procesors"
+          value: "Intel i7-10700F"
+        - name: "Videokarte"
+          value: "RTX 3060 12GB"
+        - name: "Operatīvā atmiņa"
+          value: "32GB"
+        - name: "Krātuve"
+          value: "500GB SSD + 1TB HDD"
+        - name: "Mātesplate"
+          value: "Gigabyte H470M DS3H"
+        - name: "Wi-Fi / Bluetooth"
+          value: "TP-Link Wi-Fi 6E karte"
+        - name: "Papildus"
+          value: "Papildu USB portu karte"
+    - title: "Monitori"
+      items:
+        - name: "Galvenais"
+          value: "Xiaomi 27″ 2K, 180Hz"
+        - name: "Otrais"
+          value: "Arzopa 1080p 144Hz, mazs un pārnēsājams"
+        - name: "Statīvs"
+          value: "Turētājs abiem monitoriem"
+    - title: "Perifērija"
+      items:
+        - name: "Tastatūra"
+          value: "Attack Shark X82PRO: bezvadu, ar vadu vai Bluetooth"
+        - name: "Pele"
+          value: "Razer Cobra Pro, bezvadu"
+        - name: "Mikrofons"
+          value: "Maono PD200X ar statīvu"
+        - name: "Skaļruņi"
+          value: "Edifier M60"
+        - name: "Tīkls"
+          value: "Ugreen Cat8 kabelis"
+    - title: "Filmēšana un tiešraides"
+      items:
+        - name: "Kamera"
+          value: "Mans ikdienas telefons, Nothing Phone (2)"
+        - name: "Stabilizators"
+          value: "DJI Osmo Mobile 8"
+        - name: "Mikrofons"
+          value: "Maono PD200X"
+        - name: "Apgaismojums"
+          value: "Nekāds. Tā gaisma, kas ir telpā."
+        - name: "Montāža"
+          value: "DaVinci Resolve Studio"
+  # Lodziņš „Pārdošanā” ir zem šīs grupas (3 = trešā, Dators). Kad viss
+  # pārdots, ieraksti 0, un lodziņš pazūd.
+  sale_group: 3
+  sale_label: "Pārdošanā"
+  sale_text: "Viss šis komplekts, dators, abi monitori un viss no perifērijas saraksta, šobrīd ir pārdošanā."
+  sale_price: "€2000"
+  sale_cta: "Raksti man Telegram"
+  next_cta: "Apskati darbus"
+  next_secondary: "Pajautā man kaut ko"
+
+contact:
+  label: "Kontakti"
+  title: "Uzraksti man."
+  lede: "Jautājumi, sadarbības idejas vai vienkārši gribi pasveicināties? Der jebkurš no šiem."
+  reach_label: "Sazināties"
+  reach_title: "Ātrākie ceļi"
+  reach_note: "Telegram ir ātrākais: tur skatos biežāk nekā jebkur citur. E-pasts ir labāks, ja vajag rakstisku pierakstu."
+  channels_label: "Kanāli"
+  channels_title: "Visur citur"
+  faq_label: "Jautājumi"
+  faq_title: "Biežāk uzdotie jautājumi"
+  # Rādās šādā secībā. Katrs atveras, uzklikšķinot.
+  faq:
+    - question: "Kā ar tevi visātrāk sazināties?"
+      answer: "Telegram, t.me/AmziXz. Tur skatos biežāk nekā e-pastā, tāpēc atbildi saņemsi ātrāk."
+    - question: "Ko tu īsti veido?"
+      answer: "Telefonu modificēšanas pamācības (pielāgotās ROM, root, liekās programmatūras noņemšana) kanālā @PhoneGuruAmziXz un auto saturu un tiešraides TikTok. Viss pārējais nonāk kanālā @AmziXz."
+    - question: "Kas ir Blue Eye Energy?"
+      answer: "Enerģijas dzēriena uzņēmums, kura līdzīpašnieks esmu kopā ar draugu. Tas vēl nav veikalos: mēs to joprojām veidojam un šobrīd piesaistām investīcijas."
+    - question: "Kas ir AmziXz Services?"
+      answer: "Veidojam mājaslapas, rīkus un lietotnes cilvēkiem vai ieliekam pamatu, ko lielāka izstrādātāju komanda var attīstīt tālāk. Viss par to ir lapā services.amzixz.id.lv."
+    - question: "Vai esi atvērts sponsorēšanai un partnerībām?"
+      answer: "Jā: sponsorēšanai, partnerībām un kopīgiem projektiem ar citiem satura veidotājiem. Telegram ir ātrākais; e-pasts, ja vajag rakstisku pierakstu. Pastāsti, ko esi iedomājies, nevis sūti sagatavi, un es tiešām atbildēšu."
+    - question: "Vai esi atvērts sadarbībām?"
+      answer: "Jā, gan sadarbībām, gan atsauksmēm. Raksti Telegram un pastāsti, ko esi iedomājies."
+
+# Lapa, ko cilvēki redz, ja adrese neeksistē
+notfound:
+  label: "404"
+  title: "Šīs lapas šeit nav."
+  text: "Iespējams, tā pārvietota, kad vietne tika pārbūvēta. Viss ir sasniedzams no sākumlapas."
+  cta: "Uz sākumlapu"
+  # Tas pats angliski runājošajiem
+  other: "In English: go to the home page"
