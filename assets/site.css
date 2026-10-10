@@ -92,6 +92,9 @@
 
   --card-bg: rgba(21, 18, 28, 0.72);
   --spot: rgba(139, 92, 246, 0.16);
+  --dock-bg: rgba(16, 13, 22, 0.82);
+  --portrait-bloom: rgba(139, 92, 246, 0.24);
+  --portrait-glow: rgba(139, 92, 246, 0.38);
 
   --glass: rgba(255, 255, 255, 0.06);
   --glass-line: rgba(255, 255, 255, 0.14);
@@ -130,6 +133,9 @@
 
   --card-bg: rgba(255, 255, 255, 0.72);
   --spot: rgba(124, 58, 237, 0.1);
+  --dock-bg: rgba(255, 255, 255, 0.86);
+  --portrait-bloom: rgba(139, 92, 246, 0.16);
+  --portrait-glow: rgba(124, 58, 237, 0.2);
 
   --glass: rgba(255, 255, 255, 0.55);
   --glass-line: rgba(21, 18, 28, 0.12);
@@ -559,6 +565,9 @@ ol {
   gap: 0.15rem;
   padding: 0.3rem;
   border-radius: 999px;
+  /* Nearly solid: buttons and photos scroll under the menu, and its labels
+     must stay readable over any of them. */
+  background: var(--dock-bg);
 }
 
 .dock a {
@@ -799,8 +808,17 @@ ol {
   will-change: transform;
 }
 
-/* The portrait: cropped to the circle, face in the upper half, the foot
-   fading into the page so the name in front of it stays readable. */
+/* The portrait: a square file, face in the upper half, cropped to the
+   circle. A cut-out (transparent background) stands on the disc with a
+   violet bloom behind it and a soft glow around it, so he reads as lit by
+   the ring; the foot fades into the page so the name in front stays
+   readable. */
+.hero--photo .halo-disc {
+  background:
+    radial-gradient(circle at 50% 36%, var(--portrait-bloom), transparent 58%),
+    radial-gradient(closest-side, var(--halo-core) 0%, var(--halo-core) 86%, transparent 100%);
+}
+
 .halo-photo {
   position: absolute;
   inset: 4px;
@@ -809,7 +827,19 @@ ol {
   max-width: none;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 50% 22%;
+  object-position: 50% 30%;
+  filter: drop-shadow(0 0 14px var(--portrait-glow));
+}
+
+/* Light theme: the dark letters cross him, so he fades out before them
+   instead of washing to grey. */
+[data-theme="light"] .halo-photo {
+  -webkit-mask-image: linear-gradient(180deg, #000 48%, transparent 74%);
+  mask-image: linear-gradient(180deg, #000 48%, transparent 74%);
+}
+
+[data-theme="light"] .halo-shade {
+  display: none;
 }
 
 .halo-shade {
@@ -1107,7 +1137,7 @@ ol {
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem 0.8rem;
-  color: var(--faint);
+  color: var(--muted);
   font-family: var(--mono);
   font-size: 0.78rem;
 }
@@ -1175,6 +1205,14 @@ ol {
 @media (min-width: 48rem) {
   .hero-actions .pill {
     flex: none;
+  }
+}
+
+/* One column: the buttons come before the spec sheet, so the first screen
+   ends on them and the floating menu doesn't sit on top of them. */
+@media (max-width: 63.99rem) {
+  .hero-actions {
+    order: -1;
   }
 }
 
@@ -2844,6 +2882,7 @@ body:not(.is-home) .foot {
   position: relative;
   display: grid;
   align-items: center;
+  overflow: clip;
   min-height: 100vh;
   min-height: 100svh;
   padding-block: calc(var(--top-h) + 2rem) var(--dock-space);

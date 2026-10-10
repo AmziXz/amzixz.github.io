@@ -113,7 +113,7 @@ missing key fails the build instead of publishing a blank.
   page, so never put `text-transform: uppercase` on anything that shows it.
   `npm run check` catches it in the language files.
 - After changing anything in `/assets`, add one to `asset_version` in
-  `_config.yml`. Every page follows. Currently `9`.
+  `_config.yml`. Every page follows. Currently `10`.
 - Run `npm run check`, and build once with real Jekyll if you changed a
   template: the preview matches it, but GitHub is the one that publishes.
 - New text colours are tokens defined for both themes; measure each against
