@@ -824,7 +824,7 @@ ol {
 @media (max-width: 63.99rem) {
   .halo {
     --size: min(78vw, 26rem);
-    top: calc(var(--top-h) + var(--ticker-h) + 3.75rem + var(--size) / 2);
+    top: calc(var(--top-h) + var(--ticker-h) + 4.75rem + var(--size) / 2);
   }
 }
 
