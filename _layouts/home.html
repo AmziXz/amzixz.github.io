@@ -10,18 +10,22 @@ layout: base
 {%- assign photos = site.data.photos -%}
       <!-- The first screen, framed like a camera viewfinder: corner marks, the
            status light where a camera shows REC, the time, and a ring light
-           behind the name with your portrait in it once there is one. The
-           light and the ring follow the pointer (assets/site.js). The name
-           comes first for screen readers; the grid sets it along the bottom. -->
+           behind the name, with you stepping out of it once there is a
+           portrait: the photo comes after the ring, so the ring passes behind
+           your shoulders, and a copy of the rim's light after the photo
+           falls on your legs where the ring's lower arc runs in front of
+           them. The light and the ring follow the pointer (assets/site.js).
+           The name comes first for screen readers; the grid sets it along
+           the bottom. -->
       <section class="hero{% if photos.hero != "" %} hero--photo{% endif %}" aria-labelledby="hero-name">
         <div class="hero-light" aria-hidden="true"><i class="glow glow--a"></i><i class="glow glow--b"></i></div>
         <div class="halo" aria-hidden="true">
           <i class="halo-disc"></i>
+          <span class="halo-spin"><i class="halo-glow"></i><i class="halo-ring"></i></span>
 {%- if photos.hero != "" %}
           <img class="halo-photo" src="{{ photos.hero | escape }}?v={{ v }}" alt="" />
-          <i class="halo-shade"></i>
+          <span class="halo-front"><span class="halo-spin"><i class="halo-spill"></i></span></span>
 {%- endif %}
-          <span class="halo-spin"><i class="halo-glow"></i><i class="halo-ring"></i></span>
         </div>
         <!-- The ticker along the top of the first screen. The list is written
              twice so the loop has no seam; the copy is hidden from screen

@@ -108,7 +108,7 @@ details: a status light, a Tallinn clock, a ticker, a loading counter.
 
 - **The home page** is the show: the first screen is a camera viewfinder
   (corners, REC-style status, pointer readout, clock) with a ring light behind
-  the name and the portrait inside it once there is one. Then seven numbered
+  the name, and you stepping out of it once there is a portrait. Then seven numbered
   chapters: the work, latest uploads, channels, ventures, work with me, shop,
   support.
 - **The other pages** are calmer on purpose, as on the old site: a page head
@@ -169,7 +169,7 @@ Do not open the files directly: they are templates, and root-absolute paths
 Every `/assets` reference carries `?v={{ site.asset_version }}`. Pages caches
 assets for ten minutes and browsers far longer, so after changing anything in
 `/assets`, add one to `asset_version` in `_config.yml`. Every page follows.
-Currently `12`.
+Currently `13`.
 
 ## Embeds
 
