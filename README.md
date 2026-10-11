@@ -169,7 +169,7 @@ Do not open the files directly: they are templates, and root-absolute paths
 Every `/assets` reference carries `?v={{ site.asset_version }}`. Pages caches
 assets for ten minutes and browsers far longer, so after changing anything in
 `/assets`, add one to `asset_version` in `_config.yml`. Every page follows.
-Currently `13`.
+Currently `14`.
 
 ## Embeds
 
