@@ -340,7 +340,7 @@ uses:
           value: "DaVinci Resolve Studio"
   # The "for sale" box sits under this group (3 = the third, Computer). Set
   # it to 0 when the setup is sold and the box disappears.
-  sale_group: 3
+  sale_group: 0
   sale_label: "For sale"
   sale_text: "This whole setup, the tower, both monitors and everything in the peripherals list, is for sale right now."
   sale_price: "€2000"

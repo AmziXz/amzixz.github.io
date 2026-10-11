@@ -340,7 +340,7 @@ uses:
           value: "DaVinci Resolve Studio"
   # Lodziņš „Pārdošanā” ir zem šīs grupas (3 = trešā, Dators). Kad viss
   # pārdots, ieraksti 0, un lodziņš pazūd.
-  sale_group: 3
+  sale_group: 0
   sale_label: "Pārdošanā"
   sale_text: "Viss šis komplekts, dators, abi monitori un viss no perifērijas saraksta, šobrīd ir pārdošanā."
   sale_price: "€2000"
